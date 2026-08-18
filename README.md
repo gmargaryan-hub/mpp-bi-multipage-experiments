@@ -240,14 +240,17 @@ inspection alone.
 - Added the missing "at a glance" stat-card row (Ask/Plain Language, Infrastructure/Your
   Choice, Integration/No Migration) right after the hero — matches the reference image
   from the source doc exactly.
-- Fixed heading semantics in `EnterpriseAndIntegrationSection.tsx`: the source doc's
-  approved outline explicitly labels the small eyebrow text ("Designed for enterprise BI",
-  "Integration & compatibility") as the actual `<h2>` — for the SEO keywords to land where
-  they're supposed to. The site had this backwards: the eyebrow was a plain `<p>` and the
-  larger display heading below it ("Not a Chatbot Bolted On Top", "Nothing to Migrate,
-  Nothing to Rebuild") was tagged `<h2>` instead. Swapped the tags, kept every visual style
-  class exactly as-is — confirmed via a rendered screenshot that nothing looks different,
-  and via `document.querySelectorAll('h2')` that the DOM now actually reflects it.
+- Fixed heading structure in `EnterpriseAndIntegrationSection.tsx` to match the approved
+  content exactly, not just the tag swap from my first attempt. The approved doc shows
+  exactly one heading per block ("Designed for Enterprise BI", "Integration &
+  Compatibility") with no secondary heading beneath it, and the card items ("You choose
+  the model," etc.) as bold inline lead-ins within plain text, not as separate `<h3>`
+  headings. My first pass had swapped which element got the `<h2>` tag but left the old
+  "Not a Chatbot Bolted On Top" / "Nothing to Migrate, Nothing to Rebuild" subheadings and
+  the four `<h3>` card titles in place — that wasn't what was being asked. Now confirmed
+  via direct DOM query: exactly two `<h2>`s in this section, zero `<h3>`s. Visual card
+  styling (icons, borders) kept intact — only the underlying tags and the removed
+  subheading text changed.
 - **This same eyebrow/heading pattern is used across every other page on the site** — I
   only touched Agentic BI here since that's what was asked. If the same fix should apply
   site-wide, let me know and I'll sweep the rest.

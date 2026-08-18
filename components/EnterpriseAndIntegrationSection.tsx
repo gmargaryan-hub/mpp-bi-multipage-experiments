@@ -35,17 +35,17 @@ export default function EnterpriseAndIntegrationSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-10"
         >
-          <h2 className="text-[#7C7AED] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
-            Designed for enterprise BI
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-5">
+            Designed for Enterprise BI
           </h2>
-          <p className="font-display text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-5">
-            Not a Chatbot Bolted On Top
-          </p>
-          <p className="text-[#374151] text-lg leading-relaxed">
+          <p className="text-[#374151] text-lg leading-relaxed mb-4">
             Most AI features in BI tools are a chatbot added on top of a dashboard. It
             connects to a third-party AI model and sends your data out to answer a question,
-            with little control over where that data goes. MPP BI is built for enterprise
-            environments, where control over data and infrastructure matters.
+            with little control over where that data goes.
+          </p>
+          <p className="text-[#374151] text-lg leading-relaxed">
+            MPP BI is built for enterprise environments, where control over data and
+            infrastructure matters.
           </p>
         </motion.div>
 
@@ -67,10 +67,10 @@ export default function EnterpriseAndIntegrationSection() {
                 >
                   <Icon size={18} style={{ color: '#7C7AED' }} />
                 </div>
-                <div>
-                  <h3 className="text-base font-bold text-[#0D1B2A] mb-2 leading-snug">{p.title}</h3>
-                  <p className="text-[#6B7280] text-sm leading-relaxed">{p.body}</p>
-                </div>
+                <p className="text-[#6B7280] text-sm leading-relaxed">
+                  <strong className="text-[#0D1B2A] font-bold">{p.title} — </strong>
+                  {p.body}
+                </p>
               </motion.div>
             )
           })}
@@ -84,12 +84,9 @@ export default function EnterpriseAndIntegrationSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-10"
         >
-          <h2 className="text-[#7C7AED] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
-            Integration &amp; compatibility
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-5">
+            Integration &amp; Compatibility
           </h2>
-          <p className="font-display text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-5">
-            Nothing to Migrate, Nothing to Rebuild
-          </p>
           <p className="text-[#374151] text-lg leading-relaxed">
             Agentic MPP BI isn&apos;t a new platform you have to learn or migrate to.
             It&apos;s MPP BI with AI capabilities added on top.
@@ -114,8 +111,10 @@ export default function EnterpriseAndIntegrationSection() {
                 >
                   <Icon size={16} style={{ color: '#7C7AED' }} />
                 </div>
-                <h3 className="text-sm font-bold text-[#0D1B2A] mb-1.5 leading-snug">{p.title}</h3>
-                <p className="text-[#6B7280] text-xs leading-relaxed">{p.body}</p>
+                <p className="text-[#6B7280] text-xs leading-relaxed">
+                  <strong className="text-[#0D1B2A] font-bold text-sm">{p.title} — </strong>
+                  {p.body}
+                </p>
               </motion.div>
             )
           })}
