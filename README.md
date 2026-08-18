@@ -139,6 +139,8 @@ components/
   WhatAgenticBIDoesSection.tsx     → 5-feature grid + grounded-in-your-data callout
   EnterpriseAndIntegrationSection.tsx → "designed for enterprise" + integration points
   PricingHero.tsx
+  PricingStatsSection.tsx    → "at a glance" stat cards (Pricing/Seats From/Enterprise),
+                              sits right after the hero
   PricingTableSection.tsx    → $10/$18 seat pricing with categorized feature checklist
   PerpetualLicenseSection.tsx
   PricingCalculatorSection.tsx → real interactive cost calculator (built from scratch —
@@ -241,6 +243,28 @@ classes — this caught real bugs that code review alone would likely have misse
 Verified after fixing: zero horizontal overflow across all 7 pages × 3 breakpoints (21
 combinations), confirmed via direct `scrollWidth`/`clientWidth` measurement, not visual
 inspection alone.
+
+## Pricing page fixes
+
+- Added the missing "at a glance" stat-card row (Pricing/Transparent, Seats From/$10 per
+  User, Enterprise/Custom Pricing) right after the hero.
+- Fixed H2 semantics in both the Monthly Subscription and Perpetual License sections, same
+  pattern as the Agentic BI / Why MPP BI fixes: "Monthly subscription" and "Perpetual
+  license" are now the real `<h2>`s; the larger display headings below them ("Two Seat
+  Types...", "Buy Your Seats Instead of Renting Them") are non-heading text with the same
+  visual styling as before.
+- Made the Perpetual License CTA button more visually outstanding — switched it from a
+  plain dark navy pill to the section's orange accent color with a glow shadow, so it
+  actually draws the eye against the white card instead of blending in.
+- Calculator heading changed to "Online License Calculator" (kept "Online" as requested).
+- Fixed the read-only-seats slider's granularity: it stepped in increments of 5, so an
+  exact count like 8 wasn't selectable — changed the step to 1, matching the admin-seats
+  slider (which already stepped by 1).
+- Made "For larger teams or more complex deployments, we'll prepare a package and pricing
+  based on your requirements" visually distinct instead of buried in the closing CTA's body
+  paragraph — added an optional `note` prop to the shared `SimpleCTASection` component
+  (backward compatible; every other page using it is unaffected) that renders as a
+  highlighted callout box between the body text and the button.
 
 ## Why MPP BI page fixes
 

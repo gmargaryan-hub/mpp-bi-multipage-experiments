@@ -27,7 +27,7 @@ export default function PricingCalculatorSection() {
             Estimate your cost
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-5">
-            License Calculator
+            Online License Calculator
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
             Move the sliders to match your team, and see roughly what MPP BI would cost per
@@ -52,7 +52,7 @@ export default function PricingCalculatorSection() {
                 type="range"
                 min={0}
                 max={500}
-                step={5}
+                step={1}
                 value={readOnlyUsers}
                 onChange={(e) => setReadOnlyUsers(Number(e.target.value))}
                 className="w-full accent-[#0AAEDB]"

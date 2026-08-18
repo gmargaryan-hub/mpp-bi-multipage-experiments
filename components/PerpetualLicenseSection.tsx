@@ -16,12 +16,12 @@ export default function PerpetualLicenseSection() {
           className="rounded-2xl border border-[#E2E8F0] bg-white p-8 md:p-10 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center"
         >
           <div>
-            <p className="text-[#F97316] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+            <h2 className="text-[#F97316] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
               Perpetual license
-            </p>
-            <h2 className="font-display text-3xl font-bold text-[#0D1B2A] mb-4">
-              Buy Your Seats Instead of Renting Them
             </h2>
+            <p className="font-display text-3xl font-bold text-[#0D1B2A] mb-4">
+              Buy Your Seats Instead of Renting Them
+            </p>
             <p className="text-[#374151] text-base leading-relaxed mb-3">
               Most BI platforms (e.g. Tableau and Power BI) keep you on a subscription, so
               the bill never ends. With MPP BI, you pay one time, and the seats are yours
@@ -34,8 +34,8 @@ export default function PerpetualLicenseSection() {
           </div>
           <button
             onClick={openDemoModal}
-            className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold text-white whitespace-nowrap transition-all duration-200 hover:opacity-90"
-            style={{ background: '#0D1B2A' }}
+            className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg text-sm font-semibold text-[#0A0E1A] whitespace-nowrap transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
+            style={{ background: '#F97316', boxShadow: '0 8px 28px rgba(249,115,22,0.35)' }}
           >
             Talk to Sales About Perpetual Licensing
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />

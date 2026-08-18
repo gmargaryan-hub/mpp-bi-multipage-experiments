@@ -49,12 +49,12 @@ export default function PricingTableSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <p className="text-[#F97316] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+          <h2 className="text-[#F97316] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
             Monthly subscription
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-5">
-            Two Seat Types, Priced for How People Actually Use BI
           </h2>
+          <p className="font-display text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-5">
+            Two Seat Types, Priced for How People Actually Use BI
+          </p>
           <p className="text-[#374151] text-lg leading-relaxed">
             Most users in a team only need to view and work with dashboards. Only a small
             group actually builds them. This balance is what keeps costs efficient at scale.

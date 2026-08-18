@@ -8,6 +8,8 @@ type Props = {
   eyebrow?: string
   title: string
   body: string
+  /** Optional secondary message, rendered as a visually distinct highlighted callout. */
+  note?: string
   ctaLabel: string
   /** Override only if this CTA should do something other than open the demo/contact modal. */
   onClickOverride?: () => void
@@ -17,6 +19,7 @@ type Props = {
 export default function SimpleCTASection({
   title,
   body,
+  note,
   ctaLabel,
   onClickOverride,
   accentColor = '#0AAEDB',
@@ -39,7 +42,15 @@ export default function SimpleCTASection({
         className="relative z-10 max-w-2xl mx-auto px-6 text-center"
       >
         <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">{title}</h2>
-        <p className="text-[#94A3B8] text-lg mb-10 leading-relaxed">{body}</p>
+        <p className={`text-[#94A3B8] text-lg leading-relaxed ${note ? 'mb-6' : 'mb-10'}`}>{body}</p>
+        {note && (
+          <p
+            className="text-sm font-medium px-5 py-4 rounded-xl border mb-8 inline-block"
+            style={{ background: `${accentColor}14`, borderColor: `${accentColor}40`, color: accentColor }}
+          >
+            {note}
+          </p>
+        )}
         <button
           onClick={onClickOverride ?? openDemoModal}
           className="group inline-flex items-center gap-2 px-7 py-4 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-90"
