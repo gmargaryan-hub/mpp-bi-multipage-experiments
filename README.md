@@ -99,7 +99,9 @@ components/
   Navigation.tsx            → nav matching the new site map (Architecture, Features, Agentic BI,
                              Why MPP BI, Pricing, Resources dropdown, Book a Demo), white background
   HeroSection.tsx
-  StatsSection.tsx          → the 5 "features at a glance" cards
+  StatsSection.tsx          → the 5 "features at a glance" cards — content corrected to
+                              match the approved version (2B+ records / No Extraction /
+                              Always Live, not the earlier mismatched copy)
   ConnectsWithDataSection.tsx  → real vendor logos (Postgres, Oracle, Kafka, S3, etc.)
   UseCasesSection.tsx        → industries served
   CaseStudySection.tsx      → WISE × UNDP × Ministry of Labour & Social Affairs. Used only
@@ -243,6 +245,19 @@ classes — this caught real bugs that code review alone would likely have misse
 Verified after fixing: zero horizontal overflow across all 7 pages × 3 breakpoints (21
 combinations), confirmed via direct `scrollWidth`/`clientWidth` measurement, not visual
 inspection alone.
+
+## Home page fix
+
+- Corrected Home's "features at a glance" stat cards (`StatsSection.tsx`) — the content
+  had drifted from the approved version (previously: Faster/Scalable/Secure/Flexible/
+  Affordable with "500 users," "Full control," "4 ways" framing). Now matches the correct
+  content exactly: Faster (2x–12x), Scalable (2B+ records, on a single node), Secure (No
+  Extraction), Always Live (or Scheduled), Affordable ($10) — same content already used on
+  the Benefits page hero, so both are now consistent.
+- Note on the source file: the uploaded docx was named `About_Us.docx`, but its own content
+  was headed "Home page:" and referenced the actual `StatsSection.tsx` component — About Us
+  has no matching stat-card section at all. Confirmed with the user this was a mislabeled
+  upload before proceeding.
 
 ## Pricing page fixes
 

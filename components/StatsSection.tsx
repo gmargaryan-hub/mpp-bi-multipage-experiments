@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Zap, Layers, Shield, RefreshCw, DollarSign } from 'lucide-react'
+import { Zap, Layers, ShieldCheck, Radio, DollarSign } from 'lucide-react'
 
 const stats = [
   {
@@ -9,31 +9,31 @@ const stats = [
     label: 'Faster',
     stat: '2x–12x',
     statLabel: 'faster than traditional BI',
-    body: 'Runs calculations where your data already lives, with no separate engine. Proven across real deployments.',
+    body: 'Processes over 2 billion records in under 5 seconds.',
     color: '#0AAEDB',
   },
   {
     icon: Layers,
     label: 'Scalable',
-    stat: '500 users',
-    statLabel: 'running on just 2 nodes',
-    body: 'Add capacity by adding nodes, not by rebuilding your whole setup.',
+    stat: '2B+ records',
+    statLabel: 'on a single node',
+    body: 'Add capacity by adding nodes, not by rebuilding your setup.',
     color: '#10B981',
   },
   {
-    icon: Shield,
+    icon: ShieldCheck,
     label: 'Secure',
-    stat: 'Full control',
-    statLabel: 'over who sees your data',
-    body: 'Runs fully on-premise if you need it. Checks who can see what before any data moves.',
+    stat: 'No Extraction',
+    statLabel: 'your data never leaves your systems',
+    body: 'Runs fully on-premise, with SSO, MFA, and full audit logging.',
     color: '#6366F1',
   },
   {
-    icon: RefreshCw,
-    label: 'Flexible',
-    stat: '4 ways',
-    statLabel: 'to keep data current',
-    body: 'Scheduled, trigger-based, real-time, or historical. Pick what fits each dashboard.',
+    icon: Radio,
+    label: 'Always Live',
+    stat: 'or Scheduled',
+    statLabel: 'Trigger-based · Historical data update',
+    body: 'Each dashboard follows the update pattern that fits its use case.',
     color: '#0AAEDB',
   },
   {
@@ -41,7 +41,7 @@ const stats = [
     label: 'Affordable',
     stat: '$10',
     statLabel: 'per user, per month',
-    body: 'Less than most BI tools. Pricing is public, no quote required.',
+    body: 'Starts at $10 per user. Choose monthly or a one-time license.',
     color: '#F97316',
   },
 ]
