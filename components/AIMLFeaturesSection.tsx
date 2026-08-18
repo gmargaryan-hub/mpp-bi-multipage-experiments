@@ -44,11 +44,12 @@ export default function AIMLFeaturesSection() {
             AI &amp; machine learning
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-5">
-            AI Applied to Your Own Data
+            AI and Machine Learning Features
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
-            These features are available on request, so you can add the ones you need, when
-            you need them.
+            MPP BI works with AI and machine learning, applied to your own data. These
+            features are available on request, so you can add the ones you need, when you
+            need them.
           </p>
         </motion.div>
 
