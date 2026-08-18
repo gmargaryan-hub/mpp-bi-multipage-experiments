@@ -37,38 +37,18 @@ export default function CaseStudySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-white rounded-3xl border border-[#E2E8F0] overflow-hidden"
-          style={{ boxShadow: '0 24px 80px rgba(0,0,0,0.08)' }}
+          className="rounded-3xl border border-[#E2E8F0] overflow-hidden"
         >
-          {/* Dashboard screenshot — container aspect ratio matches the image exactly
-              (1280x600), so it displays with no cropping and no distortion. The card
-              itself is capped at max-w-4xl above so the image lands around 768px wide —
-              the source is only 1280px wide, and stretching further softens noticeably
-              on high-DPI displays. */}
-          <div className="pt-8 px-8 md:pt-10 md:px-10">
-            <div className="relative w-full rounded-xl overflow-hidden bg-[#0D1B2A]" style={{ aspectRatio: '1280 / 600' }}>
-              <Image
-                src={asset('/case-study/wise-dashboard.png')}
-                alt="Social services analytics dashboard built on MPP BI for the WISE foundation"
-                fill
-                sizes="(max-width: 768px) 100vw, 768px"
-                quality={100}
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-
-          {/* Content */}
           <div className="p-8 md:p-10">
-            <div className="flex items-center gap-5 mb-6">
-              <div className="relative h-8 w-24">
+            {/* Client logos — given more visual weight, framed in their own strip */}
+            <div className="flex flex-wrap items-center gap-x-10 gap-y-5 mb-6 px-6 py-6 rounded-2xl bg-white border border-[#E2E8F0]">
+              <div className="relative h-11 w-32">
                 <Image src={asset('/case-study/wise.png')} alt="WISE" fill className="object-contain object-left" />
               </div>
-              <div className="relative h-9 w-20">
+              <div className="relative h-12 w-28">
                 <Image src={asset('/case-study/undp.png')} alt="UNDP" fill className="object-contain object-left" />
               </div>
-              <div className="relative h-10 w-16">
+              <div className="relative h-14 w-24">
                 <Image
                   src={asset('/case-study/ministry-of-labor-armenia.png')}
                   alt="Republic of Armenia, Ministry of Labour & Social Affairs"
@@ -78,7 +58,7 @@ export default function CaseStudySection() {
               </div>
             </div>
 
-            <p className="text-[#6B7280] text-sm mb-5 leading-relaxed max-w-2xl">
+            <p className="text-[#6B7280] text-sm mb-8 leading-relaxed max-w-2xl">
               In partnership with the United Nations Development Programme (UNDP), for the
               WISE foundation, which runs digital social services systems for Armenia&apos;s
               Ministry of Labour and Social Affairs.
@@ -100,13 +80,36 @@ export default function CaseStudySection() {
               ))}
             </ul>
 
-            <Link
-              href="https://mpp-insights.com/blog/social-services-analytics"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0AAEDB] hover:gap-2.5 transition-all w-fit"
-            >
-              Read the full case study
-              <ArrowRight size={15} />
-            </Link>
+            {/* CTA callout box */}
+            <div className="rounded-xl border-2 border-dashed border-[#0AAEDB]/30 bg-[#0AAEDB]/5 px-6 py-5 mb-10">
+              <p className="text-sm text-[#374151] leading-relaxed">
+                <strong className="text-[#0D1B2A]">Want the full story?</strong> Read the
+                complete walkthrough, including the architecture and a look at the dashboard.
+              </p>
+              <Link
+                href="https://mpp-insights.com/blog/social-services-analytics"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0AAEDB] hover:gap-2.5 transition-all w-fit mt-2"
+              >
+                Read the full case study
+                <ArrowRight size={15} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Dashboard screenshot — last. Container aspect ratio matches the image exactly
+              (1280x600), so it displays with no cropping and no distortion. Width capped to
+              keep it sharp on high-DPI displays. */}
+          <div className="px-8 pb-8 md:px-10 md:pb-10">
+            <div className="relative w-full rounded-xl overflow-hidden bg-[#0D1B2A]" style={{ aspectRatio: '1280 / 600' }}>
+              <Image
+                src={asset('/case-study/wise-dashboard.png')}
+                alt="Social services analytics dashboard built on MPP BI for the WISE foundation"
+                fill
+                sizes="(max-width: 768px) 100vw, 768px"
+                quality={100}
+                className="object-cover"
+              />
+            </div>
           </div>
         </motion.div>
       </div>

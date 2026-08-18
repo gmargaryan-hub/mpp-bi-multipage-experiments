@@ -4,7 +4,7 @@ import WhyMPPBIHero from '@/components/WhyMPPBIHero'
 import WhyMPPBIStatsSection from '@/components/WhyMPPBIStatsSection'
 import BigComparisonSection from '@/components/BigComparisonSection'
 import DeploymentSection from '@/components/DeploymentSection'
-import WhyCaseStudySection from '@/components/WhyCaseStudySection'
+import CaseStudySection from '@/components/CaseStudySection'
 import ScaleAndPerformanceSection from '@/components/ScaleAndPerformanceSection'
 import AICapabilitiesSection from '@/components/AICapabilitiesSection'
 import BrandAndSupportSection from '@/components/BrandAndSupportSection'
@@ -27,7 +27,7 @@ export default function WhyMPPBIPage() {
         <WhyMPPBIStatsSection />
         <BigComparisonSection />
         <DeploymentSection />
-        <WhyCaseStudySection />
+        <CaseStudySection />
         <ScaleAndPerformanceSection />
         <AICapabilitiesSection />
         <BrandAndSupportSection />

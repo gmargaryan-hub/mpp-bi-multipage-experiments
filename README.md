@@ -104,9 +104,10 @@ components/
                               Always Live, not the earlier mismatched copy)
   ConnectsWithDataSection.tsx  → real vendor logos (Postgres, Oracle, Kafka, S3, etc.)
   UseCasesSection.tsx        → industries served
-  CaseStudySection.tsx      → WISE × UNDP × Ministry of Labour & Social Affairs. Used only
-                             on Home now — Why MPP BI has its own restructured version,
-                             see WhyCaseStudySection.tsx below.
+  CaseStudySection.tsx      → WISE × UNDP × Ministry of Labour & Social Affairs. Shared
+                             across Home and Why MPP BI again — the page-specific
+                             WhyCaseStudySection.tsx variant from before was consolidated
+                             back into this one (see "Case study consolidation" below).
   CTASection.tsx
   Footer.tsx                → dark navy, MPP Insights logo
   ContactFormModal.tsx      → shared "Book a Demo" form, opened from every CTA on the site
@@ -150,10 +151,6 @@ components/
   WhyMPPBIHero.tsx
   WhyMPPBIStatsSection.tsx  → "at a glance" stat cards (Performance/Scalable/Proven/
                              Customizable), sits right after the hero
-  WhyCaseStudySection.tsx   → restructured case study, specific to this page: heading →
-                             prominent logo strip + description → summary → results →
-                             bordered CTA callout → dashboard image last (was previously
-                             image-first, sharing CaseStudySection with Home)
   BigComparisonSection.tsx  → MPP BI vs. Tableau vs. Power BI, full table
   DeploymentSection.tsx      → on-prem vs. cloud + Power BI on-prem limitations + who-it's-for
   ScaleAndPerformanceSection.tsx → enterprise-scale + speed stats
@@ -299,11 +296,25 @@ inspection alone.
   distinct strip, sized up) + client description → project summary → results checklist →
   a bordered CTA callout box → the dashboard screenshot last. Previously the dashboard
   image led, with logos small and inline further down.
-  **Scoping note:** `CaseStudySection.tsx` is shared with the Home page, and this
-  restructuring was scoped to "Why MPP BI Page" specifically, so I built a separate
-  `WhyCaseStudySection.tsx` for this page instead of changing the shared component — Home's
-  case study section is untouched. If you'd like the same reordering applied to Home's
-  version too, let me know.
+  **Scoping note (superseded):** this was originally built as a separate
+  `WhyCaseStudySection.tsx` scoped to just this page. It's since been consolidated back
+  into the shared `CaseStudySection.tsx` — see "Case study consolidation" below.
+
+## Case study consolidation (applied everywhere)
+
+The restructured case study layout built for Why MPP BI (logo strip up front, dashboard
+image last) is now the only version — merged back into `CaseStudySection.tsx`, which both
+Home and Why MPP BI import. `WhyCaseStudySection.tsx` no longer exists as a separate file.
+
+Also removed the case study card's white background per request — the outer container no
+longer has `bg-white` or a drop shadow, so it sits flush with the section's light gray
+background instead of floating as a distinct white card. The logo strip inside kept a white
+panel of its own, so the logos still have a clean, contained frame rather than sitting
+directly on the gray section background.
+
+Verified both pages render identically from the same component (screenshots matched
+side-by-side) and re-ran the full breakpoint regression sweep (8 pages × 4 widths) after
+the consolidation — still zero horizontal overflow anywhere.
 
 ## Agentic BI page fixes
 
