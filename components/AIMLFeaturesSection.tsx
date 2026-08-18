@@ -40,9 +40,6 @@ export default function AIMLFeaturesSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <p className="text-[#7C7AED] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
-            AI &amp; machine learning
-          </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-5">
             AI and Machine Learning Features
           </h2>
