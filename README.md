@@ -102,8 +102,9 @@ components/
   StatsSection.tsx          → the 5 "features at a glance" cards
   ConnectsWithDataSection.tsx  → real vendor logos (Postgres, Oracle, Kafka, S3, etc.)
   UseCasesSection.tsx        → industries served
-  CaseStudySection.tsx      → WISE × UNDP × Ministry of Labour & Social Affairs (reused on
-                             Home and Why MPP BI)
+  CaseStudySection.tsx      → WISE × UNDP × Ministry of Labour & Social Affairs. Used only
+                             on Home now — Why MPP BI has its own restructured version,
+                             see WhyCaseStudySection.tsx below.
   CTASection.tsx
   Footer.tsx                → dark navy, MPP Insights logo
   ContactFormModal.tsx      → shared "Book a Demo" form, opened from every CTA on the site
@@ -143,6 +144,12 @@ components/
   PricingCalculatorSection.tsx → real interactive cost calculator (built from scratch —
                                 see gaps below)
   WhyMPPBIHero.tsx
+  WhyMPPBIStatsSection.tsx  → "at a glance" stat cards (Performance/Scalable/Proven/
+                             Customizable), sits right after the hero
+  WhyCaseStudySection.tsx   → restructured case study, specific to this page: heading →
+                             prominent logo strip + description → summary → results →
+                             bordered CTA callout → dashboard image last (was previously
+                             image-first, sharing CaseStudySection with Home)
   BigComparisonSection.tsx  → MPP BI vs. Tableau vs. Power BI, full table
   DeploymentSection.tsx      → on-prem vs. cloud + Power BI on-prem limitations + who-it's-for
   ScaleAndPerformanceSection.tsx → enterprise-scale + speed stats
@@ -234,6 +241,30 @@ classes — this caught real bugs that code review alone would likely have misse
 Verified after fixing: zero horizontal overflow across all 7 pages × 3 breakpoints (21
 combinations), confirmed via direct `scrollWidth`/`clientWidth` measurement, not visual
 inspection alone.
+
+## Why MPP BI page fixes
+
+- Added the missing "at a glance" stat-card row (Performance/Scalable/Proven/Customizable)
+  right after the hero — matches the reference image.
+- Split the comparison table's single merged footnote into two separate notes ("Pricing as
+  of Q2 2026." / the Power BI Pro requirement note), as two distinct points instead of one
+  run-on sentence.
+- Added two H3 headings that existed in the approved content but were missing on the live
+  page: "On-premise vs. cloud deployment" (right before that table) and "Who is it for"
+  (right before the on-premise/cloud fit cards).
+- Fixed an alignment inconsistency: the "Either way, you control who can see your data..."
+  paragraph was center-aligned while the equivalent paragraph in the section above it was
+  left-aligned — now both left-aligned.
+- **Restructured the case study section**, since client-logo placement wasn't getting
+  enough attention. New order, per the request: heading → logos (now in their own visually
+  distinct strip, sized up) + client description → project summary → results checklist →
+  a bordered CTA callout box → the dashboard screenshot last. Previously the dashboard
+  image led, with logos small and inline further down.
+  **Scoping note:** `CaseStudySection.tsx` is shared with the Home page, and this
+  restructuring was scoped to "Why MPP BI Page" specifically, so I built a separate
+  `WhyCaseStudySection.tsx` for this page instead of changing the shared component — Home's
+  case study section is untouched. If you'd like the same reordering applied to Home's
+  version too, let me know.
 
 ## Agentic BI page fixes
 

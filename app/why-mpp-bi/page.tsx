@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import WhyMPPBIHero from '@/components/WhyMPPBIHero'
+import WhyMPPBIStatsSection from '@/components/WhyMPPBIStatsSection'
 import BigComparisonSection from '@/components/BigComparisonSection'
 import DeploymentSection from '@/components/DeploymentSection'
-import CaseStudySection from '@/components/CaseStudySection'
+import WhyCaseStudySection from '@/components/WhyCaseStudySection'
 import ScaleAndPerformanceSection from '@/components/ScaleAndPerformanceSection'
 import AICapabilitiesSection from '@/components/AICapabilitiesSection'
 import BrandAndSupportSection from '@/components/BrandAndSupportSection'
@@ -23,9 +24,10 @@ export default function WhyMPPBIPage() {
       <Navigation />
       <main>
         <WhyMPPBIHero />
+        <WhyMPPBIStatsSection />
         <BigComparisonSection />
         <DeploymentSection />
-        <CaseStudySection />
+        <WhyCaseStudySection />
         <ScaleAndPerformanceSection />
         <AICapabilitiesSection />
         <BrandAndSupportSection />

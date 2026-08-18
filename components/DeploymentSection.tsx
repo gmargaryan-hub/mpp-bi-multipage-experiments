@@ -55,6 +55,15 @@ export default function DeploymentSection() {
         </motion.div>
 
         {/* on-prem vs cloud table */}
+        <motion.h3
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.5 }}
+          className="text-lg font-bold text-[#0D1B2A] mb-4"
+        >
+          On-premise vs. cloud deployment
+        </motion.h3>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -113,6 +122,7 @@ export default function DeploymentSection() {
         </motion.div>
 
         {/* who is it for */}
+        <h3 className="text-lg font-bold text-[#0D1B2A] mb-4">Who is it for</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {whoFor.map((w, i) => (
             <motion.div
@@ -138,7 +148,7 @@ export default function DeploymentSection() {
           ))}
         </div>
 
-        <p className="text-center text-[#6B7280] text-sm mt-10 max-w-2xl mx-auto">
+        <p className="text-left text-[#6B7280] text-sm mt-10 max-w-2xl">
           Either way, you control who can see your data: row and chart-level access,
           multi-factor authentication, and a full audit log.
         </p>

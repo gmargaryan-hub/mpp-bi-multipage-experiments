@@ -95,8 +95,11 @@ export default function BigComparisonSection() {
         </motion.div>
 
         <p className="text-xs text-[#9CA3AF] mt-4 leading-relaxed">
-          * Pricing as of Q2 2026. Power BI Pro requires a Microsoft 365 subscription. Full
-          enterprise capability requires Power BI Premium at significantly higher cost.
+          * Pricing as of Q2 2026.
+        </p>
+        <p className="text-xs text-[#9CA3AF] mt-2 leading-relaxed">
+          * Power BI Pro requires a Microsoft 365 subscription. Full enterprise capability
+          requires Power BI Premium at significantly higher cost.
         </p>
       </div>
     </section>
