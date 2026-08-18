@@ -132,6 +132,8 @@ components/
   CustomizationSection.tsx  → "Built to Be Customized" 5-item grid
   DeploymentOptionsSection.tsx → on-prem/cloud/containers/VMs with logos + hardware table
   AgenticBIHero.tsx
+  AgenticBIStatsSection.tsx  → "at a glance" stat cards (Ask/Infrastructure/Integration),
+                              sits right after the hero
   TraditionalVsAgenticSection.tsx → traditional vs. agentic BI comparison table
   WhatAgenticBIDoesSection.tsx     → 5-feature grid + grounded-in-your-data callout
   EnterpriseAndIntegrationSection.tsx → "designed for enterprise" + integration points
@@ -232,6 +234,23 @@ classes — this caught real bugs that code review alone would likely have misse
 Verified after fixing: zero horizontal overflow across all 7 pages × 3 breakpoints (21
 combinations), confirmed via direct `scrollWidth`/`clientWidth` measurement, not visual
 inspection alone.
+
+## Agentic BI page fixes
+
+- Added the missing "at a glance" stat-card row (Ask/Plain Language, Infrastructure/Your
+  Choice, Integration/No Migration) right after the hero — matches the reference image
+  from the source doc exactly.
+- Fixed heading semantics in `EnterpriseAndIntegrationSection.tsx`: the source doc's
+  approved outline explicitly labels the small eyebrow text ("Designed for enterprise BI",
+  "Integration & compatibility") as the actual `<h2>` — for the SEO keywords to land where
+  they're supposed to. The site had this backwards: the eyebrow was a plain `<p>` and the
+  larger display heading below it ("Not a Chatbot Bolted On Top", "Nothing to Migrate,
+  Nothing to Rebuild") was tagged `<h2>` instead. Swapped the tags, kept every visual style
+  class exactly as-is — confirmed via a rendered screenshot that nothing looks different,
+  and via `document.querySelectorAll('h2')` that the DOM now actually reflects it.
+- **This same eyebrow/heading pattern is used across every other page on the site** — I
+  only touched Agentic BI here since that's what was asked. If the same fix should apply
+  site-wide, let me know and I'll sweep the rest.
 
 ## Site structure update (Benefits page + nav reorder)
 

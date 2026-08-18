@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import AgenticBIHero from '@/components/AgenticBIHero'
+import AgenticBIStatsSection from '@/components/AgenticBIStatsSection'
 import TraditionalVsAgenticSection from '@/components/TraditionalVsAgenticSection'
 import WhatAgenticBIDoesSection from '@/components/WhatAgenticBIDoesSection'
 import EnterpriseAndIntegrationSection from '@/components/EnterpriseAndIntegrationSection'
@@ -19,6 +20,7 @@ export default function AgenticBIPage() {
       <Navigation />
       <main>
         <AgenticBIHero />
+        <AgenticBIStatsSection />
         <TraditionalVsAgenticSection />
         <WhatAgenticBIDoesSection />
         <EnterpriseAndIntegrationSection />

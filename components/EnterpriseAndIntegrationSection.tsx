@@ -35,12 +35,12 @@ export default function EnterpriseAndIntegrationSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-10"
         >
-          <p className="text-[#7C7AED] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+          <h2 className="text-[#7C7AED] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
             Designed for enterprise BI
-          </p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-5">
-            Not a Chatbot Bolted On Top
           </h2>
+          <p className="font-display text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-5">
+            Not a Chatbot Bolted On Top
+          </p>
           <p className="text-[#374151] text-lg leading-relaxed">
             Most AI features in BI tools are a chatbot added on top of a dashboard. It
             connects to a third-party AI model and sends your data out to answer a question,
@@ -84,12 +84,12 @@ export default function EnterpriseAndIntegrationSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-10"
         >
-          <p className="text-[#7C7AED] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+          <h2 className="text-[#7C7AED] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
             Integration &amp; compatibility
-          </p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-5">
-            Nothing to Migrate, Nothing to Rebuild
           </h2>
+          <p className="font-display text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-5">
+            Nothing to Migrate, Nothing to Rebuild
+          </p>
           <p className="text-[#374151] text-lg leading-relaxed">
             Agentic MPP BI isn&apos;t a new platform you have to learn or migrate to.
             It&apos;s MPP BI with AI capabilities added on top.
