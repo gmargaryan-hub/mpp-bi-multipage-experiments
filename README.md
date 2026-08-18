@@ -120,6 +120,8 @@ components/
   CalcLanguageSection.tsx   → DAX vs. MPP BI's calculation language comparison table
   TalkToEngineerSection.tsx → Architecture page's technical-demo CTA
   FeaturesHero.tsx
+  FeaturesStatsSection.tsx  → "at a glance" stat cards (Connect/Visualize/AI-Powered/
+                             Secure/Scalable), sits right after the hero
   DataSourcesSection.tsx    → categorized connector logos (relational, warehouses, big data,
                              streaming, files, APIs)
   VisualizationSection.tsx  → 12-item visualization capability grid

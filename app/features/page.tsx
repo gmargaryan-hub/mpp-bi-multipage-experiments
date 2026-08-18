@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import FeaturesHero from '@/components/FeaturesHero'
+import FeaturesStatsSection from '@/components/FeaturesStatsSection'
 import DataSourcesSection from '@/components/DataSourcesSection'
 import VisualizationSection from '@/components/VisualizationSection'
 import AIMLFeaturesSection from '@/components/AIMLFeaturesSection'
@@ -23,6 +24,7 @@ export default function FeaturesPage() {
       <Navigation />
       <main>
         <FeaturesHero />
+        <FeaturesStatsSection />
         <DataSourcesSection />
         <VisualizationSection />
         <AIMLFeaturesSection />
