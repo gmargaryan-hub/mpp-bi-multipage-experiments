@@ -243,6 +243,22 @@ Verified after fixing: zero horizontal overflow across all 7 pages × 3 breakpoi
 combinations), confirmed via direct `scrollWidth`/`clientWidth` measurement, not visual
 inspection alone.
 
+## Copy + nav fixes (latest round)
+
+- Pricing calculator heading changed from "Online License Calculator" to "MPP BI Pricing
+  Calculator."
+- Features page: the eyebrow above "Runs Where You Want" changed from "Deployment" to
+  "Flexible Deployment."
+- **Features nav dropdown** — "Features" is now a hover dropdown (same pattern as
+  Resources), listing all 7 sections on that page as anchor links: Data Sources,
+  Visualization, AI & Machine Learning, MPP ETL, Security, Customization, Deployment. Each
+  links to `/features#<section-id>`. The "Features" label itself is still a real link to
+  `/features` (not just a dropdown trigger), so clicking it without hovering still works
+  normally. Verified this isn't just a URL change — actually clicked a sub-item and
+  confirmed the page scrolls to the right section (`scrollY` changed accordingly), not just
+  that the URL updated. Mobile menu shows the same 7 sub-items indented with a left border
+  under "Features" so they read as sub-items rather than top-level pages.
+
 ## Home page fix
 
 - Corrected Home's "features at a glance" stat cards (`StatsSection.tsx`) — the content

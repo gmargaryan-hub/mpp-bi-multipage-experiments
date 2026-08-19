@@ -44,7 +44,7 @@ export default function DeploymentOptionsSection() {
           className="max-w-2xl mb-12"
         >
           <p className="text-[#0AAEDB] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
-            Deployment
+            Flexible Deployment
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-5">
             Runs Where You Want

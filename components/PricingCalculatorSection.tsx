@@ -27,7 +27,7 @@ export default function PricingCalculatorSection() {
             Estimate your cost
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-5">
-            Online License Calculator
+            MPP BI Pricing Calculator
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
             Move the sliders to match your team, and see roughly what MPP BI would cost per

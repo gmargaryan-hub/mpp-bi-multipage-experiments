@@ -10,12 +10,21 @@ import { asset } from '@/lib/basePath'
 import { openDemoModal } from '@/lib/openDemoModal'
 
 const primaryNav = [
-  { label: 'Features', href: '/features' },
   { label: 'Benefits', href: '/benefits' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Why MPP BI', href: '/why-mpp-bi' },
   { label: 'New Agentic BI', href: '/agentic-bi' },
   { label: 'About Us', href: '/about-us' },
+]
+
+const featuresNav = [
+  { label: 'Data Sources', href: '/features#data-sources', description: 'Connect to your data wherever it lives' },
+  { label: 'Visualization', href: '/features#visualization', description: '30+ visualization types' },
+  { label: 'AI & Machine Learning', href: '/features#ai-ml', description: 'AI and machine learning features' },
+  { label: 'MPP ETL', href: '/features#mpp-etl', description: 'A data preparation engine' },
+  { label: 'Security', href: '/features#security', description: 'Enterprise-grade security' },
+  { label: 'Customization', href: '/features#customization', description: 'Built to be customized' },
+  { label: 'Deployment', href: '/features#deployment-options', description: 'Runs where you want' },
 ]
 
 const resourcesNav = [
@@ -28,6 +37,7 @@ const resourcesNav = [
 ]
 
 export default function Navigation() {
+  const [featuresOpen, setFeaturesOpen] = useState(false)
   const [resourcesOpen, setResourcesOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
@@ -61,6 +71,45 @@ export default function Navigation() {
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">
+            {/* Features dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setFeaturesOpen(true)}
+              onMouseLeave={() => setFeaturesOpen(false)}
+            >
+              <Link
+                href="/features"
+                className="flex items-center gap-1 px-3.5 py-2 text-sm font-medium text-[#374151] hover:text-[#0D1B2A] transition-colors rounded-lg hover:bg-[#F5F7FA]"
+              >
+                Features
+                <ChevronDown size={14} className={`transition-transform duration-200 ${featuresOpen ? 'rotate-180' : ''}`} />
+              </Link>
+              <AnimatePresence>
+                {featuresOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 pt-2 w-64"
+                  >
+                    <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-[0_12px_36px_rgba(0,0,0,0.12)] p-2">
+                      {featuresNav.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="block px-3 py-2.5 rounded-lg hover:bg-[#F5F7FA] transition-colors"
+                        >
+                          <p className="text-sm font-medium text-[#0D1B2A]">{item.label}</p>
+                          <p className="text-xs text-[#6B7280] mt-0.5">{item.description}</p>
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             {primaryNav.map((item) => (
               <Link
                 key={item.label}
@@ -140,6 +189,23 @@ export default function Navigation() {
             className="lg:hidden overflow-hidden border-t border-[#E2E8F0] bg-white"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
+              <Link
+                href="/features"
+                className="px-3 py-2.5 text-sm font-medium text-[#374151] hover:text-[#0D1B2A] rounded-lg hover:bg-[#F5F7FA]"
+                onClick={() => setMobileOpen(false)}
+              >
+                Features
+              </Link>
+              {featuresNav.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="ml-3 px-3 py-2 text-xs font-medium text-[#6B7280] hover:text-[#0D1B2A] rounded-lg hover:bg-[#F5F7FA] border-l-2 border-[#E2E8F0]"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
               {[...primaryNav, ...resourcesNav].map((item) => (
                 <Link
                   key={item.label}
