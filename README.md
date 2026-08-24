@@ -243,6 +243,76 @@ Verified after fixing: zero horizontal overflow across all 7 pages × 3 breakpoi
 combinations), confirmed via direct `scrollWidth`/`clientWidth` measurement, not visual
 inspection alone.
 
+## Home page rebuilt from the one-pager (almost exactly as it was)
+
+The Home page (`app/page.tsx`) is now assembled from the original one-pager project's
+sections, in their original order, ported directly from the source rather than
+reconstructed from memory:
+
+```
+HeroSection → BenefitsSection → TrustedGloballySection → ProblemSection →
+ArchitectureSection → EliminatedSection → LPEvsDaxSection → ComparisonTable →
+UseCasesSection → FeaturesGrid → DashboardShowcase → StatsBar → PricingSection →
+CTASection
+```
+
+Per the request, **Navigation and Footer were left untouched** — they're the multi-page
+site's nav/footer, not the one-pager's originals, since the one-pager's `Navigation.tsx`/
+`Footer.tsx` files were never copied in. Every other page on the site is unaffected; only
+`app/page.tsx` and the components it imports changed. Confirmed with a full regression
+sweep after the rebuild (8 pages × 4 breakpoints, 32 combinations) — zero overflow, zero
+console/page errors anywhere, including on the other 7 pages.
+
+Real assets ported over, not placeholders: actual client logos (`public/logos/`, from the
+one-pager's own `public/` folder) for the trusted-by marquee, and 5 real dashboard
+screenshots (`public/dashboards/`) for the interactive showcase tabs.
+
+### Three real bugs found and fixed during the port (not silently kept)
+
+- **`UseCasesSection.tsx`**: a literal typo in the source — a button read "ok a demo for
+  your industry" instead of "Book a demo for your industry" (the "Bo" had been dropped).
+  Fixed.
+- **`DashboardShowcase.tsx`**: the image container forced a fixed `aspect-[16/9]` on all 5
+  dashboard screenshots, but none of them are actually 16:9 — their real ratios range from
+  1.50 to 2.02 (measured directly, not assumed). Every single one would have displayed
+  cropped. Fixed the same way we fixed this exact class of bug on the Home page's case
+  study earlier: lock the container's aspect ratio to each image's real dimensions instead
+  of a fixed value, so `object-cover` has nothing left to crop.
+- **`CTASection.tsx`**: used a raster `/mppbi-logo.png` that was never actually included in
+  the one-pager's `public/` folder (would have 404'd), plus unused `Link`/`Download`
+  imports pointing at a dead, commented-out block. Swapped in our existing high-quality
+  vector logo (`mppbi-logo-dark-bg.svg`, already used elsewhere on the site) instead of
+  chasing down or recreating a missing raster asset, and removed the dead code.
+
+### Also fixed (unrelated to the port itself)
+
+- `PricingSection.tsx` had an unused `Link` import (never referenced in JSX) — removed to
+  avoid any lint-triggered build issues.
+- Added `@radix-ui/react-tabs` as a new dependency — `UseCasesSection.tsx`'s industry tabs
+  need it and it wasn't in the project before. Actually clicked through a tab (Government)
+  after building and confirmed the content genuinely swaps, not just that it renders once.
+- Added the `animate-marquee` keyframe animation to `globals.css` for the logo marquee —
+  wasn't present before since nothing on the old Home page needed it.
+
+### One likely content bug left as-is (not mine to silently fix)
+
+`TrustedGloballySection.tsx`'s data array labels the William & Mary logo with the subtitle
+"Washington & Madison" — almost certainly should read "William & Mary" to match the `alt`
+text right next to it in the same object. Ported faithfully rather than guessed at, since
+this is their content, not a code bug — flagging it here so it doesn't slip through
+unnoticed.
+
+### Everything else ported as a faithful, direct copy
+
+Including keeping "OctoLang" as literal text in `ArchitectureSection.tsx` and
+`LPEvsDaxSection.tsx` — this is real source content, not something I'd invented or
+generalized away this time (a previous, unrelated port of a different diagram component
+had generalized this term out; this rebuild uses the actual source verbatim). Also kept the
+one-pager's own pricing figures (SaaS + perpetual card details) on this Home preview
+section exactly as written, even though they present slightly different numbers/framing
+than the dedicated `/pricing` page — that's how the original one-pager was built, and nothing
+in the request asked to reconcile the two.
+
 ## Copy + nav fixes (latest round)
 
 - Pricing calculator heading changed from "Online License Calculator" to "MPP BI Pricing

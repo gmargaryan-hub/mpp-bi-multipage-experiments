@@ -1,9 +1,17 @@
 import Navigation from '@/components/Navigation'
 import HeroSection from '@/components/HeroSection'
-import StatsSection from '@/components/StatsSection'
-import ConnectsWithDataSection from '@/components/ConnectsWithDataSection'
+import BenefitsSection from '@/components/BenefitsSection'
+import TrustedGloballySection from '@/components/TrustedGloballySection'
+import ProblemSection from '@/components/ProblemSection'
+import ArchitectureSection from '@/components/ArchitectureSection'
+import EliminatedSection from '@/components/EliminatedSection'
+import LPEvsDaxSection from '@/components/LPEvsDaxSection'
+import ComparisonTable from '@/components/ComparisonTable'
 import UseCasesSection from '@/components/UseCasesSection'
-import CaseStudySection from '@/components/CaseStudySection'
+import FeaturesGrid from '@/components/FeaturesGrid'
+import DashboardShowcase from '@/components/DashboardShowcase'
+import StatsBar from '@/components/StatsBar'
+import PricingSection from '@/components/PricingSection'
 import CTASection from '@/components/CTASection'
 import Footer from '@/components/Footer'
 
@@ -13,10 +21,18 @@ export default function HomePage() {
       <Navigation />
       <main>
         <HeroSection />
-        <StatsSection />
-        <ConnectsWithDataSection />
+        <BenefitsSection />
+        <TrustedGloballySection />
+        <ProblemSection />
+        <ArchitectureSection />
+        <EliminatedSection />
+        <LPEvsDaxSection />
+        <ComparisonTable />
         <UseCasesSection />
-        <CaseStudySection />
+        <FeaturesGrid />
+        <DashboardShowcase />
+        <StatsBar />
+        <PricingSection />
         <CTASection />
       </main>
       <Footer />
