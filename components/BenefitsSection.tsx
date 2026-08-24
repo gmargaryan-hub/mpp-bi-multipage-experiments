@@ -89,7 +89,7 @@ export default function BenefitsSection() {
           </p>
         </motion.div>
 
-        {/* Benefits grid */}
+        {/* Benefits grid — same card style as the Benefits page hero */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -103,36 +103,22 @@ export default function BenefitsSection() {
               <motion.div
                 key={b.title}
                 variants={card}
-                className="group relative rounded-2xl border border-white/8 bg-white/4 p-7 flex flex-col gap-5 hover:border-white/15 transition-colors duration-300 overflow-hidden"
+                className="rounded-2xl border border-white/8 bg-white/4 p-6 flex flex-col gap-4"
               >
-                {/* Glow on hover */}
                 <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: `radial-gradient(ellipse at 50% 0%, ${b.color}12 0%, transparent 70%)` }}
-                />
-
-                {/* Top accent */}
-                <div className="h-px w-full rounded-full" style={{ background: `linear-gradient(90deg, transparent, ${b.color}60, transparent)` }} />
-
-                {/* Icon */}
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{ background: `${b.color}15`, border: `1px solid ${b.color}30` }}
                 >
-                  <Icon size={20} style={{ color: b.color }} />
+                  <Icon size={18} style={{ color: b.color }} />
                 </div>
-
-                {/* Title — big and in accent color */}
                 <div>
-                  <p className="text-2xl font-black font-display leading-none mb-2 uppercase tracking-tight" style={{ color: b.color }}>
+                  <p className="text-xs font-bold uppercase tracking-wide mb-1.5" style={{ color: b.color }}>
                     {b.title}
                   </p>
-                  <p className="text-4xl font-black font-display leading-none text-white">{b.stat}</p>
-                  <p className="text-xs text-[#64748B] font-medium mt-1 tracking-wide">{b.statLabel}</p>
+                  <p className="text-xl font-black font-display leading-tight text-white">{b.stat}</p>
+                  <p className="text-xs text-[#64748B] font-medium mt-1">{b.statLabel}</p>
                 </div>
-
-                {/* Body */}
-                <p className="text-[#94A3B8] text-sm leading-relaxed flex-1">{b.body}</p>
+                <p className="text-[#94A3B8] text-xs leading-relaxed">{b.body}</p>
               </motion.div>
             )
           })}

@@ -243,6 +243,17 @@ Verified after fixing: zero horizontal overflow across all 7 pages × 3 breakpoi
 combinations), confirmed via direct `scrollWidth`/`clientWidth` measurement, not visual
 inspection alone.
 
+### Update: BenefitsSection card style now matches the Benefits page
+
+Content was already correct (ported verbatim from the one-pager and unchanged), but the
+card design was the one-pager's own heavier style (large uppercase title, hover glow, top
+accent line). Replaced the card markup with the exact style already used on the Benefits
+page hero (`BenefitsHero.tsx`) — same icon-chip size, same typography hierarchy, same
+spacing — so the two pages present the same 5 stats consistently instead of two different
+visual treatments. Confirmed via side-by-side screenshots that the card designs now match
+exactly. Section header/copy (eyebrow, H2, intro paragraph) is unchanged, since that's
+Home-specific and wasn't part of the request.
+
 ## Home page rebuilt from the one-pager (almost exactly as it was)
 
 The Home page (`app/page.tsx`) is now assembled from the original one-pager project's
