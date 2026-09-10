@@ -298,6 +298,28 @@ Home-specific and wasn't part of the request.
 
 ## Blog / Sanity CMS integration
 
+### Nav trim + blog index restructuring (latest round)
+
+- **Resources dropdown trimmed**, in both `Navigation.tsx` and `Footer.tsx`: removed
+  "Demos" and "Documentation" (dead links, no pages behind them yet), and merged
+  "Research" into "Blog" rather than keeping it separate — Resources is now just
+  Architecture, Case Studies, Blog.
+- **Blog listing page restructured** to match the pattern from the main company site
+  (mpp-insights.com/blog, provided as a reference): added a category filter row ("All" +
+  each category from Sanity) above the post grid, and moved each card's category label
+  from plain text above the title to a badge overlaid on the image itself (top-left,
+  translucent dark pill), matching the reference's visual style. Card aspect ratio changed
+  to 1.3:1 to match the reference too (was 16:9).
+- **Filtering is a real navigation**, same pattern as the post page's topic tags:
+  clicking a category link goes to `/blog?category=<slug>`, which re-renders the page
+  server-side with `getPostsByCategory` instead of `getAllPosts`. No client component, no
+  local state — consistent with the "must be server-rendered" requirement from earlier.
+- **Verified without live Sanity access** (same limitation as before — this sandbox can't
+  reach `api.sanity.io`): built a temporary route with fabricated categories and posts,
+  clicked a category tag, confirmed the URL changed to `?category=data-engineering` and
+  the grid genuinely filtered down to the one matching post — not just checked that it
+  compiled. Deleted before committing; never shipped.
+
 ### Post page layout + "Other Articles" (latest round)
 
 - **Author, category, and date moved** to a single row directly below the hero image

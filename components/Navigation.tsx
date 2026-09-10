@@ -30,10 +30,7 @@ const featuresNav = [
 const resourcesNav = [
   { label: 'Architecture', href: '/architecture', description: 'How MPP BI is built' },
   { label: 'Case Studies', href: '/resources/case-studies', description: 'Filterable by industry' },
-  { label: 'Demos', href: '/resources/demos', description: 'A series of walkthrough videos' },
-  { label: 'Research', href: '/resources/research', description: 'Whitepapers and benchmarks' },
-  { label: 'Documentation', href: '/resources/documentation', description: 'Setup and reference guides' },
-  { label: 'Blog', href: '/blog', description: 'Product updates and news' },
+  { label: 'Blog', href: '/blog', description: 'Product updates, research, and news' },
 ]
 
 export default function Navigation() {

@@ -23,9 +23,6 @@ const columns = [
     links: [
       { label: 'Architecture', href: '/architecture' },
       { label: 'Case Studies', href: '/resources/case-studies' },
-      { label: 'Demos', href: '/resources/demos' },
-      { label: 'Research', href: '/resources/research' },
-      { label: 'Documentation', href: '/resources/documentation' },
       { label: 'Blog', href: '/blog' },
     ],
   },

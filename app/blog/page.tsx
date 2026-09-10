@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-import { getAllPosts } from '@/lib/sanity-queries'
+import { getAllPosts, getPostsByCategory, getAllCategories } from '@/lib/sanity-queries'
 import { urlForImage } from '@/lib/sanity'
 
 // Revalidate periodically so newly published posts show up without a full
@@ -21,11 +21,19 @@ function formatDate(dateStr?: string) {
   return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
-export default async function BlogIndexPage() {
+type Props = { searchParams: Promise<{ category?: string }> }
+
+export default async function BlogIndexPage({ searchParams }: Props) {
+  const { category: selectedCategory } = await searchParams
+
   let posts: Awaited<ReturnType<typeof getAllPosts>> = []
+  let categories: Awaited<ReturnType<typeof getAllCategories>> = []
   let fetchFailed = false
   try {
-    posts = await getAllPosts()
+    ;[posts, categories] = await Promise.all([
+      selectedCategory ? getPostsByCategory(selectedCategory) : getAllPosts(),
+      getAllCategories(),
+    ])
   } catch {
     // Sanity read likely failed (unset project/dataset, restricted read access, or a
     // network issue) — degrade to an empty-state message instead of crashing the page.
@@ -61,9 +69,44 @@ export default async function BlogIndexPage() {
               </div>
             )}
 
+            {/* Category filter — "All" + each category. Real navigation (?category=slug),
+                so this re-renders server-side, same pattern as the post page's topic tags. */}
+            {!fetchFailed && categories.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-2 mb-14">
+                <Link
+                  href="/blog"
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                    !selectedCategory
+                      ? 'bg-[#0D1B2A] text-white'
+                      : 'bg-white border border-[#E2E8F0] text-[#374151] hover:border-[#0AAEDB]/40'
+                  }`}
+                >
+                  All
+                </Link>
+                {categories.map((cat) => {
+                  const active = cat.slug === selectedCategory
+                  return (
+                    <Link
+                      key={cat.slug}
+                      href={`/blog?category=${cat.slug}`}
+                      className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                        active
+                          ? 'bg-[#0D1B2A] text-white'
+                          : 'bg-white border border-[#E2E8F0] text-[#374151] hover:border-[#0AAEDB]/40'
+                      }`}
+                    >
+                      {cat.title}
+                    </Link>
+                  )
+                })}
+              </div>
+            )}
+
             {!fetchFailed && posts.length === 0 && (
               <div className="text-center py-20">
-                <p className="text-[#374151] text-lg font-semibold mb-2">No posts published yet</p>
+                <p className="text-[#374151] text-lg font-semibold mb-2">
+                  {selectedCategory ? 'No posts in this category yet' : 'No posts published yet'}
+                </p>
                 <p className="text-[#6B7280] text-sm">Once something is published in the Studio, it&apos;ll show up here.</p>
               </div>
             )}
@@ -75,10 +118,10 @@ export default async function BlogIndexPage() {
                   href={`/blog/${post.slug}`}
                   className="group rounded-2xl border border-[#E2E8F0] overflow-hidden hover:border-[#0AAEDB]/40 transition-colors"
                 >
-                  <div className="relative w-full bg-[#F5F7FA]" style={{ aspectRatio: '16 / 9' }}>
+                  <div className="relative w-full bg-[#F5F7FA]" style={{ aspectRatio: '1.3 / 1' }}>
                     {post.mainImage ? (
                       <Image
-                        src={urlForImage(post.mainImage).width(800).height(450).fit('crop').auto('format').url()}
+                        src={urlForImage(post.mainImage).width(800).height(615).fit('crop').auto('format').url()}
                         alt={post.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 400px"
@@ -87,24 +130,22 @@ export default async function BlogIndexPage() {
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-[#CBD5E1] text-xs">No image</div>
                     )}
+                    {post.category && (
+                      <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide text-white bg-[#0D1B2A]/80 backdrop-blur-sm">
+                        {post.category.title}
+                      </span>
+                    )}
                   </div>
                   <div className="p-5">
-                    {post.category && (
-                      <p className="text-[10px] font-bold uppercase tracking-wide text-[#0AAEDB] mb-2">
-                        {post.category.title}
-                      </p>
-                    )}
                     <h2 className="font-display text-lg font-bold text-[#0D1B2A] leading-snug mb-2 group-hover:text-[#0AAEDB] transition-colors">
                       {post.title}
                     </h2>
                     {post.excerpt && (
                       <p className="text-sm text-[#6B7280] leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
                     )}
-                    <div className="flex items-center gap-2 text-xs text-[#9CA3AF]">
-                      {post.author?.name && <span>{post.author.name}</span>}
-                      {post.author?.name && post.publishedAt && <span>&middot;</span>}
-                      {formatDate(post.publishedAt) && <span>{formatDate(post.publishedAt)}</span>}
-                    </div>
+                    {formatDate(post.publishedAt) && (
+                      <p className="text-xs text-[#9CA3AF]">{formatDate(post.publishedAt)}</p>
+                    )}
                   </div>
                 </Link>
               ))}
