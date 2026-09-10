@@ -298,6 +298,32 @@ Home-specific and wasn't part of the request.
 
 ## Blog / Sanity CMS integration
 
+### Post page layout + "Other Articles" (latest round)
+
+- **Author, category, and date moved** to a single row directly below the hero image
+  (previously they sat inside the dark hero, above the image). The hero itself now only
+  has the back-link and the title.
+- **New "Other Articles" section**, replacing the old curated `relatedPosts` section:
+  category tags across the top (the current post's own category is active by default,
+  styled dark/filled vs. the others' outline style), and the 3 most recent posts in
+  whichever category is selected underneath. Clicking a tag is a real link to
+  `/blog/[slug]?topic=<category-slug>#other-articles` — the whole section re-renders
+  server-side with the new selection. No client component, no `useState`, no
+  client-side fetch for the switching itself.
+- **On the "is this server-rendered?" question**: yes, and it was already server-rendered
+  before this round too — `/blog` and `/blog/[slug]` are async Server Components
+  (`generateStaticParams` + `revalidate = 60`, i.e. SSG with ISR), not client components
+  fetching via `useEffect`. The new tag-switching interaction was deliberately built the
+  same way (URL search param + Server Component re-render) rather than reaching for a
+  client component with local state, specifically to keep the whole feature server-rendered
+  end to end, not just the initial page load.
+- **Verified without live Sanity access**: since this sandbox can't reach `api.sanity.io`
+  at all (see below), the new layout and the tag-switching were verified against a
+  temporary route with fabricated data — actually clicked a different topic tag and
+  confirmed the URL changed to `?topic=product-updates#other-articles` and the active tag
+  visually updated, proving it's a real navigation/re-render rather than assumed to work.
+  That temporary route was deleted before committing; it never shipped.
+
 `/blog` was a dead link since the site was built; it's now wired to a real Sanity Studio
 (`studio-mpp-website`, project ID `cpyjkfcl`, dataset `production`, both hardcoded as
 defaults in `lib/sanity.ts` since they're not secrets — still overridable via

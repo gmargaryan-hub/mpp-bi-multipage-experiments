@@ -169,3 +169,21 @@ export async function getAllCategories(): Promise<CategorySummary[]> {
     `*[_type == "category" && defined(slug.current)] | order(title asc){ title, "slug": slug.current, description }`
   )
 }
+
+/**
+ * Most recent posts in a category, excluding one post (typically the one currently
+ * being viewed, so "other articles on this topic" doesn't just show itself back).
+ * Fetches one extra so that after excluding the current post there are still
+ * `limit` results whenever possible, then trims to `limit` in JS.
+ */
+export async function getRecentPostsByCategory(
+  categorySlug: string,
+  excludeSlug?: string,
+  limit = 3
+): Promise<PostSummary[]> {
+  const raw: PostSummary[] = await sanityClient.fetch(
+    `*[_type == "post" && category->slug.current == $categorySlug && defined(slug.current)] | order(publishedAt desc) [0...${limit + 1}] ${postSummaryProjection}`,
+    { categorySlug }
+  )
+  return raw.filter((p) => p.slug !== excludeSlug).slice(0, limit)
+}
