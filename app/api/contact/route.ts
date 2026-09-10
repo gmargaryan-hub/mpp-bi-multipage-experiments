@@ -14,8 +14,8 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         // TEMPORARY: onboarding@resend.dev (Resend's sandbox sender) can only deliver to
-        // the email address the Resend account signed up with — gmargaryan@mpplabs.io in
-        // this case — so that's the recipient below for now. Once mpp-insights.com is
+        // the email address the Resend account signed up with - gmargaryan@mpplabs.io in
+        // this case - so that's the recipient below for now. Once mpp-insights.com is
         // verified at resend.com/domains, switch `to` back to welcome@mpp-insights.com
         // and change `from` to an address on the verified domain (e.g.
         // 'MPP BI <noreply@mpp-insights.com>'), or Resend will reject it the same way.

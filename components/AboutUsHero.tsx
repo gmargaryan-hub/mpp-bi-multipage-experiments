@@ -41,8 +41,8 @@ export default function AboutUsHero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-[#94A3B8] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
         >
-          MPP BI is a business intelligence platform&mdash;think dashboards, reports, and
-          real-time monitoring like Tableau or Power BI&mdash;but built with a leaner
+          MPP BI is a business intelligence platform (think dashboards, reports, and
+          real-time monitoring like Tableau or Power BI) but built with a leaner
           architecture that runs analytics directly inside your database instead of copying
           data out to a separate engine. The result is live analytics on massive datasets
           (billions of records), 2x&ndash;12x faster performance, and dramatically lower

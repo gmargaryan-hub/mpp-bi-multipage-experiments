@@ -8,8 +8,8 @@ const groups = [
     icon: KeyRound,
     title: 'Safe sign-in',
     items: [
-      'Staff sign in with their existing company account \u2014 Active Directory, Kerberos, or any LDAP system',
-      'Fits your existing security setup \u2014 OAuth 2.0, OpenID Connect, and tools like KeyCloak',
+      'Staff sign in with their existing company account, like Active Directory, Kerberos, or any LDAP system',
+      'Fits your existing security setup: OAuth 2.0, OpenID Connect, and tools like KeyCloak',
       'Multi-factor authentication (MFA)',
       'Secure access for connected software via signed JWTs',
     ],
@@ -18,7 +18,7 @@ const groups = [
     icon: Lock,
     title: 'Data kept safe',
     items: [
-      'Passwords are encrypted before storage \u2014 the real password is never kept anywhere',
+      'Passwords are encrypted before storage, the real password is never kept anywhere',
       'Everything travels encrypted in transit, the same protection trusted by online banking',
     ],
   },
@@ -26,15 +26,15 @@ const groups = [
     icon: Eye,
     title: 'You decide who sees what',
     items: [
-      'Granular access control \u2014 set permissions separately for data sources, cubes, atlases, dashboards, and individual charts',
-      'Row-level security \u2014 two people can open the same dashboard and each see only the records they\u2019re allowed to',
+      'Granular access control: set permissions separately for data sources, cubes, atlases, dashboards, and individual charts',
+      'Row-level security: two people can open the same dashboard and each see only the records they\u2019re allowed to',
     ],
   },
   {
     icon: ScrollText,
     title: 'A full record of activity',
     items: [
-      'SIEM-based logs \u2014 every action recorded in a format that plugs into standard security monitoring tools, exportable anytime',
+      'SIEM-based logs: every action recorded in a format that plugs into standard security monitoring tools, exportable anytime',
     ],
   },
 ]

@@ -159,7 +159,7 @@ export default function ArchitectureSection() {
             <div className="mb-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E05A2B]/10 border border-[#E05A2B]/25 mb-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#E05A2B]" />
-                <span className="text-[11px] font-mono text-[#E05A2B] tracking-widest uppercase">Legacy BI — Tableau · Power BI · Looker</span>
+                <span className="text-[11px] font-mono text-[#E05A2B] tracking-widest uppercase">Legacy BI &middot; Tableau &middot; Power BI &middot; Looker</span>
               </div>
               <p className="text-[#6B7280] text-sm font-medium">4 Layers. 3 Bottlenecks. 1 Fundamental Flaw.</p>
             </div>
@@ -186,7 +186,7 @@ export default function ArchitectureSection() {
                 <Arrow color="#37415180" long label="data must travel here ↑" />
               </div>
 
-              {/* Data Source — external, distant */}
+              {/* Data Source - external, distant */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={visible ? { opacity: 1 } : {}}
@@ -263,7 +263,7 @@ export default function ArchitectureSection() {
 
               <div className="flex justify-center"><Arrow color="#00C2FF80" label="query pushed down ↓" /></div>
 
-              {/* Data Source — close */}
+              {/* Data Source - close */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={visible ? { opacity: 1 } : {}}

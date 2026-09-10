@@ -50,7 +50,7 @@ export default function DeploymentSection() {
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
             MPP BI can run fully on-premise or in your cloud environment. Both options use
-            the same product and architecture &mdash; the difference is only where it runs.
+            the same product and architecture. The difference is only where it runs.
           </p>
         </motion.div>
 

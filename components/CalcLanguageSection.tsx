@@ -30,7 +30,7 @@ export default function CalcLanguageSection() {
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
             Most BI tools have a formula language built assuming your data would be copied
-            in first &mdash; Power BI&apos;s is called DAX. Live connections came later, as an
+            in first. Power BI&apos;s is called DAX. Live connections came later, as an
             add-on, so a large part of the language stops working once you switch to one.
             MPP BI&apos;s calculation language was built for live connections from the very
             first line of code.
@@ -77,8 +77,8 @@ export default function CalcLanguageSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center text-[#6B7280] text-sm mt-8 max-w-2xl mx-auto"
         >
-          This same language works on both sides of MPP BI &mdash; in the browser and inside
-          the database &mdash; so your team isn&apos;t learning two different systems for the
+          This same language works on both sides of MPP BI, in the browser and inside
+          the database, so your team isn&apos;t learning two different systems for the
           same task. Developers can also use it inside JavaScript, alongside whatever other
           tools or libraries they already use.
         </motion.p>

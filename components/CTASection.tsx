@@ -69,7 +69,7 @@ export default function CTASection() {
           transition={{ duration: 0.7, delay: 0.5 }}
           className="flex flex-col items-center gap-2 text-sm text-white/30"
         >
-          <p>MPP BI is developed by MPP Insights LLC — headquartered in Richmond, Virginia with an R&amp;D center in Yerevan, Armenia. Global delivery. UN Supplier.</p>
+          <p>MPP BI is developed by MPP Insights LLC, headquartered in Richmond, Virginia with an R&amp;D center in Yerevan, Armenia. Global delivery. UN Supplier.</p>
           <a
             href="https://mpp-insights.com"
             target="_blank"

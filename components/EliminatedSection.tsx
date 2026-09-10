@@ -20,9 +20,9 @@ const cards = [
     title: 'The Calculation Engine',
     verdict: 'Gone. Entirely.',
     verdictColor: '#F97316',
-    body: `The in-memory calculation engine is the most expensive, most limiting component in legacy BI. It requires dedicated RAM. It imposes hard dataset size limits. It's the reason DirectQuery breaks — the engine can't push complex computations to the data source, so vendors disable those functions rather than fix the architecture.
+    body: `The in-memory calculation engine is the most expensive, most limiting component in legacy BI. It requires dedicated RAM. It imposes hard dataset size limits. It's the reason DirectQuery breaks. The engine can't push complex computations to the data source, so vendors disable those functions rather than fix the architecture.
 
-MPP BI eliminated it. Computation happens at the data source, pushed there by OctoLang. No engine. No RAM cost. No ceiling. No broken functions. The absence of this component is not a missing feature — it's the product's most significant engineering decision.`,
+MPP BI eliminated it. Computation happens at the data source, pushed there by OctoLang. No engine. No RAM cost. No ceiling. No broken functions. The absence of this component is not a missing feature. It's the product's most significant engineering decision.`,
   },
   {
     number: '02',
@@ -31,14 +31,14 @@ MPP BI eliminated it. Computation happens at the data source, pushed there by Oc
     verdictColor: '#0AAEDB',
     body: `Legacy BI separates the app server (query prep, user management, session handling) from metadata storage (dashboard configs, access rights, audit logs). Two systems to deploy, synchronize, and maintain. Two surfaces to secure.
 
-MPP BI Core unifies both into one block, running inside PostgreSQL. One system. Half the infrastructure footprint. Metadata-enforced access rights are applied before query execution — not after data has already moved.`,
+MPP BI Core unifies both into one block, running inside PostgreSQL. One system. Half the infrastructure footprint. Metadata-enforced access rights are applied before query execution, not after data has already moved.`,
   },
   {
     number: '03',
     title: 'The Data Copy',
     verdict: 'Eliminated. No import mode. No cache. No stale data.',
     verdictColor: '#10B981',
-    body: `Legacy BI's import mode exists because the calculation engine needs data fed to it. The engine cannot reach into your data source and compute there — so the data must come to it. Without import mode, DirectQuery's limitations make the tool unusable for complex analytics. This is a workaround for a structural flaw.
+    body: `Legacy BI's import mode exists because the calculation engine needs data fed to it. The engine cannot reach into your data source and compute there, so the data must come to it. Without import mode, DirectQuery's limitations make the tool unusable for complex analytics. This is a workaround for a structural flaw.
 
 MPP BI has no import mode because it has no calculation engine. Your data lives where it lives. The query goes to the data. Always fresh. Always live. Always complete.`,
   },
@@ -49,7 +49,7 @@ export default function EliminatedSection() {
 
   return (
     <section className="py-24 relative bg-[#0D1B2A]" id="eliminated">
-      {/* Dot grid — matches CTA section */}
+      {/* Dot grid - matches CTA section */}
       <div className="absolute inset-0 dot-grid opacity-20" />
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(249,115,22,0.06) 0%, transparent 70%)' }} />
 

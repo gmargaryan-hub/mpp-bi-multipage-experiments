@@ -68,7 +68,7 @@ export default function EnterpriseAndIntegrationSection() {
                   <Icon size={18} style={{ color: '#7C7AED' }} />
                 </div>
                 <p className="text-[#6B7280] text-sm leading-relaxed">
-                  <strong className="text-[#0D1B2A] font-bold">{p.title} — </strong>
+                  <strong className="text-[#0D1B2A] font-bold">{p.title}: </strong>
                   {p.body}
                 </p>
               </motion.div>
@@ -112,7 +112,7 @@ export default function EnterpriseAndIntegrationSection() {
                   <Icon size={16} style={{ color: '#7C7AED' }} />
                 </div>
                 <p className="text-[#6B7280] text-xs leading-relaxed">
-                  <strong className="text-[#0D1B2A] font-bold text-sm">{p.title} — </strong>
+                  <strong className="text-[#0D1B2A] font-bold text-sm">{p.title}: </strong>
                   {p.body}
                 </p>
               </motion.div>

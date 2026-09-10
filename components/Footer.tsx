@@ -58,7 +58,7 @@ export default function Footer() {
             </a>
             <p className="text-xs text-white/40 leading-relaxed max-w-xs">
               MPP Insights builds MPP BI and MPP ETL. Business intelligence that runs inside
-              your data — no data extraction, no calculation engine, always live.
+              your data, with no data extraction, no calculation engine, always live.
             </p>
           </div>
 

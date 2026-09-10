@@ -25,7 +25,7 @@ const industries = [
       description: 'Faster risk calculations vs. traditional BI platforms, with zero data extraction from compliant databases.',
     },
     bullets: [
-      'Business logic runs inside your compliant database — data never leaves',
+      'Business logic runs inside your compliant database, data never leaves',
       'Hot/Warm/Cold tiers handle real-time feeds through historical archives',
       'Perpetual license available for regulatory and air-gapped environments',
       'AI/ML risk scoring natively integrated via stored procedures',
@@ -37,7 +37,7 @@ const industries = [
     icon: Flame,
     color: '#F59E0B',
     headline: 'Operational Intelligence at the Wellhead',
-    subheadline: 'Remote operations demand analytics that work without reliable connectivity — or third-party cloud dependence.',
+    subheadline: 'Remote operations demand analytics that work without reliable connectivity, or third-party cloud dependence.',
     pains: [
       'SCADA and IoT data volumes overwhelm traditional BI ingestion',
       'Remote sites with limited connectivity need on-premises deployment',
@@ -49,7 +49,7 @@ const industries = [
       description: 'Full deployment in air-gapped, remote, or sovereign environments with zero cloud dependency.',
     },
     bullets: [
-      'Deploy fully on-premises — no cloud connectivity required',
+      'Deploy fully on-premises, no cloud connectivity required',
       'Kafka and streaming data sources supported natively',
       'Scales to billions of sensor records without performance degradation',
       'Open SOA: integrate with existing SCADA, ERP, and DCS systems',
@@ -70,11 +70,11 @@ const industries = [
     ],
     result: {
       metric: '51% reduction',
-      description: 'In payment defaults after deploying MPP BI predictive analytics — documented case study.',
+      description: 'In payment defaults after deploying MPP BI predictive analytics (documented case study).',
     },
     bullets: [
       'Proven on 2B+ record datasets with <5 minute query time',
-      'Native ML/AI via stored procedures — no Python server required',
+      'Native ML/AI via stored procedures, no Python server required',
       'Cold layer (Hadoop/S3) for historical claims, hot layer for active policies',
       'Source code available for regulatory audit requirements',
     ],
@@ -94,11 +94,11 @@ const industries = [
     ],
     result: {
       metric: '$1M+',
-      description: 'Annual savings from analytics alone — steel and rebar procurement analysis across 500+ entities, with real-time budget KPIs.',
+      description: 'Annual savings from analytics alone: steel and rebar procurement analysis across 500+ entities, with real-time budget KPIs.',
     },
     bullets: [
       'Connects to SAP, Oracle, Excel, and custom ERP systems simultaneously',
-      'Real-time project dashboards from stored procedures — no lag',
+      'Real-time project dashboards from stored procedures, no lag',
       'Mobile-ready HTML5 client for field supervisors',
       'Embedded analytics in existing project management portals',
     ],
@@ -118,7 +118,7 @@ const industries = [
     ],
     result: {
       metric: 'Real-Time',
-      description: 'Content performance analytics with zero data movement — all analysis happens inside the database.',
+      description: 'Content performance analytics with zero data movement. All analysis happens inside the database.',
     },
     bullets: [
       'Unify CMS, CRM, subscription, and ad data without ETL',
@@ -145,7 +145,7 @@ const industries = [
       description: 'Certified UN Supplier with 20 years of public sector delivery history and full on-premises deployment capability.',
     },
     bullets: [
-      'Full on-premises deployment — data never leaves sovereign infrastructure',
+      'Full on-premises deployment, data never leaves sovereign infrastructure',
       'Perpetual license for multi-year government procurement cycles',
       'Connects to legacy Oracle, SAP, and mainframe systems',
       'Source code available per license for security audit requirements',

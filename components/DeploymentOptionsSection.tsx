@@ -112,12 +112,12 @@ export default function DeploymentOptionsSection() {
           >
             <h3 className="text-base font-bold text-[#0D1B2A] mb-3">Grow as Your Needs Grow</h3>
             <p className="text-sm text-[#6B7280] leading-relaxed mb-2">
-              <strong className="text-[#0D1B2A]">Horizontal scaling</strong> &mdash; spread
+              <strong className="text-[#0D1B2A]">Horizontal scaling</strong>: spread
               the load across extra nodes using the built-in load balancer (Nginx), or split
               services across separate machines.
             </p>
             <p className="text-sm text-[#6B7280] leading-relaxed">
-              <strong className="text-[#0D1B2A]">Vertical scaling</strong> &mdash; add more
+              <strong className="text-[#0D1B2A]">Vertical scaling</strong>: add more
               memory and processing power to the machines you already have.
             </p>
           </motion.div>
@@ -167,10 +167,10 @@ export default function DeploymentOptionsSection() {
         </motion.div>
 
         <div className="flex items-center gap-6 mt-8 text-xs text-[#6B7280]">
-          <p><strong className="text-[#0D1B2A]">High availability</strong> &mdash; database clustering (Patroni), hot and cold backup options.</p>
+          <p><strong className="text-[#0D1B2A]">High availability</strong>: database clustering (Patroni), hot and cold backup options.</p>
         </div>
         <p className="text-xs text-[#6B7280] mt-2">
-          <strong className="text-[#0D1B2A]">Automatic backups</strong> &mdash; set backups to run on a schedule, so your data is always protected.
+          <strong className="text-[#0D1B2A]">Automatic backups</strong>: set backups to run on a schedule, so your data is always protected.
         </p>
       </div>
     </section>

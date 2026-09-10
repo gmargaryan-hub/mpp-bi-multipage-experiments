@@ -32,7 +32,7 @@ const rows: Row[] = [
   { label: 'AI/ML integrated on-prem', mpp: { type: 'highlight', label: 'Native' }, tableau: { type: 'partial', label: 'Add-on' }, powerbi: { type: 'partial', label: 'Add-on' } },
   { label: 'Source code available', mpp: { type: 'highlight', label: 'Per license' }, tableau: { type: 'x' }, powerbi: { type: 'x' } },
   { label: 'Hot/Warm/Cold data layers', mpp: { type: 'check' }, tableau: { type: 'x' }, powerbi: { type: 'x' } },
-  { label: '500 concurrent users — 16 cores / 32GB RAM', mpp: { type: 'highlight', label: 'Production proven' }, tableau: { type: 'partial', label: 'Requires Premium' }, powerbi: { type: 'partial', label: 'Requires Premium' } },
+  { label: '500 concurrent users · 16 cores / 32GB RAM', mpp: { type: 'highlight', label: 'Production proven' }, tableau: { type: 'partial', label: 'Requires Premium' }, powerbi: { type: 'partial', label: 'Requires Premium' } },
   { label: '2B+ records in under 5 seconds', mpp: { type: 'highlight', label: 'Production proven' }, tableau: { type: 'warn', label: 'Not validated' }, powerbi: { type: 'warn', label: 'Not validated' } },
   { label: 'Performance vs traditional BI', mpp: { type: 'highlight', label: '2x–12x faster' }, tableau: { type: 'text', label: 'Baseline' }, powerbi: { type: 'text', label: 'Baseline' } },
   { label: 'Integrated ETL', mpp: { type: 'highlight', label: 'Included' }, tableau: { type: 'x' }, powerbi: { type: 'partial', label: 'Limited' } },

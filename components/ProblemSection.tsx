@@ -8,14 +8,14 @@ const problems = [
     icon: Database,
     title: 'Your Data Leaves Home',
     description:
-      'Tableau and Power BI extract your data into their own storage engines — Hyper and VertiPaq respectively. Every full-scale query requires a data copy. Latency. Security surface area. Infrastructure cost paid twice — once for the database, once for the BI layer that duplicates it.',
+      'Tableau and Power BI extract your data into their own storage engines: Hyper and VertiPaq respectively. Every full-scale query requires a data copy. Latency. Security surface area. Infrastructure cost paid twice: once for the database, once for the BI layer that duplicates it.',
     callout: 'Import Mode = Data Copy = Stale Data',
   },
   {
     icon: Server,
     title: "You're Paying for an Engine You Don't Need",
     description:
-      "Power BI Premium. Tableau Server. License it, manage it, scale it, secure it — and it's still slower than running analytics where the data already lives. Switch to DirectQuery or Live Connection mode and roughly 40% of your calculation functions break. Not a bug. An architectural consequence.",
+      "Power BI Premium. Tableau Server. License it, manage it, scale it, secure it, and it's still slower than running analytics where the data already lives. Switch to DirectQuery or Live Connection mode and roughly 40% of your calculation functions break. Not a bug. An architectural consequence.",
     callout: 'DirectQuery Wall ≈ 40% of Functions Disabled',
   },
   {
@@ -123,7 +123,7 @@ export default function ProblemSection() {
           <p className="text-[#6B7280] text-base leading-relaxed">
             MPP BI was designed from day one to{' '}
             <span className="text-[#0AAEDB] font-semibold">eliminate both the calculation engine and internal data storage</span>
-            {' '}— by running business logic directly inside your database.
+            {' '}by running business logic directly inside your database.
           </p>
         </motion.div>
       </div>

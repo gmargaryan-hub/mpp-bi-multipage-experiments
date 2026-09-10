@@ -144,7 +144,7 @@ export default function PricingSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-10 text-sm text-[#6B7280] text-center max-w-2xl mx-auto"
         >
-          Tableau Creator starts at ~$75/seat/month. Power BI Pro requires Microsoft 365 and caps capability without Power BI Premium. MPP BI includes integrated ETL, on-premises deployment, and source code availability — with no separate BI server required.
+          Tableau Creator starts at ~$75/seat/month. Power BI Pro requires Microsoft 365 and caps capability without Power BI Premium. MPP BI includes integrated ETL, on-premises deployment, and source code availability, with no separate BI server required.
         </motion.p>
       </div>
     </section>

@@ -25,7 +25,7 @@ const benefits = [
     title: 'Secure',
     stat: 'Zero',
     statLabel: 'data extraction required',
-    body: 'Data never leaves your environment. Access rights enforced at the metadata layer before any query executes — not after data has already moved. SSO, RBAC, full audit logging.',
+    body: 'Data never leaves your environment. Access rights enforced at the metadata layer before any query executes, not after data has already moved. SSO, RBAC, full audit logging.',
     color: '#6366F1',
   },
   {
@@ -41,7 +41,7 @@ const benefits = [
     title: 'Always Live',
     stat: 'No',
     statLabel: 'import mode. Ever.',
-    body: 'Live connection is not a mode in MPP BI — it is the only mode. There is no import mode, no scheduled refresh, no stale cache. Your queries go directly to the data source.',
+    body: 'Live connection is not a mode in MPP BI. It is the only mode. There is no import mode, no scheduled refresh, no stale cache. Your queries go directly to the data source.',
     color: '#0AAEDB',
   },
 ]
@@ -59,7 +59,7 @@ const card = {
 export default function BenefitsSection() {
   return (
     <section className="relative py-28 overflow-hidden bg-[#0D1B2A]" id="benefits">
-      {/* Dot grid — matches CTA section */}
+      {/* Dot grid - matches CTA section */}
       <div className="absolute inset-0 dot-grid opacity-20" />
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
@@ -89,7 +89,7 @@ export default function BenefitsSection() {
           </p>
         </motion.div>
 
-        {/* Benefits grid — same card style as the Benefits page hero */}
+        {/* Benefits grid - same card style as the Benefits page hero */}
         <motion.div
           variants={container}
           initial="hidden"

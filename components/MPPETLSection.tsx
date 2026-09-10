@@ -32,7 +32,7 @@ export default function MPPETLSection() {
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
             MPP ETL (also called Lizardata) is an add-on for MPP BI. ETL stands for
-            &ldquo;extract, transform, load&rdquo; &mdash; the standard term for taking data
+            &ldquo;extract, transform, load&rdquo;, the standard term for taking data
             from a source, preparing it, and putting it where it&apos;s needed. MPP ETL
             collects data from your sources, cleans and organizes it, and prepares it for
             analysis.

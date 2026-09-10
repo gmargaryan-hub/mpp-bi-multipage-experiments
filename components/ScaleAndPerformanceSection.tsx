@@ -61,7 +61,7 @@ export default function ScaleAndPerformanceSection() {
             </h2>
             <p className="text-[#6B7280] text-sm leading-relaxed mb-3">
               MPP BI answers 2 to 12 times faster than traditional BI tools like Tableau and
-              Power BI. That gap doesn&apos;t stay the same size &mdash; it grows as your
+              Power BI. That gap doesn&apos;t stay the same size. It grows as your
               questions get harder. Teams switching from Power BI or Tableau usually notice
               the difference within their first week.
             </p>
@@ -76,7 +76,7 @@ export default function ScaleAndPerformanceSection() {
             <div className="flex items-center gap-3 px-4 py-3.5 rounded-lg bg-[#F5F7FA] border border-[#E2E8F0]">
               <Database size={18} className="text-[#10B981] flex-shrink-0" />
               <p className="text-sm font-semibold text-[#0D1B2A]">
-                2B+ records, under 5 seconds &mdash; real enterprise data volumes, not a lab test.
+                2B+ records, under 5 seconds: real enterprise data volumes, not a lab test.
               </p>
             </div>
           </motion.div>

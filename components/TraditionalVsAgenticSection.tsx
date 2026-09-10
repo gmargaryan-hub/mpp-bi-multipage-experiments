@@ -29,7 +29,7 @@ export default function TraditionalVsAgenticSection() {
             Traditional BI vs. Agentic BI
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
-            Agentic BI doesn&apos;t replace your dashboards &mdash; it adds a layer on top
+            Agentic BI doesn&apos;t replace your dashboards. It adds a layer on top
             that notices, explains, and answers.
           </p>
         </motion.div>

@@ -100,7 +100,7 @@ export default function ContactFormModal() {
               className="fixed inset-0 z-[900] bg-black/70 backdrop-blur-sm"
             />
 
-            {/* Outer centering shell — does NOT scroll */}
+            {/* Outer centering shell - does NOT scroll */}
             <motion.div
               key="panel"
               initial={{ opacity: 0, y: 40, scale: 0.97 }}

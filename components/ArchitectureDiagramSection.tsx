@@ -16,7 +16,7 @@ function useInView(threshold = 0.1) {
   return { ref, visible }
 }
 
-// ─── Architecture diagram — ported verbatim from the one-pager's HeroSection.tsx ──
+// ─── Architecture diagram - ported verbatim from the one-pager's HeroSection.tsx ──
 function ArchDiagram() {
   return (
     <svg viewBox="0 0 960 520" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
@@ -36,12 +36,12 @@ function ArchDiagram() {
 
       {/* ══════════ LEFT STACK ══════════ */}
 
-      {/* Left gutter: App Server ↔ CE/IS — drawn BEFORE boxes */}
+      {/* Left gutter: App Server ↔ CE/IS - drawn BEFORE boxes */}
       <polyline points="50,168 34,168 34,320 50,320" fill="none" stroke="#E05A2B" strokeWidth="2" strokeOpacity="0.7" strokeLinejoin="round" />
       <polygon points="50,320 38,314 38,326" fill="#E05A2B" fillOpacity="0.7" />
       <polygon points="50,168 38,162 38,174" fill="#E05A2B" fillOpacity="0.7" />
 
-      {/* Right gutter: App Server → E.S. — drawn BEFORE boxes */}
+      {/* Right gutter: App Server → E.S. - drawn BEFORE boxes */}
       <polyline points="406,168 422,168 422,452 406,452" fill="none" stroke="#9CA3AF" strokeWidth="1.5" strokeOpacity="0.5" strokeLinejoin="round" />
       <polygon points="406,452 418,446 418,458" fill="#9CA3AF" fillOpacity="0.5" />
 
@@ -67,12 +67,12 @@ function ArchDiagram() {
       <line x1="228" y1="184" x2="228" y2="214" stroke="#9CA3AF" strokeWidth="2" strokeOpacity="0.6" />
       <polygon points="228,214 224,206 232,206" fill="#9CA3AF" fillOpacity="0.6" />
 
-      {/* 3. Metadata Storage — drawn AFTER gutter so white covers crossing */}
+      {/* 3. Metadata Storage - drawn AFTER gutter so white covers crossing */}
       <rect x="50" y="214" width="356" height="44" rx="8" fill="white" stroke="#D1D5DB" strokeWidth="1.5" />
       <text x="228" y="231" textAnchor="middle" fill="#111827" fontSize="13" fontWeight="700" fontFamily="system-ui">Metadata Storage</text>
       <text x="228" y="248" textAnchor="middle" fill="#9CA3AF" fontSize="10" fontFamily="system-ui">Dashboards, users, settings</text>
 
-      {/* Left gutter label — inside panel, rotated */}
+      {/* Left gutter label - inside panel, rotated */}
       <text x="34" y="252" textAnchor="middle" fill="#E05A2B" fontSize="8" fontFamily="monospace" fillOpacity="0.7" transform="rotate(-90,34,252)">data travels ↕</text>
 
       {/* 4. CE + IS side by side */}
@@ -112,18 +112,18 @@ function ArchDiagram() {
         <animateMotion dur="1.6s" begin="1.0s" repeatCount="indefinite" path="M 322 452 L 322 352" />
       </circle>
 
-      {/* ── VS — centered between panels (gap x=448..512, midpoint=480) ── */}
+      {/* ── VS - centered between panels (gap x=448..512, midpoint=480) ── */}
       <circle cx="480" cy="260" r="20" fill="#111827" stroke="#1E3A5F" strokeWidth="1.5" />
       <text x="480" y="264" textAnchor="middle" fill="rgba(255,255,255,0.4)" fontSize="9" fontWeight="800" fontFamily="system-ui">VS</text>
 
       {/* ══════════ RIGHT STACK ══════════ */}
 
-      {/* Left gutter: Browser ↔ App Server — drawn BEFORE boxes */}
+      {/* Left gutter: Browser ↔ App Server - drawn BEFORE boxes */}
       <polyline points="554,86 538,86 538,228 554,228" fill="none" stroke="#0AAEDB" strokeWidth="2" strokeOpacity="0.7" strokeLinejoin="round" />
       <polygon points="554,86 542,80 542,92" fill="#0AAEDB" fillOpacity="0.7" />
       <polygon points="554,228 542,222 542,234" fill="#0AAEDB" fillOpacity="0.7" />
 
-      {/* Right gutter: App Server → E.S. — drawn BEFORE boxes */}
+      {/* Right gutter: App Server → E.S. - drawn BEFORE boxes */}
       <polyline points="910,228 926,228 926,452 910,452" fill="none" stroke="#0AAEDB" strokeWidth="2" strokeOpacity="0.7" strokeLinejoin="round" />
       <polygon points="910,452 922,446 922,458" fill="#0AAEDB" fillOpacity="0.7" />
       <text x="926" y="346" textAnchor="middle" fill="#0AAEDB" fontSize="9" fontFamily="monospace" fillOpacity="0.6" transform="rotate(90,926,346)">Direct push</text>
@@ -141,7 +141,7 @@ function ArchDiagram() {
       <rect x="554" y="144" width="356" height="148" rx="8" fill="#0D2137" stroke="#0AAEDB" strokeWidth="2"
         style={{ filter: 'drop-shadow(0 0 14px rgba(10,174,219,0.18))' }} />
       <text x="732" y="200" textAnchor="middle" fill="#0AAEDB" fontSize="15" fontWeight="800" fontFamily="system-ui">App Server</text>
-      <text x="732" y="218" textAnchor="middle" fill="#0AAEDB" fontSize="10" fontFamily="system-ui" fillOpacity="0.6">App Server + Metadata — unified inside PostgreSQL</text>
+      <text x="732" y="218" textAnchor="middle" fill="#0AAEDB" fontSize="10" fontFamily="system-ui" fillOpacity="0.6">App Server + Metadata: unified inside PostgreSQL</text>
       <rect x="566" y="232" width="152" height="26" rx="6" fill="#10B981" fillOpacity="0.09" stroke="#10B981" strokeWidth="1" strokeOpacity="0.3" />
       <text x="642" y="249" textAnchor="middle" fill="#10B981" fontSize="10" fontFamily="system-ui" fontWeight="600">No Calc Engine</text>
       <rect x="730" y="232" width="152" height="26" rx="6" fill="#10B981" fillOpacity="0.09" stroke="#10B981" strokeWidth="1" strokeOpacity="0.3" />

@@ -14,7 +14,7 @@ function useInView() {
   return { ref, visible }
 }
 
-const daxCode = `// DAX — CALCULATE in DirectQuery mode
+const daxCode = `// DAX: CALCULATE in DirectQuery mode
 CALCULATE(
   SUM(Sales[Revenue]),
   FILTER(
@@ -27,7 +27,7 @@ CALCULATE(
 // Switch to Import Mode to use this function.
 // Your data will no longer be live.`
 
-const lpeCode = `-- OctoLang — same calculation, live connection
+const lpeCode = `-- OctoLang: same calculation, live connection
 SELECT
   SUM(revenue)
 FROM sales
@@ -69,7 +69,7 @@ export default function OctoLangvsDaxSection() {
         {/* Two column comparison */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
 
-          {/* LEFT — DAX */}
+          {/* LEFT - DAX */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={visible ? { opacity: 1, x: 0 } : {}}
@@ -78,7 +78,7 @@ export default function OctoLangvsDaxSection() {
           >
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E05A2B]/10 border border-[#E05A2B]/25 mb-4">
-                <span className="text-[11px] font-mono text-[#E05A2B] tracking-widest uppercase">DAX — Power BI DirectQuery</span>
+                <span className="text-[11px] font-mono text-[#E05A2B] tracking-widest uppercase">DAX &middot; Power BI DirectQuery</span>
               </div>
               <h3 className="text-2xl font-bold text-[#0D1B2A] mb-2">Powerful language.</h3>
               <h3 className="text-2xl font-bold text-[#E05A2B]">Crippled in live mode.</h3>
@@ -86,7 +86,7 @@ export default function OctoLangvsDaxSection() {
 
             <div className="space-y-3">
               <p className="text-[#6B7280] text-sm leading-relaxed">
-                Power BI's DAX is a sophisticated analytical language — in import mode. Switch to
+                Power BI's DAX is a sophisticated analytical language in import mode. Switch to
                 DirectQuery and a significant portion of DAX functions are unsupported, return
                 errors, or produce different results. This is documented by Microsoft.
               </p>
@@ -115,11 +115,11 @@ export default function OctoLangvsDaxSection() {
               <p className="text-[11px] font-mono text-[#6B7280] leading-relaxed">
                 "Some DAX functions and query patterns are not supported in DirectQuery models."
               </p>
-              <p className="text-[10px] text-[#4B5563] mt-1">— Microsoft Power BI documentation</p>
+              <p className="text-[10px] text-[#4B5563] mt-1">Source: Microsoft Power BI documentation</p>
             </div>
           </motion.div>
 
-          {/* RIGHT — OctoLang */}
+          {/* RIGHT - OctoLang */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={visible ? { opacity: 1, x: 0 } : {}}
@@ -128,7 +128,7 @@ export default function OctoLangvsDaxSection() {
           >
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0AAEDB]/10 border border-[#0AAEDB]/25 mb-4">
-                <span className="text-[11px] font-mono text-[#0AAEDB] tracking-widest uppercase">OctoLang — MPP BI</span>
+                <span className="text-[11px] font-mono text-[#0AAEDB] tracking-widest uppercase">OctoLang &middot; MPP BI</span>
               </div>
               <h3 className="text-2xl font-bold text-[#0D1B2A] mb-2">Built for live.</h3>
               <h3 className="text-2xl font-bold text-[#0AAEDB]">No exceptions.</h3>
@@ -157,7 +157,7 @@ export default function OctoLangvsDaxSection() {
                 </div>
               </div>
               <pre className="p-4 text-xs font-mono text-[#374151] leading-relaxed overflow-x-auto whitespace-pre">
-                <span className="text-[#6B7280]">-- OctoLang — same calculation, live connection{'\n'}</span>
+                <span className="text-[#6B7280]">-- OctoLang: same calculation, live connection{'\n'}</span>
                 <span className="text-[#0AAEDB]">SELECT{'\n'}</span>
                 <span className="text-[#0D1B2A]">  SUM(revenue){'\n'}</span>
                 <span className="text-[#0AAEDB]">FROM</span>

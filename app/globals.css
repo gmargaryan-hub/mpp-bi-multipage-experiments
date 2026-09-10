@@ -8,7 +8,7 @@ body {
 
 .font-display {
   /*
-   * Swap this for a real display font — next/font/google works great here
+   * Swap this for a real display font - next/font/google works great here
    * (e.g. Space Grotesk or Sora) once you have network access at build time.
    */
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;

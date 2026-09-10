@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Palette, Ruler, FileOutput, Headphones, Wrench } from 'lucide-react'
 
 const brandItems = [
-  { icon: Palette, title: 'Built around your brand', body: "MPP BI doesn't have a fixed interface — white-labeled deployment is supported, so it feels like part of your own product or platform." },
+  { icon: Palette, title: 'Built around your brand', body: "MPP BI doesn't have a fixed interface, and white-labeled deployment is supported, so it feels like part of your own product or platform." },
   { icon: Ruler, title: 'Pixel-perfect visualizations', body: 'Every element can be precisely customized to match your design requirements. Designers can define the layout, and dashboards can be adapted to follow that design exactly.' },
   { icon: FileOutput, title: 'Flexible reporting and output', body: 'Users can create, adjust, and export reports and presentations directly from dashboards.' },
 ]

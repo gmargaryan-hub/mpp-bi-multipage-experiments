@@ -19,7 +19,7 @@ const points = [
   {
     icon: Link2,
     title: 'More steps between you and your data means more can go wrong',
-    body: 'A request has to pass through several stops before it reaches your data. Each stop adds delay, and it\u2019s possible that something could go wrong. This setup hasn\u2019t changed much since the 1990s, even though the reason for it \u2014 slow databases \u2014 no longer applies.',
+    body: 'A request has to pass through several stops before it reaches your data. Each stop adds delay, and it\u2019s possible that something could go wrong. This setup hasn\u2019t changed much since the 1990s, even though the reason for it, slow databases, no longer applies.',
     callout: 'Client \u2192 App Server \u2192 Calc Engine \u2192 Source',
   },
 ]
@@ -42,7 +42,7 @@ export default function LegacyProblemSection() {
             Why Legacy BI Tools Slow You Down
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
-            Most BI tools, including Tableau and Power BI, use a calculation engine \u2014 a
+            Most BI tools, including Tableau and Power BI, use a calculation engine, a
             separate mini-database built just for fast calculations. Tableau calls theirs
             Hyper, Power BI calls theirs VertiPaq. That made sense when regular databases
             were too slow for real-time analysis. Databases are fast now. The engine that

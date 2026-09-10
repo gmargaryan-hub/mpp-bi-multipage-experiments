@@ -14,7 +14,7 @@ const rows: { feature: string; mpp: string; mppGood?: boolean; tableau: string; 
   { feature: 'On-premises (full)', mpp: 'Yes', mppGood: true, tableau: 'Limited', power: 'Limited' },
   { feature: 'AI/ML integrated on-prem', mpp: 'Built-in', tableau: 'Add-on', power: 'Add-on' },
   { feature: 'Source code available', mpp: 'Per license', mppGood: true, tableau: 'No', tableauGood: false, power: 'No', powerGood: false },
-  { feature: '500 concurrent users \u2014 16 cores / 32GB RAM', mpp: 'Production proven', mppGood: true, tableau: 'Not available', tableauGood: false, power: 'Not available', powerGood: false },
+  { feature: '500 concurrent users \u00b7 16 cores / 32GB RAM', mpp: 'Production proven', mppGood: true, tableau: 'Not available', tableauGood: false, power: 'Not available', powerGood: false },
   { feature: 'Performance vs traditional BI', mpp: '2x\u201312x faster', tableau: 'Baseline', power: 'Baseline' },
 ]
 

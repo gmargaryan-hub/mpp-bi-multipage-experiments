@@ -94,7 +94,7 @@ export default function DataSourcesSection() {
             Connect to Your Data Wherever It Lives
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
-            MPP BI connects to almost any data source &mdash; old databases, cloud
+            MPP BI connects to almost any data source: old databases, cloud
             warehouses, spreadsheets, and APIs.
           </p>
         </motion.div>

@@ -213,7 +213,7 @@ export default function BenefitsListSection() {
             items={[
               'Starts at $10/user per month, versus $15 (Tableau) and $14 (Power BI)',
               'Admin seats cost less too: $18, versus $115 (Tableau) and $24 (Power BI)',
-              'Choose a monthly subscription or a one-time license — most tools only offer subscriptions',
+              'Choose a monthly subscription or a one-time license, since most tools only offer subscriptions',
               "Data prep (ETL) is built in, so there's no separate tool to buy and license",
             ]}
           />
@@ -280,7 +280,7 @@ export default function BenefitsListSection() {
           <p className="text-[#6B7280] text-sm leading-relaxed mb-5">
             MPP BI has strict access controls and user grouping. Give people access to
             exactly what they need, nothing more. Every action is tracked, so nothing
-            happens without a record of who did it and when — with documentation trails
+            happens without a record of who did it and when, with documentation trails
             that make audits easier.
           </p>
           <Quote color={COLORS.indigo}>Controlled access, without slowing down access</Quote>

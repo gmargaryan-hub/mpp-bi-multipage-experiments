@@ -26,9 +26,9 @@ export default function TalkToEngineerSection() {
           Talk to an Engineer
         </h2>
         <p className="text-[#94A3B8] text-lg mb-10 leading-relaxed">
-          If you have any architecture questions &mdash; how pushdown queries work with your
+          If you have any architecture questions, like how pushdown queries work with your
           database, how the metadata layer handles permissions, or what deployment looks
-          like in your environment &mdash; book a call with our technical staff.
+          like in your environment, book a call with our technical staff.
         </p>
         <button
           onClick={openDemoModal}

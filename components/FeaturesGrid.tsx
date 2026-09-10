@@ -77,7 +77,7 @@ export default function FeaturesGrid() {
             <span className="gradient-text">Plus What You Wouldn&apos;t.</span>
           </h2>
           <p className="text-[#374151] text-lg max-w-2xl mx-auto leading-relaxed">
-            A full-stack analytics platform that lives inside your database — with the features to prove it.
+            A full-stack analytics platform that lives inside your database, with the features to prove it.
           </p>
         </motion.div>
 

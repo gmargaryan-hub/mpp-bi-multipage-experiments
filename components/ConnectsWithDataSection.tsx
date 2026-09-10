@@ -46,7 +46,7 @@ export default function ConnectsWithDataSection() {
           </h2>
           <p className="text-[#374151] text-lg max-w-2xl mx-auto">
             Relational databases, warehouses, big data systems, streaming sources, files, and
-            APIs — connect to almost any data source without moving it first.
+            APIs. Connect to almost any data source without moving it first.
           </p>
         </motion.div>
 

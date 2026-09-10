@@ -56,7 +56,7 @@ export default function Navigation() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0]">
       <div className="max-w-[1440px] mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo — always returns to the top of the home page */}
+          {/* Logo - always returns to the top of the home page */}
           <Link href="/" onClick={handleLogoClick} className="flex items-center shrink-0">
             <Image
               src={asset('/mppbi-logo.svg')}

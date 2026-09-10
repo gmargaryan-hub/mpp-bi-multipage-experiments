@@ -40,7 +40,7 @@ export default function CaseStudySection() {
           className="rounded-3xl border border-[#E2E8F0] overflow-hidden"
         >
           <div className="p-8 md:p-10">
-            {/* Client logos — given more visual weight, framed in their own strip */}
+            {/* Client logos - given more visual weight, framed in their own strip */}
             <div className="flex flex-wrap items-center gap-x-10 gap-y-5 mb-6 px-6 py-6 rounded-2xl bg-white border border-[#E2E8F0]">
               <div className="relative h-11 w-32">
                 <Image src={asset('/case-study/wise.png')} alt="WISE" fill className="object-contain object-left" />
@@ -96,7 +96,7 @@ export default function CaseStudySection() {
             </div>
           </div>
 
-          {/* Dashboard screenshot — last. Container aspect ratio matches the image exactly
+          {/* Dashboard screenshot - last. Container aspect ratio matches the image exactly
               (1280x600), so it displays with no cropping and no distortion. Width capped to
               keep it sharp on high-DPI displays. */}
           <div className="px-8 pb-8 md:px-10 md:pb-10">

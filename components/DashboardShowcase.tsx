@@ -14,7 +14,7 @@ const dashboards = [
     height: 1060,
     metric: '$1M+',
     metricLabel: 'annual savings',
-    description: 'Real-time procurement transparency — suspicious items, overpayment detection, and supplier analysis across 500+ entities. Business logic runs inside the database, data never extracted.',
+    description: 'Real-time procurement transparency: suspicious items, overpayment detection, and supplier analysis across 500+ entities. Business logic runs inside the database, data never extracted.',
   },
   {
     id: 'oilgas-safety',
@@ -25,7 +25,7 @@ const dashboards = [
     height: 1366,
     metric: 'Live',
     metricLabel: 'incident monitoring',
-    description: 'Offshore safety command center: incident tracking, personnel status, equipment monitoring, and vessel logistics — streaming via Kafka at 7,000+ events/sec.',
+    description: 'Offshore safety command center: incident tracking, personnel status, equipment monitoring, and vessel logistics, streaming via Kafka at 7,000+ events/sec.',
   },
   {
     id: 'oilgas-wells',
@@ -36,7 +36,7 @@ const dashboards = [
     height: 1302,
     metric: '2×–12×',
     metricLabel: 'faster than traditional BI',
-    description: 'Well profile analytics with spacer placement recommendations, CP/Collector monitoring, and deviation analysis — computation runs inside the database, zero data movement.',
+    description: 'Well profile analytics with spacer placement recommendations, CP/Collector monitoring, and deviation analysis. Computation runs inside the database, zero data movement.',
   },
   {
     id: 'operations',
@@ -47,7 +47,7 @@ const dashboards = [
     height: 1268,
     metric: '500',
     metricLabel: 'concurrent users · 16 cores / 32GB RAM',
-    description: 'Work planning across incident management, change tracking, and personnel deployment — sub-second performance on 16 cores / 32GB RAM with 500 concurrent users.',
+    description: 'Work planning across incident management, change tracking, and personnel deployment. Sub-second performance on 16 cores / 32GB RAM with 500 concurrent users.',
   },
   {
     id: 'servicedesk',
@@ -58,7 +58,7 @@ const dashboards = [
     height: 1392,
     metric: '100%',
     metricLabel: 'functions in live mode',
-    description: "Service desk analytics: SLA violation rates, resolution speed, agent performance ratings, and ticket flow — all 100% of MPP BI's functions available in live connection mode.",
+    description: "Service desk analytics: SLA violation rates, resolution speed, agent performance ratings, and ticket flow. All 100% of MPP BI's functions available in live connection mode.",
   },
 ]
 
@@ -137,7 +137,7 @@ export default function DashboardShowcase() {
                 mppbi.com/dashboard
               </div>
             </div>
-            {/* Container aspect ratio matches the current image's real dimensions —
+            {/* Container aspect ratio matches the current image's real dimensions -
                 none of the 5 screenshots are actually 16:9 (they range from 1.50 to
                 2.02), so a fixed aspect-[16/9] here was cropping every one of them. */}
             <div

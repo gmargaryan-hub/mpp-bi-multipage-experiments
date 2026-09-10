@@ -296,6 +296,30 @@ visual treatments. Confirmed via side-by-side screenshots that the card designs 
 exactly. Section header/copy (eyebrow, H2, intro paragraph) is unchanged, since that's
 Home-specific and wasn't part of the request.
 
+## Em-dashes removed site-wide
+
+Every em-dash (—) across the codebase replaced with natural phrasing (periods, commas,
+colons, "and"/"so", or restructured clauses) rather than a mechanical find-replace — each
+one was rewritten by hand to read naturally in context, not just stripped out.
+
+Two things worth knowing about how this was actually verified:
+
+- A source-text grep alone wasn't sufficient — three files (`SecuritySection.tsx`,
+  `LegacyProblemSection.tsx`, `BigComparisonSection.tsx`) used the JavaScript unicode escape
+  `\u2014` directly in string literals rather than the literal `—` character, so they didn't
+  show up in a plain text search but still rendered as real em-dashes in the browser. Found
+  by checking actual rendered page text (`document.body.innerText`) in a real browser across
+  every page, not just grepping the source.
+- Final verification counted em-dash occurrences in the live rendered DOM on all 8 pages —
+  zero everywhere, confirmed twice (once before finding the `\u2014` escapes, once after
+  fixing them, to make sure the fix actually worked rather than assuming it did).
+
+Left untouched: en-dashes (–) used for numeric ranges like "2x–12x" — those are a different
+character and a different, legitimate typographic convention, not what was asked to be
+removed. Also left untouched: the `─` box-drawing characters used for decorative separators
+in a couple of code comments — visually similar but a completely different Unicode
+character, unrelated to em-dashes.
+
 ## Home page rebuilt from the one-pager (almost exactly as it was)
 
 The Home page (`app/page.tsx`) is now assembled from the original one-pager project's

@@ -43,7 +43,7 @@ export default function AICapabilitiesSection() {
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
             Go beyond dashboards. Use AI to ask questions, build reports, discover trends,
-            and plan ahead &mdash; all without your data leaving your infrastructure.
+            and plan ahead, all without your data leaving your infrastructure.
           </p>
         </motion.div>
 
