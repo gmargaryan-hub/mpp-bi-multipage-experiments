@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
     // requests quality=100 to avoid extra compression softness on top of its
     // already-limited source resolution.
     qualities: [75, 100],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+    ],
   },
 }
 

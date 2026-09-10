@@ -1,10 +1,9 @@
 import { createClient } from '@sanity/client'
-import imageUrlBuilder, { type SanityImageSource } from '@sanity/image-url'
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url'
 
-// TODO: fill in once the Studio project is uploaded — these two values aren't secret,
-// they're safe to hardcode here or set as NEXT_PUBLIC_ env vars in Vercel.
-// Find them in sanity.config.ts / sanity.cli.ts in the Studio folder.
-export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || ''
+// From studio-mpp-website/sanity.config.ts — not secret, safe to hardcode. Still
+// overridable via env vars if the project/dataset ever changes without a redeploy.
+export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'cpyjkfcl'
 export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 export const apiVersion = '2024-01-01'
 
@@ -21,7 +20,7 @@ export const sanityClient = createClient({
   // token: process.env.SANITY_API_READ_TOKEN,
 })
 
-const builder = imageUrlBuilder(sanityClient)
+const builder = createImageUrlBuilder(sanityClient)
 
 export function urlForImage(source: SanityImageSource) {
   return builder.image(source)

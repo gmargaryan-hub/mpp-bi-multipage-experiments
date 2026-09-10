@@ -296,29 +296,68 @@ visual treatments. Confirmed via side-by-side screenshots that the card designs 
 exactly. Section header/copy (eyebrow, H2, intro paragraph) is unchanged, since that's
 Home-specific and wasn't part of the request.
 
-## Blog / Sanity CMS integration (groundwork only — not wired up yet)
+## Blog / Sanity CMS integration
 
-`/blog` has been a dead link in the nav since the site was built (Resources dropdown and
-footer both link to it, but no route ever existed). The user is setting this up with a
-self-hosted Sanity Studio and asked to connect it, but the actual Studio folder — schemas,
-project ID, dataset name — hasn't been provided yet, so the query layer and `/blog` /
-`/blog/[slug]` pages can't be built without guessing field names that likely won't match.
+`/blog` was a dead link since the site was built; it's now wired to a real Sanity Studio
+(`studio-mpp-website`, project ID `cpyjkfcl`, dataset `production`, both hardcoded as
+defaults in `lib/sanity.ts` since they're not secrets — still overridable via
+`NEXT_PUBLIC_SANITY_PROJECT_ID`/`NEXT_PUBLIC_SANITY_DATASET` env vars if that ever changes).
 
-What's done so far, ahead of that:
+**What's built:**
 
-- **`lib/sanity.ts`** — a Sanity client using `@sanity/client` + `@sanity/image-url`,
-  reading `NEXT_PUBLIC_SANITY_PROJECT_ID` / `NEXT_PUBLIC_SANITY_DATASET` from env vars
-  (both safe to expose client-side — they're not secrets). Has a commented-out spot for a
-  server-only `SANITY_API_READ_TOKEN` if the dataset turns out to have restricted read
-  access rather than Sanity's public-read default.
-- **Dependency choice matters here**: the natural first choice, `next-sanity`, pulls in the
-  *entire Sanity Studio CLI toolchain* as a transitive dependency (for its Visual Editing /
-  Presentation features) — this alone added 14 vulnerabilities (2 high) via `adm-zip`,
-  `js-yaml`, and `smol-toml` deep in that chain, none of which we need for just reading
-  published content. Swapped to the lighter `@sanity/client` + `@sanity/image-url`
-  directly instead: 396 packages instead of 1,246, confirmed 0 vulnerabilities on a clean
-  install. If Visual Editing/draft previews are wanted later, that's a deliberate
-  reintroduction of that dependency weight, not a default.
+- `lib/sanity.ts` — the client (`@sanity/client` + `@sanity/image-url`, not `next-sanity` —
+  see the dependency note below).
+- `lib/sanity-queries.ts` — GROQ queries and types for posts, authors, categories: full post
+  list, featured posts, posts by category, all slugs (for static generation), single post by
+  slug with related posts expanded.
+- `components/PortableTextRenderer.tsx` — renders the `content` field's Portable Text array,
+  styled to match the rest of the site, with custom renderers for all 4 of the schema's
+  custom block types (`articleImage`, `statisticsBlock`, `comparisonTable`, `ctaBlock`), not
+  just plain paragraphs/headings.
+- `app/blog/page.tsx` — listing page, card grid, `revalidate = 60` (ISR — new posts show up
+  within a minute of publishing, no redeploy needed).
+- `app/blog/[slug]/page.tsx` — post page with `generateStaticParams` for known slugs at
+  build time, still revalidates, real `generateMetadata` (SEO title/description/canonical
+  pulled from the post's own SEO fields when set).
+- `next.config.ts` — added `cdn.sanity.io` to `images.remotePatterns`, required for
+  `next/image` to serve Sanity-hosted images at all.
+- Both pages fail **gracefully**, not silently or with a crash, if Sanity can't be reached:
+  wrapped in try/catch, `/blog` shows an explicit "couldn't load posts" message rather than
+  a blank page or a 500, and `generateStaticParams` falls back to an empty array (fully
+  dynamic rendering) rather than failing the whole site's build.
+
+**A schema inconsistency worth fixing on the Studio side, not something I changed
+unilaterally:** `postType.ts`'s `content` field inlines its own copies of 4 block-type
+definitions, but they don't match the separately-registered versions in
+`schemaTypes/objects/*.ts` that `schemaTypes/index.ts` also registers. Most notably, the
+inline `comparisonTable` has a `columns` field that the standalone `objects/comparisonTable.ts`
+doesn't define at all — so depending on which definition Sanity actually uses for that
+field (this is a genuine ambiguity in how the schema is wired, not something I should
+guess at and "fix" by editing your Studio config), documents may or may not have a `columns`
+value. The frontend types and renderer here handle `columns` as optional so nothing breaks
+either way, but the Studio schema itself would benefit from consolidating to one definition
+(ideally `postType.ts` referencing `{type: 'articleImage'}` etc. instead of re-inlining).
+
+**Dependency choice matters here:** the natural first choice, `next-sanity`, pulls in the
+*entire Sanity Studio CLI toolchain* as a transitive dependency (for its Visual Editing /
+Presentation features) — this alone added 14 vulnerabilities (2 high) via `adm-zip`,
+`js-yaml`, and `smol-toml` deep in that chain, none of which we need for just reading
+published content. Used `@sanity/client` + `@sanity/image-url` + `@portabletext/react`
+directly instead: 399 packages instead of 1,246, confirmed 0 vulnerabilities on a clean
+install. If Visual Editing/draft previews are wanted later, that's a deliberate
+reintroduction of that dependency weight, not a default.
+
+**A real limitation of this sandbox, not the code:** this environment's network egress
+blocks `api.sanity.io` entirely (confirmed directly — a raw `curl` to it gets rejected at
+the proxy level), so I could not verify live data actually renders correctly end-to-end.
+What I *did* verify here: the build succeeds and handles that exact network failure
+gracefully (tested by literally hitting this from inside the sandbox — `/blog` returns 200
+with a clear "couldn't load posts" message, not a crash or a hang; `/blog/[nonexistent-slug]`
+correctly 404s), and the full 9-page × 4-breakpoint regression sweep is clean. The actual
+live rendering — real posts, real images from `cdn.sanity.io`, the custom Portable Text
+blocks — needs to be checked once this is deployed on Vercel (or run locally on a machine
+with normal internet access), since that's the first environment in this whole process with
+real access to the Sanity API.
 
 Still needed before the actual blog pages can be built: the Studio folder (zipped, for the
 schema field names) and the project ID + dataset name.
