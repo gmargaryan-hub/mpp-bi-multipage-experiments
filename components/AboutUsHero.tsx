@@ -16,23 +16,24 @@ export default function AboutUsHero() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-[#0AAEDB] text-xs font-semibold tracking-[0.18em] uppercase mb-5"
-        >
-          About us
-        </motion.p>
-
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.05 }}
           className="font-display text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] text-white mb-6"
         >
-          Where MPP BI <span style={{ color: '#0AAEDB' }}>Comes From</span>
+          About Us
         </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.08 }}
+          className="text-xl md:text-2xl font-semibold mb-6"
+          style={{ color: '#0AAEDB' }}
+        >
+          The data visualization agent for enterprise analytics
+        </motion.p>
 
         <motion.p
           initial={{ opacity: 0, y: 18 }}
@@ -40,7 +41,12 @@ export default function AboutUsHero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-[#94A3B8] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
         >
-          A product built by people who&apos;ve worked inside the problems it solves.
+          MPP BI is a business intelligence platform&mdash;think dashboards, reports, and
+          real-time monitoring like Tableau or Power BI&mdash;but built with a leaner
+          architecture that runs analytics directly inside your database instead of copying
+          data out to a separate engine. The result is live analytics on massive datasets
+          (billions of records), 2x&ndash;12x faster performance, and dramatically lower
+          cost, starting at $10 per user per month.
         </motion.p>
 
         <motion.div

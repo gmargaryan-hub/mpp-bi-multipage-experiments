@@ -3,6 +3,45 @@
 Next.js (App Router) rebuild of the MPP BI home page — hero, stat cards, data-connector
 logos, industries, and the WISE/UNDP case study — built to deploy on Vercel.
 
+## About Us page rewritten with new approved content
+
+Full content replacement per the new doc, not just a tweak:
+
+- **Hero** — completely new copy: H1 is now the literal "About Us" (previously "Where MPP BI
+  Comes From"), with a new tagline and a longer product-description paragraph that wasn't
+  there before.
+- **Team section** — stripped down to match the new content exactly: removed the industries
+  chips and intro paragraph that used to sit above the two bios (not in the new content, so
+  not kept). Added the missing "earned a PhD in Artificial Intelligence in 2001" detail to
+  Sergei's bio.
+- **Two new sections added**: "What Does MPP BI Do?" (3 cards — Dashboards and Reporting, A
+  Data-Centric Tool, Build Your Own Data Products) and "Why Does Your Team Need MPP BI?"
+  (Visibility for Leadership, plus a "Data Infrastructure and Agentic Workflows" block with
+  its own two-part breakdown).
+- **Mission section rewritten** — the old version had a long two-paragraph narrative and a
+  pull-quote; the new content is one short paragraph, so replaced it entirely rather than
+  trying to preserve the old framing.
+- **Company timeline section removed from this page** — the new content doesn't include a
+  timeline at all, and the one specific fact from it (2001) is now folded into Sergei's bio
+  instead. `CompanyTimelineSection.tsx` is left on disk unused rather than deleted, in case
+  it's wanted elsewhere.
+- Final CTA ("Ready to See It for Yourself?") is unchanged — the new content's wording for
+  it matched what was already there exactly.
+- **Not implemented**: the doc's note to Gevorg about all images being WebP (not JPG/PNG)
+  and adding `<link rel="preload">` for hero images. This page has no raster hero image to
+  preload — its hero is text-only — so there's nothing here to act on. Flagging this note
+  in case it's meant to apply to other pages with actual hero images.
+
+### Also fixed: a real security issue unrelated to this content change
+
+Running a fresh `npm install` this session surfaced 3 new vulnerabilities that didn't exist
+at the last build — including a **critical** Next.js unauthenticated RCE
+([GHSA-p293-qw3h-jr36](https://github.com/advisories/GHSA-p293-qw3h-jr36), affecting
+16.0.0–16.3.2) disclosed since then. The installed version (16.3.0) was in the affected
+range. Bumped to `^16.3.4` in `package.json`, reinstalled clean, and confirmed `npm audit`
+now reports 0 vulnerabilities before rebuilding. Rebuilt and reran the full regression sweep
+afterward to confirm the version bump didn't break anything — same result, all clean.
+
 ## Run it locally
 
 ```bash
@@ -160,7 +199,10 @@ components/
   AboutUsHero.tsx
   CompanyTimelineSection.tsx → 2001 / 2022 / 2025 company timeline
   TeamSection.tsx             → Sergei Shestakov + Peter Bilzerian bios, industries served
-  MissionSection.tsx          → mission statement + pull quote
+  MissionSection.tsx          → mission statement (short version — no longer has a pull quote)
+  WhatMPPBIDoesSection.tsx     → "What Does MPP BI Do?" — 3 cards
+  WhyNeedMPPBISection.tsx      → "Why Does Your Team Need MPP BI?" — leadership visibility +
+                                data infrastructure/agentic workflows breakdown
   BenefitsHero.tsx             → Benefits page hero + its own 5 stat cards (2x–12x /
                                 2B+ records / No Extraction / Always Live / $10)
   BenefitsListSection.tsx      → the 8 benefit blocks (each with a pull-quote + checklist),

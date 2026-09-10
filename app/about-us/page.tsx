@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import AboutUsHero from '@/components/AboutUsHero'
-import CompanyTimelineSection from '@/components/CompanyTimelineSection'
 import TeamSection from '@/components/TeamSection'
+import WhatMPPBIDoesSection from '@/components/WhatMPPBIDoesSection'
+import WhyNeedMPPBISection from '@/components/WhyNeedMPPBISection'
 import MissionSection from '@/components/MissionSection'
 import SimpleCTASection from '@/components/SimpleCTASection'
 import Footer from '@/components/Footer'
@@ -19,8 +20,9 @@ export default function AboutUsPage() {
       <Navigation />
       <main>
         <AboutUsHero />
-        <CompanyTimelineSection />
         <TeamSection />
+        <WhatMPPBIDoesSection />
+        <WhyNeedMPPBISection />
         <MissionSection />
         <SimpleCTASection
           title="Ready to See It for Yourself?"
