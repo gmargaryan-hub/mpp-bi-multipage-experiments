@@ -296,6 +296,33 @@ visual treatments. Confirmed via side-by-side screenshots that the card designs 
 exactly. Section header/copy (eyebrow, H2, intro paragraph) is unchanged, since that's
 Home-specific and wasn't part of the request.
 
+## Blog / Sanity CMS integration (groundwork only — not wired up yet)
+
+`/blog` has been a dead link in the nav since the site was built (Resources dropdown and
+footer both link to it, but no route ever existed). The user is setting this up with a
+self-hosted Sanity Studio and asked to connect it, but the actual Studio folder — schemas,
+project ID, dataset name — hasn't been provided yet, so the query layer and `/blog` /
+`/blog/[slug]` pages can't be built without guessing field names that likely won't match.
+
+What's done so far, ahead of that:
+
+- **`lib/sanity.ts`** — a Sanity client using `@sanity/client` + `@sanity/image-url`,
+  reading `NEXT_PUBLIC_SANITY_PROJECT_ID` / `NEXT_PUBLIC_SANITY_DATASET` from env vars
+  (both safe to expose client-side — they're not secrets). Has a commented-out spot for a
+  server-only `SANITY_API_READ_TOKEN` if the dataset turns out to have restricted read
+  access rather than Sanity's public-read default.
+- **Dependency choice matters here**: the natural first choice, `next-sanity`, pulls in the
+  *entire Sanity Studio CLI toolchain* as a transitive dependency (for its Visual Editing /
+  Presentation features) — this alone added 14 vulnerabilities (2 high) via `adm-zip`,
+  `js-yaml`, and `smol-toml` deep in that chain, none of which we need for just reading
+  published content. Swapped to the lighter `@sanity/client` + `@sanity/image-url`
+  directly instead: 396 packages instead of 1,246, confirmed 0 vulnerabilities on a clean
+  install. If Visual Editing/draft previews are wanted later, that's a deliberate
+  reintroduction of that dependency weight, not a default.
+
+Still needed before the actual blog pages can be built: the Studio folder (zipped, for the
+schema field names) and the project ID + dataset name.
+
 ## Em-dashes removed site-wide
 
 Every em-dash (—) across the codebase replaced with natural phrasing (periods, commas,
