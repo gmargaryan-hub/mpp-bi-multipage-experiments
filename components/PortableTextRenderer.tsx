@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { PortableText, type PortableTextComponents } from '@portabletext/react'
+import { PortableText, toPlainText, type PortableTextComponents } from '@portabletext/react'
 import { Highlight, themes } from 'prism-react-renderer'
 import { ArrowRight } from 'lucide-react'
 import { urlForImage } from '@/lib/sanity'
+import { slugify } from '@/lib/slugify'
 import CopyCodeButton from '@/components/CopyCodeButton'
 import HtmlEmbed from '@/components/HtmlEmbed'
 import type {
@@ -158,7 +159,11 @@ const components: PortableTextComponents = {
   },
   block: {
     normal: ({ children }) => <p className="text-[#374151] text-base leading-relaxed mb-5">{children}</p>,
-    h2: ({ children }) => <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0D1B2A] mt-10 mb-4">{children}</h2>,
+    h2: ({ children, value }) => (
+      <h2 id={slugify(toPlainText(value))} className="font-display text-2xl sm:text-3xl font-bold text-[#0D1B2A] mt-10 mb-4 scroll-mt-24">
+        {children}
+      </h2>
+    ),
     h3: ({ children }) => <h3 className="font-display text-xl sm:text-2xl font-bold text-[#0D1B2A] mt-8 mb-3">{children}</h3>,
     h4: ({ children }) => <h4 className="text-lg font-bold text-[#0D1B2A] mt-6 mb-2">{children}</h4>,
     blockquote: ({ children }) => (

@@ -6,6 +6,7 @@ import { ArrowLeft, CheckCircle2, AlertTriangle, Lightbulb } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import PortableTextRenderer from '@/components/PortableTextRenderer'
+import TableOfContents from '@/components/TableOfContents'
 import SimpleCTASection from '@/components/SimpleCTASection'
 import {
   getCaseStudyBySlug,
@@ -162,6 +163,7 @@ export default async function CaseStudyPage({ params, searchParams }: Props) {
             )}
 
             {/* Optional additional Portable Text content */}
+            {cs.content && cs.content.length > 0 && <TableOfContents content={cs.content} />}
             {cs.content && cs.content.length > 0 && <PortableTextRenderer value={cs.content} />}
           </div>
 

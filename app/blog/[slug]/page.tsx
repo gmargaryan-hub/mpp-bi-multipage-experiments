@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import PortableTextRenderer from '@/components/PortableTextRenderer'
+import TableOfContents from '@/components/TableOfContents'
 import {
   getPostBySlug,
   getAllPostSlugs,
@@ -137,6 +138,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
           </div>
 
           <div className="max-w-3xl mx-auto px-6 py-16">
+            {post.content && <TableOfContents content={post.content} />}
             {post.content && <PortableTextRenderer value={post.content} />}
 
             {post.tags && post.tags.length > 0 && (

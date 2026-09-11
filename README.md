@@ -356,8 +356,36 @@ property) and confirmed three separate things — zero `<iframe>` elements exist
 workaround really executes), and the block's `<style>` rule's computed background color
 matched exactly what was authored (CSS genuinely applies, not just visually eyeballed).
 
+### Table of Contents (built from article data, not a DOM-scraping script)
 
+The request came with a working Tilda snippet (`document.querySelectorAll("h2")` +
+`DOMContentLoaded`), but recommended against using it as-is: that query scans the *entire
+page*, not just the article body, so on a page with any other H2 elsewhere it would pick up
+headings that have nothing to do with the article. It also only runs client-side, after the
+page has already loaded.
 
+Built as a real feature instead, using data we already have server-side before the page
+even renders:
+
+- **`lib/slugify.ts`** — one shared slug function, used both to set each `<h2>`'s real
+  `id` (in `PortableTextRenderer.tsx`) and to generate the Table of Contents' links (in
+  `components/TableOfContents.tsx`). Same source of truth for both, so they can't drift out
+  of sync with each other.
+- **`components/TableOfContents.tsx`** — a plain Server Component (no `'use client'`, no
+  DOM access at all). Takes the article's own `content` array as a prop, filters for `h2`
+  blocks, and renders links — correctly scoped to just that article by construction, not by
+  hoping a DOM query doesn't accidentally match something else. Only renders when there are
+  2+ headings (a contents list for one heading isn't useful).
+- Wired into both `/blog/[slug]` and `/case-studies/[slug]`, right before the article body.
+- `scroll-mt-24` added to `h2` so jumping to a heading doesn't tuck it behind the fixed nav.
+
+Verified concretely: built a 3-heading test article (one title with `&` and `!` in it, to
+stress-test the slugifier), and directly compared the TOC's generated `href`s against the
+actual rendered heading `id`s in the DOM — exact match, not just visually similar. Then
+clicked a link and confirmed a genuine scroll happened (checked `window.scrollY` before and
+after, with a viewport small enough to force real scrolling, since an earlier check with a
+tall viewport showed `scrollY: 0` simply because that whole short test page already fit on
+screen — worth ruling out before treating a zero as a bug).
 
 
 ### Case Studies — new content type, built from scratch (latest round)
