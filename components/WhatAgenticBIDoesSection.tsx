@@ -1,33 +1,33 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MessageSquare, TrendingUp, LifeBuoy, Box, LayoutDashboard } from 'lucide-react'
+import { MessageSquare, TrendingUp, Lightbulb, LayoutDashboard, LifeBuoy } from 'lucide-react'
 
 const features = [
   {
     icon: MessageSquare,
-    title: 'Ask questions in plain language',
-    body: 'Type a question in natural language, then the system pulls the right data and gives you an answer.',
+    title: 'Ask questions about your data',
+    body: 'Ask questions in plain language. Agentic BI finds the relevant data and gives you an answer based on your business definitions.',
   },
   {
     icon: TrendingUp,
-    title: 'See the likely reason, not just the number',
-    body: 'Alongside the change, the system highlights what is likely driving it.',
+    title: 'Investigate what changed',
+    body: 'When a number changes, Agentic BI can look into the data and help identify the factors that may be driving the change.',
   },
   {
-    icon: LifeBuoy,
-    title: 'Get help using MPP BI',
-    body: "Ask how to do something in the interface, and the system explains it or walks you through it, so you're not searching on your own.",
-  },
-  {
-    icon: Box,
-    title: 'Build a cube by describing it',
-    body: 'A cube is a structured way of organizing your data for fast analysis. Instead of setting one up manually, describe what you need and the system builds it for you.',
+    icon: Lightbulb,
+    title: 'Explain the answer',
+    body: "You don't have to work through the numbers yourself. Agentic BI can explain the result in plain language and show the reasoning behind it.",
   },
   {
     icon: LayoutDashboard,
-    title: 'Build and edit dashboards and reports',
-    body: "Describe the dashboard or report you want, and the system builds it. You can review it, edit it, and share it once it's ready.",
+    title: 'Build what you need',
+    body: 'Describe a dashboard, report, or data cube in plain language. Agentic BI can help create it, then you can review and edit the result.',
+  },
+  {
+    icon: LifeBuoy,
+    title: 'Get help with MPP BI',
+    body: 'Ask how to use a feature or complete a task in MPP BI. Agentic BI can explain the steps instead of making you search through documentation.',
   },
 ]
 
@@ -46,11 +46,11 @@ export default function WhatAgenticBIDoesSection() {
             What it does
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-5">
-            What Agentic MPP BI Does For Your Business
+            What You Can Delegate to Agentic BI
           </h2>
           <p className="text-[#374151] text-lg leading-relaxed">
-            Agentic MPP BI works alongside your dashboards to answer questions and point
-            your team toward what to do next.
+            Agentic BI is designed to handle the work between a business question and a
+            useful answer.
           </p>
         </motion.div>
 
@@ -87,7 +87,7 @@ export default function WhatAgenticBIDoesSection() {
           className="text-center text-sm font-medium px-5 py-4 rounded-xl border max-w-2xl mx-auto"
           style={{ background: '#7C7AED0D', borderColor: '#7C7AED30', color: '#4B3FC4' }}
         >
-          Every answer is built from your own data sources and business definitions, not
+          Every answer is based on your connected data and business definitions, not
           generic AI knowledge.
         </motion.p>
       </div>

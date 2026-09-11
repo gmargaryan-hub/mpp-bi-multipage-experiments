@@ -3,6 +3,44 @@
 Next.js (App Router) rebuild of the MPP BI home page — hero, stat cards, data-connector
 logos, industries, and the WISE/UNDP case study — built to deploy on Vercel.
 
+## Agentic BI page — full content rebuild from the September update
+
+Near-total content replacement, not a copy edit — new hero copy, a rewritten comparison
+section, and four entirely new sections that didn't exist before, matching the updated doc
+section by section:
+
+- **Hero** — new H1 ("Agentic BI. Delegate the Work, Not Just the Question") and subtitle.
+- **`TraditionalVsAgenticSection.tsx`** rewritten: new H2 ("From Asking Questions to
+  Delegating the Work"), new Traditional BI / Agentic BI intro paragraphs, a new
+  Goal→Plan→Retrieve→Analyze→Verify→Answer flow row, and the comparison table's 6 rows
+  replaced with the new content (the H3 "Traditional BI vs. Agentic BI" now sits as a
+  sub-heading directly above the table, not as the section's main H2 like before).
+- **Two new diagrams**, real design assets rather than hand-recreated SVG — the doc
+  explicitly said to use these specific files, so they're used as-is: a governance/agent/
+  harness structure diagram (`AgenticStructureSection.tsx`) and a user-question-flow
+  architecture diagram (`GovernanceSection.tsx`). Both initially shrank to fit on mobile via
+  `object-contain`, which made the dense text illegible — caught this and switched both to
+  the same horizontal-scroll-with-swipe-hint pattern already used for the Architecture
+  page's diagram, confirmed legible afterward.
+- **`AgenticStructureSection.tsx`** (new) — "What Makes MPP BI Agentic": intro, the
+  governance diagram, 6 cards (Model/Tools/Memory/Skills/Harness/Governance), closing bold
+  line.
+- **`GovernanceSection.tsx`** (new) — the flow diagram, then "Governance Is Part of How the
+  Agent Works" with the "Schema tells the agent what the data looks like / Governance tells
+  the agent what the data means" pull-quote.
+- **`WhatAgenticBIDoesSection.tsx`** rewritten — "What You Can Delegate to Agentic BI", 5
+  cards (Ask questions about your data / Investigate what changed / Explain the answer /
+  Build what you need / Get help with MPP BI).
+- **`EnterpriseAndIntegrationSection.tsx` removed entirely**, replaced by
+  **`BuiltIntoMPPBISection.tsx`** (new) — "Built Into MPP BI", 4 cards (Same data
+  environment / Same business definitions / No separate chatbot / Your choice of AI model).
+  Confirmed this old component wasn't used anywhere else before deleting it.
+- **`DataToActionSection.tsx`** (new) — "From Data to Action, In One Environment", with its
+  own flow row (A question → the right data → analysis → an explanation → the next step).
+- Closing CTA copy updated to "See Agentic BI in Action."
+- SEO title/description updated to the doc's exact values, confirmed against the actual
+  rendered `<title>` and `<meta name="description">` tags.
+
 ## Full mobile audit (not just incremental overflow checks)
 
 Every mobile check up to this point was incremental — verified the specific thing just

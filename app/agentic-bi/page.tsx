@@ -3,15 +3,18 @@ import Navigation from '@/components/Navigation'
 import AgenticBIHero from '@/components/AgenticBIHero'
 import AgenticBIStatsSection from '@/components/AgenticBIStatsSection'
 import TraditionalVsAgenticSection from '@/components/TraditionalVsAgenticSection'
+import AgenticStructureSection from '@/components/AgenticStructureSection'
+import GovernanceSection from '@/components/GovernanceSection'
 import WhatAgenticBIDoesSection from '@/components/WhatAgenticBIDoesSection'
-import EnterpriseAndIntegrationSection from '@/components/EnterpriseAndIntegrationSection'
+import BuiltIntoMPPBISection from '@/components/BuiltIntoMPPBISection'
+import DataToActionSection from '@/components/DataToActionSection'
 import SimpleCTASection from '@/components/SimpleCTASection'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Agentic BI: AI-Powered Answers From Your Data | MPP BI',
+  title: 'Agentic BI for Enterprise Data Analytics | MPP BI',
   description:
-    'Agentic BI is an AI feature built into MPP BI. Ask questions in plain language, catch changes automatically, and get answers grounded in your own data. Book a demo.',
+    'Discover Agentic BI in MPP BI. Delegate data analysis, investigate changes, build dashboards, and get answers using your business data and definitions.',
 }
 
 export default function AgenticBIPage() {
@@ -22,11 +25,14 @@ export default function AgenticBIPage() {
         <AgenticBIHero />
         <AgenticBIStatsSection />
         <TraditionalVsAgenticSection />
+        <AgenticStructureSection />
+        <GovernanceSection />
         <WhatAgenticBIDoesSection />
-        <EnterpriseAndIntegrationSection />
+        <BuiltIntoMPPBISection />
+        <DataToActionSection />
         <SimpleCTASection
-          title="See What Agentic BI Can Do With Your Data"
-          body="Every business asks different questions, and Agentic BI is built to work with the data and setup you already have. Tell us what you're trying to solve, and we'll show you how it would work for your team."
+          title="See Agentic BI in Action"
+          body="Every business has its own data, definitions, and questions. Tell us what your team needs to investigate, build, or understand. We'll show you how Agentic BI can handle the work inside your MPP BI environment."
           ctaLabel="Book a Demo"
           accentColor="#7C7AED"
         />

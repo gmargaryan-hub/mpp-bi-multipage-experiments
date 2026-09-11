@@ -31,7 +31,7 @@ export default function AgenticBIHero() {
           transition={{ duration: 0.6, delay: 0.05 }}
           className="font-display text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] text-white mb-6"
         >
-          Advanced AI Feature, <span style={{ color: '#7C7AED' }}>Built Into MPP BI</span>
+          Agentic BI. <span style={{ color: '#7C7AED' }}>Delegate the Work, Not Just the Question</span>
         </motion.h1>
 
         <motion.p
@@ -40,8 +40,8 @@ export default function AgenticBIHero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-[#94A3B8] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
         >
-          Agentic BI works alongside your dashboards to detect changes, investigate what is
-          driving them, explain the causes, and support next steps for your team.
+          Agentic BI brings AI agents into MPP BI to find the right data, investigate
+          changes, explain what is happening, and help build what you need.
         </motion.p>
 
         <motion.div
