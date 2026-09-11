@@ -13,7 +13,6 @@ const primaryNav = [
   { label: 'Benefits', href: '/benefits' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Why MPP BI', href: '/why-mpp-bi' },
-  { label: 'New Agentic BI', href: '/agentic-bi' },
   { label: 'About Us', href: '/about-us' },
 ]
 

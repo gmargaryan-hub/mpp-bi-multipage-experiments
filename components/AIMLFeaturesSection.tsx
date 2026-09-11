@@ -1,16 +1,13 @@
 'use client'
 
-import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Sparkles, MessageCircle, TrendingUp, Workflow, ArrowRight } from 'lucide-react'
+import { Sparkles, MessageCircle, TrendingUp, Workflow } from 'lucide-react'
 
 const items = [
   {
     icon: Sparkles,
     title: 'Agentic BI',
     body: 'An AI assistant that works inside MPP BI. Just ask it, in plain words, to pull data, build a dashboard, create a report, or look into a question. It does the work and brings you the answer.',
-    link: '/agentic-bi',
-    linkLabel: 'Explore Agentic BI',
   },
   {
     icon: MessageCircle,
@@ -70,16 +67,6 @@ export default function AIMLFeaturesSection() {
                 </div>
                 <h3 className="text-base font-bold text-[#0D1B2A] mb-2">{it.title}</h3>
                 <p className="text-[#6B7280] text-sm leading-relaxed mb-3">{it.body}</p>
-                {it.link && (
-                  <Link
-                    href={it.link}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold"
-                    style={{ color: '#7C7AED' }}
-                  >
-                    {it.linkLabel}
-                    <ArrowRight size={13} className="flex-shrink-0" />
-                  </Link>
-                )}
               </motion.div>
             )
           })}
