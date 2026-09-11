@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { PortableText, type PortableTextComponents } from '@portabletext/react'
+import { Highlight, themes } from 'prism-react-renderer'
 import { ArrowRight } from 'lucide-react'
 import { urlForImage } from '@/lib/sanity'
 import CopyCodeButton from '@/components/CopyCodeButton'
@@ -98,9 +99,23 @@ function CodeBlockRenderer({ value }: { value: CodeBlock }) {
         </span>
         <CopyCodeButton code={value.code} />
       </div>
-      <pre className="p-4 text-xs font-mono text-[#CBD5E1] leading-relaxed overflow-x-auto whitespace-pre">
-        <code>{value.code}</code>
-      </pre>
+      <Highlight theme={themes.vsDark} code={value.code.trim()} language={value.language}>
+        {({ className, tokens, getLineProps, getTokenProps }) => (
+          <pre className={`${className} p-4 text-xs font-mono leading-relaxed overflow-x-auto whitespace-pre bg-transparent`}>
+            {tokens.map((line, i) => {
+              const { className: lineClassName, ...lineProps } = getLineProps({ line })
+              return (
+                <div key={i} className={lineClassName} {...lineProps}>
+                  {line.map((token, key) => {
+                    const { className: tokenClassName, ...tokenProps } = getTokenProps({ token })
+                    return <span key={key} className={tokenClassName} {...tokenProps} />
+                  })}
+                </div>
+              )
+            })}
+          </pre>
+        )}
+      </Highlight>
     </div>
   )
 }

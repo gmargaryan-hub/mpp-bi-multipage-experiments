@@ -317,6 +317,18 @@ articles), but nothing on the frontend knew about it yet — any post using it c
   them, so the `comparisonTable`/`columns` ambiguity flagged in an earlier round is
   resolved on the Studio side — no longer needs to be handled defensively on the frontend.
 
+**Follow-up: real syntax highlighting.** The initial fix rendered code as plain monospace
+text with no coloring — functional, but not what "rendered" turned out to mean. Added
+`prism-react-renderer` (2 small dependencies, no DOM requirement, confirmed 0 new
+vulnerabilities) and rewrote `CodeBlockRenderer` to use it. Chose this over heavier options
+like `next-sanity`-style bundles specifically because it tokenizes in plain JS with no
+browser APIs, so it runs directly in the Server Component — confirmed the page that uses it
+still builds as a static page, not a client component, so this stays consistent with the
+"needs to be server-rendered" requirement from earlier. Verified all 8 supported languages
+(TypeScript, JavaScript, Python, SQL, JSON, HTML, CSS, Bash) render with real token
+coloring, not just checked that the build passes — a temporary test route with one real
+snippet per language, screenshotted, then deleted before committing.
+
 ### Case Studies — new content type, built from scratch (latest round)
 
 No case study schema existed in Sanity at all before this round — unlike the blog, where
