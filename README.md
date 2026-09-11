@@ -387,6 +387,31 @@ after, with a viewport small enough to force real scrolling, since an earlier ch
 tall viewport showed `scrollY: 0` simply because that whole short test page already fit on
 screen — worth ruling out before treating a zero as a bug).
 
+### Team photos + policy pages
+
+- **`TeamSection.tsx`** now shows real photos (`public/team/sergei-shestakov.webp`,
+  `public/team/peter-bilzerian.webp`) instead of the colored-initials placeholders, in the
+  order given (Sergei first, Peter second). Both source images were already square
+  (240×240), so they crop cleanly into the existing circular frame with no distortion.
+- **Three new legal pages**, each `noindex, nofollow` (confirmed by checking the actual
+  rendered `<meta name="robots">` tag, not just setting the field and assuming it worked):
+  `/cookie-policy`, `/privacy-policy`, `/terms-of-use`. Share one layout
+  (`components/LegalPageLayout.tsx`) and a `.legal-content` CSS block in `globals.css` for
+  consistent heading/list/link styling without hand-repeating Tailwind classes on every
+  paragraph. Effective date set to today (09/11/2026) per the source docs' own instruction
+  to fill it in "when published."
+- **Footer fixed**: the Privacy Policy / Terms / Cookie Policy links already existed in the
+  bottom bar, but pointed at placeholder paths (`/privacy`, `/terms`, `/cookies`) that never
+  had real pages behind them — same dead-link pattern as Blog and Case Studies before their
+  own rounds. Updated to the real paths, and corrected the "Terms of Service" label to
+  "Terms of Use" to match the actual page title.
+- **Not silently fixed:** the Terms of Use source document's own section numbering skips
+  from "5. Limitation of Liability" straight to "7. Changes to These Terms" — there's no
+  section 6 anywhere in the source. Preserved the numbering exactly as given rather than
+  renumbering it myself, since silently changing numbering in a legal document is a content
+  decision, not a formatting one — flagging it instead so it can be fixed at the source if
+  it's actually a drafting error.
+
 ### Canonical URL fix
 
 Checked whether canonical links actually work for external URLs — they did, confirmed by

@@ -93,9 +93,9 @@ export default function Footer() {
             © {new Date().getFullYear()} MPP Insights LLC. All rights reserved.
           </p>
           <div className="flex items-center gap-5 text-[11px] text-white/25">
-            <Link href="/privacy" className="hover:text-white/50 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white/50 transition-colors">Terms of Service</Link>
-            <Link href="/cookies" className="hover:text-white/50 transition-colors">Cookie Policy</Link>
+            <Link href="/privacy-policy" className="hover:text-white/50 transition-colors">Privacy Policy</Link>
+            <Link href="/terms-of-use" className="hover:text-white/50 transition-colors">Terms of Use</Link>
+            <Link href="/cookie-policy" className="hover:text-white/50 transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>

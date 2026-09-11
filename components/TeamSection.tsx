@@ -1,17 +1,18 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 const team = [
   {
-    initials: 'SS',
+    photo: '/team/sergei-shestakov.webp',
     name: 'Sergei Shestakov',
     role: 'Founder & CEO',
     bio: 'Sergei founded MPP Insights after more than 20 years designing enterprise data architecture and analytics systems. He earned a PhD in Artificial Intelligence in 2001, and today he leads the product vision and technical direction behind MPP BI and MPP ETL.',
     color: '#0AAEDB',
   },
   {
-    initials: 'PB',
+    photo: '/team/peter-bilzerian.webp',
     name: 'Peter Bilzerian',
     role: 'U.S. Managing Director',
     bio: 'Before joining MPP Insights, Peter led data engineering and business intelligence initiatives at Bank of America, where his work helped drive an estimated $20 million in cost savings. At MPP Insights, he leads U.S. strategy and operations, including market expansion, client relationships, and delivery coordination between the U.S. and Armenia teams.',
@@ -44,10 +45,10 @@ export default function TeamSection() {
               className="rounded-2xl border border-[#E2E8F0] bg-white p-7"
             >
               <div
-                className="w-14 h-14 rounded-full flex items-center justify-center text-base font-black font-display mb-5"
-                style={{ background: `${member.color}18`, color: member.color, border: `2px solid ${member.color}40` }}
+                className="relative w-14 h-14 rounded-full overflow-hidden mb-5"
+                style={{ border: `2px solid ${member.color}40` }}
               >
-                {member.initials}
+                <Image src={member.photo} alt={member.name} fill sizes="56px" className="object-cover" />
               </div>
               <h3 className="text-lg font-bold text-[#0D1B2A]">{member.name}</h3>
               <p className="text-sm font-medium mb-3" style={{ color: member.color }}>
