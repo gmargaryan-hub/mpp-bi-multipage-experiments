@@ -58,7 +58,7 @@ export default function CTASection() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4 items-center"
         >
-          <button onClick={openDemoModal} className="bg-[#0AAEDB] hover:bg-[#0074A6] text-white font-semibold text-base px-8 py-4 rounded-lg transition-colors duration-200 flex items-center gap-2 min-w-[220px] justify-center">Book a Strategy Call <ArrowRight size={18} /></button>
+          <button onClick={openDemoModal} className="bg-[#0AAEDB] hover:bg-[#0074A6] text-white font-semibold text-base px-8 py-4 rounded-lg transition-colors duration-200 flex items-center gap-2 min-w-[220px] justify-center">Book a Strategy Call <ArrowRight size={18} className="flex-shrink-0" /></button>
         </motion.div>
 
         {/* Footer info */}

@@ -107,6 +107,8 @@ export default function ComparisonTable() {
           </p>
         </motion.div>
 
+        <p className="sm:hidden text-center text-xs text-[#9CA3AF] mb-3">← Swipe to see all columns →</p>
+
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}

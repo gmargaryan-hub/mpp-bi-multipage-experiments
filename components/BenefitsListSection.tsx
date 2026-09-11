@@ -97,11 +97,11 @@ export default function BenefitsListSection() {
           />
           <Link
             href="/architecture"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold mt-5"
+            className="inline-flex items-start gap-1.5 text-sm font-semibold mt-5"
             style={{ color: COLORS.cyan }}
           >
             Want the technical breakdown? See how our architecture works
-            <ArrowRight size={14} />
+            <ArrowRight size={14} className="flex-shrink-0" />
           </Link>
         </BlockShell>
 

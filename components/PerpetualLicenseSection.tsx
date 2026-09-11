@@ -34,11 +34,11 @@ export default function PerpetualLicenseSection() {
           </div>
           <button
             onClick={openDemoModal}
-            className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg text-sm font-semibold text-[#0A0E1A] whitespace-nowrap transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
+            className="group inline-flex w-full md:w-auto items-center justify-center text-center gap-2 px-7 py-4 rounded-lg text-sm font-semibold text-[#0A0E1A] whitespace-normal md:whitespace-nowrap transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
             style={{ background: '#F97316', boxShadow: '0 8px 28px rgba(249,115,22,0.35)' }}
           >
             Talk to Sales About Perpetual Licensing
-            <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight size={16} className="flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
           </button>
         </motion.div>
       </div>

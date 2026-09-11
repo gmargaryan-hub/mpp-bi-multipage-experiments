@@ -57,7 +57,7 @@ export default function SimpleCTASection({
           style={{ background: accentColor, color: accentColor === '#7C7AED' ? '#fff' : '#0A0E1A' }}
         >
           {ctaLabel}
-          <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+          <ArrowRight size={16} className="flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
         </button>
       </motion.div>
     </section>

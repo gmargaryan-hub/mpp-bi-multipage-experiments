@@ -95,7 +95,7 @@ export default function PricingSection() {
                 </li>
               ))}
             </ul>
-            <button onClick={openDemoModal} className="w-full bg-[#0AAEDB] hover:bg-[#0074A6] text-white font-semibold text-sm px-6 py-3.5 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">Book a Demo<ArrowRight size={15} /></button>
+            <button onClick={openDemoModal} className="w-full bg-[#0AAEDB] hover:bg-[#0074A6] text-white font-semibold text-sm px-6 py-3.5 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">Book a Demo<ArrowRight size={15} className="flex-shrink-0" /></button>
           </motion.div>
 
           {/* Perpetual Card */}
@@ -134,7 +134,7 @@ export default function PricingSection() {
                 </li>
               ))}
             </ul>
-            <button onClick={openDemoModal} className="w-full border border-white/30 hover:border-white text-white font-semibold text-sm px-6 py-3.5 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">Talk to Sales <ArrowRight size={15} /></button>
+            <button onClick={openDemoModal} className="w-full border border-white/30 hover:border-white text-white font-semibold text-sm px-6 py-3.5 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">Talk to Sales <ArrowRight size={15} className="flex-shrink-0" /></button>
           </motion.div>
         </div>
 

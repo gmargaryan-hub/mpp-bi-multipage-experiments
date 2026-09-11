@@ -77,7 +77,7 @@ export default function AIMLFeaturesSection() {
                     style={{ color: '#7C7AED' }}
                   >
                     {it.linkLabel}
-                    <ArrowRight size={13} />
+                    <ArrowRight size={13} className="flex-shrink-0" />
                   </Link>
                 )}
               </motion.div>

@@ -36,7 +36,7 @@ export default function TalkToEngineerSection() {
           style={{ background: '#0AAEDB' }}
         >
           Book a Technical Demo
-          <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+          <ArrowRight size={16} className="flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
         </button>
       </motion.div>
     </section>

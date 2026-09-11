@@ -130,8 +130,9 @@ export default function DeploymentOptionsSection() {
           transition={{ duration: 0.5 }}
           className="rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden"
         >
-          <div className="px-6 py-4 border-b border-[#E2E8F0]">
+          <div className="px-6 py-4 border-b border-[#E2E8F0] flex items-center justify-between gap-3">
             <h3 className="text-sm font-bold text-[#0D1B2A]">What You&apos;ll Need to Run It</h3>
+            <span className="sm:hidden text-[10px] text-[#9CA3AF] whitespace-nowrap">← swipe →</span>
           </div>
           <div className="overflow-x-auto">
           <table className="w-full text-sm min-w-[480px]">

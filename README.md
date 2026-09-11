@@ -3,6 +3,57 @@
 Next.js (App Router) rebuild of the MPP BI home page — hero, stat cards, data-connector
 logos, industries, and the WISE/UNDP case study — built to deploy on Vercel.
 
+## Full mobile audit (not just incremental overflow checks)
+
+Every mobile check up to this point was incremental — verified the specific thing just
+built, not a fresh look at the whole site. This round was a genuine site-wide pass: 13
+pages × 9 widths (320–1920px, covering small phones through wide desktop) for hard overflow,
+plus actually reading through captured screenshots of every page rather than just checking
+numbers. Found and fixed four real issues, none of which were hard overflow (the incremental
+checks had already caught those) — these were things overflow checks can't catch:
+
+- **Missing swipe-hint pattern in 3 more places.** `ComparisonTable.tsx` (Home page's main
+  MPP BI vs. Tableau vs. Power BI table) and the dynamic comparison-table renderer used in
+  blog/case-study article content (`PortableTextRenderer.tsx`) both had genuinely scrollable
+  tables with no indication they were scrollable — same class of bug fixed on other tables
+  much earlier, just hadn't reached these two yet. Found by searching every component with
+  `overflow-x-auto` for the hint text (case-insensitively — an earlier case-sensitive grep
+  had produced a false "missing" reading on two tables that actually already had it).
+- **A real icon-collapse bug**: the arrow icon on the Pricing page's "Talk to Sales About
+  Perpetual Licensing" button had computed `width: 0` on mobile — the flex layout was
+  squeezing it to nothing because it lacked `flex-shrink-0`. Confirmed via
+  `getBoundingClientRect()`, not just a visual guess. Checked every other `ArrowRight` icon
+  on the site for the same missing property (15 files) and fixed all of them, not just the
+  one that happened to be visibly broken.
+- **A follow-up bug the icon fix revealed**: once the icon could no longer shrink, it started
+  rendering outside the button's visible box, because the button's actual content (long
+  nowrap text + icon + gap) no longer fit the fixed-width grid cell it lived in. Root-caused
+  with `getBoundingClientRect()` comparisons (confirmed `svgOutsideBtn: true`), then fixed
+  properly — the button now wraps its text and goes full-width on mobile instead of forcing
+  a single line into too little space — rather than papering over it with a narrower icon or
+  smaller font.
+- **A cramped headline**: the Case Studies page's H1 ("Real Results From Real Deployments")
+  wrapped to 4 tight lines at the same `text-5xl` mobile size that works fine for every other
+  page's shorter headline. Not a hard bug (confirmed no actual overflow), but genuinely
+  looked bad — reduced the mobile base size one step, no change to tablet/desktop.
+- Also nudged one link's icon alignment (`items-center` → `items-start` on the Benefits
+  page's "Want the technical breakdown?" link) so the arrow doesn't float next to the middle
+  line when the text wraps to three lines on mobile — invisible on desktop, where that text
+  never wraps.
+
+One methodology note: several early screenshots in this pass showed sections with large
+empty gaps or faded-out content. Investigated one specifically with a much longer wait time
+before re-screenshotting and confirmed it was a `whileInView` animation simply not having
+triggered yet when the screenshot was taken — not a real layout bug. Worth remembering next
+time a screenshot looks broken: rule out animation timing before concluding it's a genuine
+issue.
+
+Final verification after all fixes: 13 pages × 9 widths (320/360/375/390/414/428/768/
+1440/1920) = 117 combinations, zero overflow, zero console errors. Also actually clicked
+through the fixed elements rather than trusting the screenshots alone — the mobile nav's
+Features sub-items, the "Talk to Sales" button, and the "technical breakdown" link all
+genuinely navigate where they should.
+
 ## About Us page rewritten with new approved content
 
 Full content replacement per the new doc, not just a tweak:
@@ -18,6 +69,7 @@ Full content replacement per the new doc, not just a tweak:
   Data-Centric Tool, Build Your Own Data Products) and "Why Does Your Team Need MPP BI?"
   (Visibility for Leadership, plus a "Data Infrastructure and Agentic Workflows" block with
   its own two-part breakdown).
+
 - **Mission section rewritten** — the old version had a long two-paragraph narrative and a
   pull-quote; the new content is one short paragraph, so replaced it entirely rather than
   trying to preserve the old framing.

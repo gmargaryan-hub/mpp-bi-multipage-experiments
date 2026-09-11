@@ -43,7 +43,7 @@ export default async function CaseStudiesIndexPage({ searchParams }: Props) {
           <div className="absolute inset-0 dot-grid opacity-20" />
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <p className="text-[#0AAEDB] text-xs font-semibold tracking-[0.18em] uppercase mb-5">Case Studies</p>
-            <h1 className="font-display text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
               Real Results From Real Deployments
             </h1>
             <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto leading-relaxed">

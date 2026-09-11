@@ -56,6 +56,7 @@ function ComparisonTableRenderer({ value }: { value: ComparisonTableBlock }) {
           {value.description && <p className="text-xs text-[#6B7280] mt-1">{value.description}</p>}
         </div>
       )}
+      <p className="sm:hidden text-center text-[10px] text-[#9CA3AF] pt-3">← swipe →</p>
       <div className="overflow-x-auto">
         <table className="w-full text-sm min-w-[480px]">
           <thead>
@@ -142,7 +143,7 @@ function CtaBlockRenderer({ value }: { value: CtaBlock }) {
           style={{ background: '#0AAEDB' }}
         >
           {value.buttonText}
-          <ArrowRight size={15} />
+          <ArrowRight size={15} className="flex-shrink-0" />
         </Link>
       )}
     </div>

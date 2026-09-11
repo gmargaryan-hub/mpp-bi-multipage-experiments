@@ -91,7 +91,7 @@ export default function CaseStudySection() {
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0AAEDB] hover:gap-2.5 transition-all w-fit mt-2"
               >
                 Read the full case study
-                <ArrowRight size={15} />
+                <ArrowRight size={15} className="flex-shrink-0" />
               </Link>
             </div>
           </div>
