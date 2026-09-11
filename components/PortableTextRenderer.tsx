@@ -5,6 +5,7 @@ import { Highlight, themes } from 'prism-react-renderer'
 import { ArrowRight } from 'lucide-react'
 import { urlForImage } from '@/lib/sanity'
 import CopyCodeButton from '@/components/CopyCodeButton'
+import HtmlEmbed from '@/components/HtmlEmbed'
 import type {
   PortableTextBlockContent,
   ArticleImageBlock,
@@ -88,26 +89,12 @@ const languageLabels: Record<CodeBlock['language'], string> = {
   css: 'CSS',
   bash: 'Bash',
 }
-
-function HtmlEmbed({ code }: { code: string }) {
-  return (
-    <div className="my-8 rounded-xl overflow-hidden not-prose border border-[#E2E8F0]">
-      <iframe
-        srcDoc={code}
-        sandbox="allow-scripts"
-        title="Embedded HTML"
-        className="w-full bg-white"
-        style={{ height: '500px', border: 'none' }}
-      />
-    </div>
-  )
-}
-
 function CodeBlockRenderer({ value }: { value: CodeBlock }) {
   if (!value?.code) return null
 
-  // HTML blocks render live — the actual markup/CSS/script runs in a sandboxed
-  // iframe, not shown as highlighted source text like the other languages.
+  // HTML blocks are injected directly into the page (not shown as highlighted
+  // source text like the other languages), so they render natively rather than
+  // sitting in a boxed embed.
   if (value.language === 'html') {
     return <HtmlEmbed code={value.code} />
   }

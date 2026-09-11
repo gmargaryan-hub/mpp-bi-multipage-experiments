@@ -331,18 +331,32 @@ snippet per language, screenshotted, then deleted before committing.
 
 **Follow-up #2: HTML needed to actually *run*, not just display as colored text.**
 Clarified requirement: for `codeBlock` entries where `language === 'html'`, the markup
-needs to render and execute live on the page — a real embed, not source code on display.
-Added a separate path (`HtmlEmbed` in `PortableTextRenderer.tsx`) specifically for this
-case: the HTML renders inside a sandboxed `<iframe srcDoc={code} sandbox="allow-scripts">`,
-isolated from the rest of the page (no `allow-same-origin`, so it can't touch the parent
-page's cookies, storage, or DOM) while still genuinely running any CSS or `<script>` content
-inside it. The other 7 languages still get the syntax-highlighted source display from the
-fix above — this only changes behavior for HTML specifically. Verified with a real
-interactive test embed (styled card with a button wired to an `onclick` handler), not just
-static markup: actually clicked the button inside the iframe via Playwright and confirmed
-the DOM text genuinely changed, then separately confirmed the embedded script's global
-state (`window.clickCount`) did *not* leak into the parent page — proving both that it
-executes and that it's properly isolated.
+needs to render and execute live on the page — not source code on display. First pass used
+a sandboxed `<iframe srcDoc={code}>` — safe, but visually reads as a boxed-off "embed"
+(fixed height, its own scroll area, doesn't inherit the page's fonts). The other 7
+languages still get the syntax-highlighted source display from the fix above — this only
+ever changes behavior for HTML specifically.
+
+**Follow-up #3: wanted it to appear natively on the page, not boxed off.** Replaced the
+iframe with direct DOM injection instead (`components/HtmlEmbed.tsx`, a small `'use client'`
+component using `dangerouslySetInnerHTML`). This makes the content flow naturally with the
+rest of the article — no fixed height, no border, no scrollbar — but gives up the iframe's
+isolation as a deliberate trade, made explicit to the user before building it: browsers
+don't execute `<script>` tags added via `innerHTML` by default, so this manually replaces
+each one with a freshly created `<script>` element (the standard workaround, and the reason
+this needs to be a client component — the swap has to happen after the DOM node exists in
+the browser). Any CSS in the block now also applies page-wide rather than staying scoped to
+the block, since it's no longer isolated in its own document — acceptable here since this
+content comes from trusted Studio editors, not public input, but worth knowing.
+
+Verified concretely, not assumed: rebuilt the same interactive test embed (styled card, a
+button wired to an `onclick` handler that both updates its own text and sets a `window`
+property) and confirmed three separate things — zero `<iframe>` elements exist in the page
+(genuinely inline now), clicking the button actually changed the DOM text (the script
+workaround really executes), and the block's `<style>` rule's computed background color
+matched exactly what was authored (CSS genuinely applies, not just visually eyeballed).
+
+
 
 
 
