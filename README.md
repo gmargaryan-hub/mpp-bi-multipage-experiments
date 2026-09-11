@@ -329,6 +329,23 @@ still builds as a static page, not a client component, so this stays consistent 
 coloring, not just checked that the build passes — a temporary test route with one real
 snippet per language, screenshotted, then deleted before committing.
 
+**Follow-up #2: HTML needed to actually *run*, not just display as colored text.**
+Clarified requirement: for `codeBlock` entries where `language === 'html'`, the markup
+needs to render and execute live on the page — a real embed, not source code on display.
+Added a separate path (`HtmlEmbed` in `PortableTextRenderer.tsx`) specifically for this
+case: the HTML renders inside a sandboxed `<iframe srcDoc={code} sandbox="allow-scripts">`,
+isolated from the rest of the page (no `allow-same-origin`, so it can't touch the parent
+page's cookies, storage, or DOM) while still genuinely running any CSS or `<script>` content
+inside it. The other 7 languages still get the syntax-highlighted source display from the
+fix above — this only changes behavior for HTML specifically. Verified with a real
+interactive test embed (styled card with a button wired to an `onclick` handler), not just
+static markup: actually clicked the button inside the iframe via Playwright and confirmed
+the DOM text genuinely changed, then separately confirmed the embedded script's global
+state (`window.clickCount`) did *not* leak into the parent page — proving both that it
+executes and that it's properly isolated.
+
+
+
 ### Case Studies — new content type, built from scratch (latest round)
 
 No case study schema existed in Sanity at all before this round — unlike the blog, where

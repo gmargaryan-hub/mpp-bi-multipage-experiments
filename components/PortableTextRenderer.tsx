@@ -89,8 +89,29 @@ const languageLabels: Record<CodeBlock['language'], string> = {
   bash: 'Bash',
 }
 
+function HtmlEmbed({ code }: { code: string }) {
+  return (
+    <div className="my-8 rounded-xl overflow-hidden not-prose border border-[#E2E8F0]">
+      <iframe
+        srcDoc={code}
+        sandbox="allow-scripts"
+        title="Embedded HTML"
+        className="w-full bg-white"
+        style={{ height: '500px', border: 'none' }}
+      />
+    </div>
+  )
+}
+
 function CodeBlockRenderer({ value }: { value: CodeBlock }) {
   if (!value?.code) return null
+
+  // HTML blocks render live — the actual markup/CSS/script runs in a sandboxed
+  // iframe, not shown as highlighted source text like the other languages.
+  if (value.language === 'html') {
+    return <HtmlEmbed code={value.code} />
+  }
+
   return (
     <div className="my-8 rounded-xl overflow-hidden not-prose bg-[#0D1B2A] border border-white/10">
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10">
