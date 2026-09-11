@@ -387,6 +387,33 @@ after, with a viewport small enough to force real scrolling, since an earlier ch
 tall viewport showed `scrollY: 0` simply because that whole short test page already fit on
 screen — worth ruling out before treating a zero as a bug).
 
+### Canonical URL fix
+
+Checked whether canonical links actually work for external URLs — they did, confirmed by
+building a test route with `alternates.canonical` set to a different domain entirely and
+inspecting the actual rendered `<link rel="canonical">` tag in the HTML output, not just
+reading the code and assuming Next.js handles it correctly.
+
+While checking that, found a real bug in the empty case: the schema's own field
+description promises *"leave empty to use the [post's] URL as the canonical URL,"* but the
+code was `post.canonicalUrl ? {canonical: ...} : undefined` — meaning an empty field
+produced **no canonical tag at all**, not a self-referencing one as documented. Fixed:
+
+- Added `metadataBase` to `app/layout.tsx` (was entirely missing before) — required for a
+  relative canonical path to resolve into a real absolute URL rather than Next.js silently
+  defaulting to `localhost`. Reads `NEXT_PUBLIC_SITE_URL` if set, otherwise falls back to
+  the Vercel URL this project has been using — **set the env var once a final production
+  domain exists**, since the fallback is a placeholder, not guaranteed to be the real one.
+- Both `/blog/[slug]` and `/case-studies/[slug]` now do
+  `post.canonicalUrl || \`/blog/${post.slug}\`` — external URL if set, otherwise a real
+  self-referencing canonical, matching what the schema field already told editors would
+  happen.
+
+Verified both branches concretely, not just one: built two test routes, one with an
+external `canonicalUrl` (confirmed the tag renders that exact external URL unchanged) and
+one with an empty `canonicalUrl` (confirmed it now renders
+`https://<site>/blog/<slug>` instead of omitting the tag).
+
 
 ### Case Studies — new content type, built from scratch (latest round)
 

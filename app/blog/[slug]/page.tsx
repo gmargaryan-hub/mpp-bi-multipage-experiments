@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.seoTitle || `${post.title} | MPP BI Blog`,
     description: post.seoDescription || post.excerpt,
-    alternates: post.canonicalUrl ? { canonical: post.canonicalUrl } : undefined,
+    alternates: { canonical: post.canonicalUrl || `/blog/${post.slug}` },
   }
 }
 
