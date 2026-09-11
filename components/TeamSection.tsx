@@ -45,10 +45,10 @@ export default function TeamSection() {
               className="rounded-2xl border border-[#E2E8F0] bg-white p-7"
             >
               <div
-                className="relative w-14 h-14 rounded-full overflow-hidden mb-5"
-                style={{ border: `2px solid ${member.color}40` }}
+                className="relative w-32 h-32 rounded-full overflow-hidden mb-6"
+                style={{ border: `3px solid ${member.color}40` }}
               >
-                <Image src={member.photo} alt={member.name} fill sizes="56px" className="object-cover" />
+                <Image src={member.photo} alt={member.name} fill sizes="128px" className="object-cover" />
               </div>
               <h3 className="text-lg font-bold text-[#0D1B2A]">{member.name}</h3>
               <p className="text-sm font-medium mb-3" style={{ color: member.color }}>
