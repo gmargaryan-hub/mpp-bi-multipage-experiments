@@ -298,6 +298,59 @@ Home-specific and wasn't part of the request.
 
 ## Blog / Sanity CMS integration
 
+### codeBlock fix (crash fix, latest round)
+
+A new `codeBlock` object type was added to the Studio schema (for code snippets inside
+articles), but nothing on the frontend knew about it yet — any post using it crashed with
+`[@portabletext/react] Unknown block type "codeBlock"`. Fixed:
+
+- Added the `CodeBlock` type to `lib/sanity-queries.ts`.
+- Added a renderer in `components/PortableTextRenderer.tsx` — dark code card, language
+  label, and a working copy-to-clipboard button (`components/CopyCodeButton.tsx`, a tiny
+  `'use client'` island — the only client-side piece on an otherwise fully server-rendered
+  page, same approach as the topic-switching tags).
+- Verified past just compiling: rendered a real code block, clicked Copy with clipboard
+  permissions explicitly granted in the test, and confirmed the exact code text actually
+  landed in the clipboard, not just that the button showed a "Copied" state.
+- Also noticed and removed a stale comment: `postType.ts`'s `content` field now references
+  registered object types directly (`{type: 'statisticsBlock'}` etc.) instead of re-inlining
+  them, so the `comparisonTable`/`columns` ambiguity flagged in an earlier round is
+  resolved on the Studio side — no longer needs to be handled defensively on the frontend.
+
+### Case Studies — new content type, built from scratch (latest round)
+
+No case study schema existed in Sanity at all before this round — unlike the blog, where
+the schema came first and the frontend was built to match it, this one only had a content
+example from the main company site to work from. So this round included **designing and
+writing the Studio schema itself**, not just the frontend:
+
+- **`sanity-schema-additions/`** (delivered as a separate zip, not part of this repo — it
+  belongs in `studio-mpp-website`, a different project): two new schema files
+  (`caseStudyType.ts`, `industryType.ts`) plus an updated `index.ts` registering them.
+  `industryType.ts` mirrors `categoryType.ts` exactly, so case studies can be filtered by
+  industry the same way blog posts are filtered by category. `caseStudyType.ts`'s fields
+  map directly to the reference content's structure: `description` and `challenges` are
+  each an array of short text blocks (matching the reference's plain bullet-point
+  sections), `solutions` is an array of `{title, description}` objects (matching the
+  reference's titled solution cards), plus an optional rich-content field for anything
+  beyond those three fixed sections, reusing the same block types as blog posts (including
+  the new `codeBlock`). See `sanity-schema-additions/README.md` for exactly where each file
+  goes and how to apply it.
+- **`app/case-studies/page.tsx`** and **`app/case-studies/[slug]/page.tsx`** — deliberately
+  structured the same way as the blog (industry filter tabs via search params, meta row
+  placed right after the hero image, "Other Case Studies" section with the same
+  tag-switching pattern as "Other Articles"), per the request to keep the structure
+  consistent between the two. Same server-rendering approach throughout — no client
+  component except the copy button mentioned above.
+- **Nav fixed**: "Case Studies" was pointing at `/resources/case-studies`, a placeholder
+  that was never actually built — same dead-link situation the blog was in before. Updated
+  to `/case-studies` in both `Navigation.tsx` and `Footer.tsx`.
+- **Verified with the user's actual reference content**, not generic placeholder text:
+  built a temporary test route using the real "Text Analytics: Natural Language Processing"
+  example from the request (bank, sentiment analysis, all four solution points) to confirm
+  the layout handles real content correctly, not just short lorem-ipsum-style test strings.
+  Deleted before committing, same as every other test route in this project.
+
 ### Nav trim + blog index restructuring (latest round)
 
 - **Resources dropdown trimmed**, in both `Navigation.tsx` and `Footer.tsx`: removed

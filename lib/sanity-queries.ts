@@ -1,13 +1,10 @@
 import { sanityClient } from './sanity'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
-// Matches studio-mpp-website/schemaTypes exactly. Note: postType.ts's inline
-// `content` block definitions for statisticsBlock/comparisonTable/ctaBlock/
-// articleImage don't quite match the separately-registered versions in
-// schemaTypes/objects/*.ts (most notably: the inline comparisonTable has a
-// `columns` field that the standalone one doesn't). Typed as optional/loose
-// here so rendering doesn't break regardless of which definition produced a
-// given document — but this mismatch is worth fixing on the Studio side.
+// Matches studio-mpp-website/schemaTypes exactly. postType.ts's `content` field now
+// references the registered object types directly ({type: 'statisticsBlock'} etc.)
+// rather than re-inlining separate definitions, so there's a single source of truth
+// for each block's shape.
 
 export type SanityImage = {
   asset: { _ref: string; _type: 'reference' }
@@ -62,8 +59,14 @@ export type ComparisonTableBlock = {
   _key: string
   title?: string
   description?: string
-  columns?: string[] // only present on documents authored against postType.ts's inline shape
   rows: { feature: string; mppBi?: string; powerBi?: string }[]
+}
+
+export type CodeBlock = {
+  _type: 'codeBlock'
+  _key: string
+  language: 'typescript' | 'javascript' | 'python' | 'sql' | 'json' | 'html' | 'css' | 'bash'
+  code: string
 }
 
 export type CtaBlock = {
@@ -80,6 +83,7 @@ export type PortableTextBlockContent =
   | ArticleImageBlock
   | StatisticsBlock
   | ComparisonTableBlock
+  | CodeBlock
   | CtaBlock
 
 export type PostDetail = PostSummary & {
@@ -186,4 +190,124 @@ export async function getRecentPostsByCategory(
     { categorySlug }
   )
   return raw.filter((p) => p.slug !== excludeSlug).slice(0, limit)
+}
+
+// ─── Case Studies ───────────────────────────────────────────────────────────
+// Mirrors the blog's structure (see README for the schema, added in
+// sanity-schema-additions/ alongside this project — no case study schema existed
+// before this round).
+
+export type IndustrySummary = {
+  title: string
+  slug: string
+  description?: string
+}
+
+export type SolutionItem = {
+  title: string
+  description?: string
+}
+
+export type CaseStudySummary = {
+  _id: string
+  title: string
+  slug: string
+  excerpt?: string
+  mainImage?: SanityImage
+  industry?: IndustrySummary
+  clientName?: string
+  publishedAt?: string
+  featured?: boolean
+}
+
+export type CaseStudyDetail = CaseStudySummary & {
+  description?: string[]
+  challenges?: string[]
+  solutions?: SolutionItem[]
+  content?: PortableTextBlockContent[]
+  seoTitle?: string
+  seoDescription?: string
+  canonicalUrl?: string
+  socialImage?: SanityImage
+}
+
+const industryProjection = `industry->{ title, "slug": slug.current, description }`
+
+const caseStudySummaryProjection = `{
+  _id,
+  title,
+  "slug": slug.current,
+  excerpt,
+  mainImage,
+  ${industryProjection},
+  clientName,
+  publishedAt,
+  featured,
+}`
+
+export async function getAllCaseStudies(): Promise<CaseStudySummary[]> {
+  return sanityClient.fetch(
+    `*[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc) ${caseStudySummaryProjection}`
+  )
+}
+
+export async function getCaseStudiesByIndustry(industrySlug: string): Promise<CaseStudySummary[]> {
+  return sanityClient.fetch(
+    `*[_type == "caseStudy" && industry->slug.current == $industrySlug && defined(slug.current)] | order(publishedAt desc) ${caseStudySummaryProjection}`,
+    { industrySlug }
+  )
+}
+
+export async function getAllCaseStudySlugs(): Promise<string[]> {
+  const slugs: { slug: string }[] = await sanityClient.fetch(
+    `*[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }`
+  )
+  return slugs.map((s) => s.slug)
+}
+
+export async function getCaseStudyBySlug(slug: string): Promise<CaseStudyDetail | null> {
+  return sanityClient.fetch(
+    `*[_type == "caseStudy" && slug.current == $slug][0]{
+      _id,
+      title,
+      "slug": slug.current,
+      excerpt,
+      mainImage,
+      ${industryProjection},
+      clientName,
+      publishedAt,
+      featured,
+      description,
+      challenges,
+      solutions,
+      content[]{
+        ...,
+        _type == "image" => { ... },
+        markDefs[]{ ..., _type == "link" => { href } },
+      },
+      seoTitle,
+      seoDescription,
+      canonicalUrl,
+      socialImage,
+    }`,
+    { slug }
+  )
+}
+
+export async function getAllIndustries(): Promise<IndustrySummary[]> {
+  return sanityClient.fetch(
+    `*[_type == "industry" && defined(slug.current)] | order(title asc){ title, "slug": slug.current, description }`
+  )
+}
+
+export async function getRecentCaseStudiesByIndustry(
+  industrySlug: string,
+  excludeSlug?: string,
+  limit = 3
+): Promise<CaseStudySummary[]> {
+  const raw: CaseStudySummary[] = await sanityClient.fetch(
+    `*[_type == "caseStudy" && industry->slug.current == $industrySlug && defined(slug.current)] | order(publishedAt desc) [0...${limit + 1}] ${caseStudySummaryProjection}`,
+    { industrySlug }
+  )
+  return raw.filter((cs) => cs.slug !== excludeSlug).slice(0, limit)
 }

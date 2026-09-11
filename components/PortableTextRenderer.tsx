@@ -3,11 +3,13 @@ import Link from 'next/link'
 import { PortableText, type PortableTextComponents } from '@portabletext/react'
 import { ArrowRight } from 'lucide-react'
 import { urlForImage } from '@/lib/sanity'
+import CopyCodeButton from '@/components/CopyCodeButton'
 import type {
   PortableTextBlockContent,
   ArticleImageBlock,
   StatisticsBlock,
   ComparisonTableBlock,
+  CodeBlock,
   CtaBlock,
 } from '@/lib/sanity-queries'
 
@@ -75,6 +77,34 @@ function ComparisonTableRenderer({ value }: { value: ComparisonTableBlock }) {
   )
 }
 
+const languageLabels: Record<CodeBlock['language'], string> = {
+  typescript: 'TypeScript',
+  javascript: 'JavaScript',
+  python: 'Python',
+  sql: 'SQL',
+  json: 'JSON',
+  html: 'HTML',
+  css: 'CSS',
+  bash: 'Bash',
+}
+
+function CodeBlockRenderer({ value }: { value: CodeBlock }) {
+  if (!value?.code) return null
+  return (
+    <div className="my-8 rounded-xl overflow-hidden not-prose bg-[#0D1B2A] border border-white/10">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10">
+        <span className="text-[11px] font-mono text-[#0AAEDB] tracking-widest uppercase">
+          {languageLabels[value.language] || value.language}
+        </span>
+        <CopyCodeButton code={value.code} />
+      </div>
+      <pre className="p-4 text-xs font-mono text-[#CBD5E1] leading-relaxed overflow-x-auto whitespace-pre">
+        <code>{value.code}</code>
+      </pre>
+    </div>
+  )
+}
+
 function CtaBlockRenderer({ value }: { value: CtaBlock }) {
   if (!value) return null
   return (
@@ -100,6 +130,7 @@ const components: PortableTextComponents = {
     articleImage: ArticleImage,
     statisticsBlock: StatisticsBlockRenderer,
     comparisonTable: ComparisonTableRenderer,
+    codeBlock: CodeBlockRenderer,
     ctaBlock: CtaBlockRenderer,
   },
   block: {
