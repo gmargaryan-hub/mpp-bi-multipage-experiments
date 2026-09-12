@@ -2,10 +2,16 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { Instagram, Linkedin } from 'lucide-react'
 import { asset } from '@/lib/basePath'
 import { openDemoModal } from '@/lib/openDemoModal'
 
 const MAIN_SITE_URL = 'https://mpp-insights.com/'
+
+const socials = [
+  { label: 'Instagram', href: 'https://www.instagram.com/mppinsights/', icon: Instagram },
+  { label: 'LinkedIn', href: 'https://am.linkedin.com/company/mpp-insights', icon: Linkedin },
+]
 
 const columns = [
   {
@@ -57,6 +63,23 @@ export default function Footer() {
               MPP Insights builds MPP BI and MPP ETL. Business intelligence that runs inside
               your data, with no data extraction, no calculation engine, always live.
             </p>
+            <div className="flex items-center gap-3">
+              {socials.map((s) => {
+                const Icon = s.icon
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-colors"
+                  >
+                    <Icon size={15} />
+                  </a>
+                )
+              })}
+            </div>
           </div>
 
           {columns.map((col) => (
