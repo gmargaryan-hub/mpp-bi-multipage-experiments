@@ -28,7 +28,6 @@ const featuresNav = [
 
 const resourcesNav = [
   { label: 'Architecture', href: '/architecture', description: 'How MPP BI is built' },
-  { label: 'Case Studies', href: '/case-studies', description: 'Filterable by industry' },
   { label: 'Blog', href: '/blog', description: 'Product updates, research, and news' },
 ]
 
