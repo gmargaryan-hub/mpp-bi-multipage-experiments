@@ -21,14 +21,12 @@ const columns = [
       { label: 'Benefits', href: '/benefits' },
       { label: 'Pricing', href: '/pricing' },
       { label: 'Why MPP BI', href: '/why-mpp-bi' },
-      { label: 'New Agentic BI', href: '/agentic-bi' },
     ],
   },
   {
     heading: 'Resources',
     links: [
       { label: 'Architecture', href: '/architecture' },
-      { label: 'Case Studies', href: '/case-studies' },
       { label: 'Blog', href: '/blog' },
     ],
   },
