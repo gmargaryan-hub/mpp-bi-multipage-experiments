@@ -11,6 +11,13 @@ export const metadata: Metadata = {
   title: 'MPP BI: Business Intelligence That Runs Inside Your Data',
   description:
     'MPP BI connects straight to your databases and runs calculations where your data already lives, with no data copies, no calculation engine, and no compromise.',
+  // Google Search Console site ownership verification (from Sahar, 14.09.2026). Set in
+  // the root layout rather than only on the home page — it's rendered into every page's
+  // <head> this way, so it's present regardless of which URL Google's verifier requests,
+  // and still satisfies "the home page" since every page including that one inherits it.
+  verification: {
+    google: 'yAJLpxaiU7bqxfZN5BDFMC73jftkxkyR6KrTYtWifrw',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
