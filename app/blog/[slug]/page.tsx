@@ -71,14 +71,13 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
       <Navigation />
       <main>
         <article>
-          <section className="relative pt-40 pb-16 overflow-hidden bg-[#0D1B2A]">
-            <div className="absolute inset-0 dot-grid opacity-20" />
-            <div className="relative z-10 max-w-3xl mx-auto px-6">
-              <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-[#94A3B8] hover:text-white transition-colors mb-8">
+          <section className="bg-paper border-b border-line pt-32 pb-20 md:pt-40">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6">
+              <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-slate hover:text-ink transition-colors mb-8">
                 <ArrowLeft size={14} />
                 Back to Blog
               </Link>
-              <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              <h1 className="text-4xl md:text-5xl font-semibold tracking-tight leading-tight">
                 {post.title}
               </h1>
             </div>
@@ -86,7 +85,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
 
           {post.mainImage && (
             <div className="max-w-4xl mx-auto px-6 -mt-10 relative z-10">
-              <div className="relative w-full rounded-2xl overflow-hidden bg-[#F5F7FA] border border-[#E2E8F0]" style={{ aspectRatio: '16 / 9' }}>
+              <div className="relative w-full rounded-lg overflow-hidden bg-paper border border-line" style={{ aspectRatio: '16 / 9' }}>
                 <Image
                   src={urlForImage(post.mainImage).width(1400).height(788).fit('crop').auto('format').url()}
                   alt={post.title}
@@ -101,7 +100,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
 
           {/* Author, category, date — right after the hero image, per request */}
           <div className="max-w-3xl mx-auto px-6 pt-8">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pb-8 border-b border-[#E2E8F0]">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pb-8 border-b border-line">
               {post.author?.name && (
                 <div className="flex items-center gap-2.5">
                   {post.author.photo ? (
@@ -114,25 +113,25 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
                       />
                     </div>
                   ) : (
-                    <div className="w-8 h-8 rounded-full bg-[#0AAEDB]/10 border border-[#0AAEDB]/25 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[10px] font-bold text-[#0AAEDB]">
+                    <div className="w-8 h-8 rounded-full bg-navy/10 border border-navy/25 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[10px] font-semibold text-navy">
                         {post.author.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                       </span>
                     </div>
                   )}
-                  <span className="text-sm font-semibold text-[#0D1B2A]">{post.author.name}</span>
+                  <span className="text-sm font-semibold text-ink">{post.author.name}</span>
                 </div>
               )}
               {post.category && (
                 <Link
                   href={`/blog?category=${post.category.slug}`}
-                  className="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wide text-[#0AAEDB] bg-[#0AAEDB]/8 hover:bg-[#0AAEDB]/15 transition-colors"
+                  className="px-2.5 py-1 rounded-md text-xs font-medium text-navy bg-navy/8 hover:bg-navy/15 transition-colors"
                 >
                   {post.category.title}
                 </Link>
               )}
               {formatDate(post.publishedAt) && (
-                <span className="text-sm text-[#9CA3AF]">{formatDate(post.publishedAt)}</span>
+                <span className="text-sm text-slate">{formatDate(post.publishedAt)}</span>
               )}
             </div>
           </div>
@@ -142,9 +141,9 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
             {post.content && <PortableTextRenderer value={post.content} />}
 
             {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-[#E2E8F0]">
+              <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-line">
                 {post.tags.map((tag) => (
-                  <span key={tag} className="px-2.5 py-1 rounded-md text-xs font-medium bg-[#F5F7FA] border border-[#E2E8F0] text-[#374151]">
+                  <span key={tag} className="px-2.5 py-1 rounded-md text-xs font-medium bg-paper border border-line text-body">
                     {tag}
                   </span>
                 ))}
@@ -152,7 +151,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
             )}
 
             {post.author?.name && (post.author.bio || post.author.position) && (
-              <div className="flex items-center gap-4 mt-10 pt-8 border-t border-[#E2E8F0]">
+              <div className="flex items-center gap-4 mt-10 pt-8 border-t border-line">
                 {post.author.photo ? (
                   <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
                     <Image
@@ -163,16 +162,16 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
                     />
                   </div>
                 ) : (
-                  <div className="w-12 h-12 rounded-full bg-[#0AAEDB]/10 border border-[#0AAEDB]/25 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm font-bold text-[#0AAEDB]">
+                  <div className="w-12 h-12 rounded-full bg-navy/10 border border-navy/25 flex items-center justify-center flex-shrink-0">
+                    <span className="text-sm font-semibold text-navy">
                       {post.author.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                     </span>
                   </div>
                 )}
                 <div>
-                  <p className="text-sm font-bold text-[#0D1B2A]">{post.author.name}</p>
-                  {post.author.position && <p className="text-xs text-[#6B7280]">{post.author.position}</p>}
-                  {post.author.bio && <p className="text-xs text-[#6B7280] mt-1 max-w-md leading-relaxed">{post.author.bio}</p>}
+                  <p className="text-sm font-semibold text-ink">{post.author.name}</p>
+                  {post.author.position && <p className="text-xs text-slate">{post.author.position}</p>}
+                  {post.author.bio && <p className="text-xs text-slate mt-1 max-w-md leading-relaxed">{post.author.bio}</p>}
                 </div>
               </div>
             )}
@@ -182,9 +181,9 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
               in that category. Switching tags is a real navigation (?topic=slug),
               so this whole section re-renders server-side, not client JS state. */}
           {categories.length > 0 && (
-            <section id="other-articles" className="py-16 bg-[#F5F7FA] scroll-mt-24">
+            <section id="other-articles" className="py-16 bg-paper scroll-mt-24">
               <div className="max-w-5xl mx-auto px-6">
-                <p className="text-xs font-bold uppercase tracking-wide text-[#6B7280] mb-5">Other Articles</p>
+                <p className="text-xs font-medium text-slate mb-5">Other Articles</p>
 
                 <div className="flex flex-wrap gap-2 mb-8">
                   {categories.map((cat) => {
@@ -196,8 +195,8 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
                         scroll={false}
                         className={`px-3.5 py-2 rounded-full text-xs font-semibold transition-colors ${
                           active
-                            ? 'bg-[#0D1B2A] text-white'
-                            : 'bg-white border border-[#E2E8F0] text-[#374151] hover:border-[#0AAEDB]/40'
+                            ? 'bg-ink text-white'
+                            : 'bg-white border border-line text-body hover:border-navy/40'
                         }`}
                       >
                         {cat.title}
@@ -212,10 +211,10 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
                       <Link
                         key={rp._id}
                         href={`/blog/${rp.slug}`}
-                        className="rounded-xl border border-[#E2E8F0] bg-white overflow-hidden hover:border-[#0AAEDB]/40 transition-colors"
+                        className="rounded-lg border border-line bg-white overflow-hidden hover:border-navy/40 transition-colors"
                       >
                         {rp.mainImage && (
-                          <div className="relative w-full bg-[#F5F7FA]" style={{ aspectRatio: '16 / 9' }}>
+                          <div className="relative w-full bg-paper" style={{ aspectRatio: '16 / 9' }}>
                             <Image
                               src={urlForImage(rp.mainImage).width(500).height(281).fit('crop').auto('format').url()}
                               alt={rp.title}
@@ -226,14 +225,14 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
                           </div>
                         )}
                         <div className="p-5">
-                          <h3 className="font-display text-base font-bold text-[#0D1B2A] leading-snug">{rp.title}</h3>
-                          {rp.excerpt && <p className="text-xs text-[#6B7280] mt-2 leading-relaxed line-clamp-2">{rp.excerpt}</p>}
+                          <h3 className="text-base font-semibold text-ink leading-snug">{rp.title}</h3>
+                          {rp.excerpt && <p className="text-xs text-slate mt-2 leading-relaxed line-clamp-2">{rp.excerpt}</p>}
                         </div>
                       </Link>
                     ))}
                   </div>
                 ) : (
-                  <p className="text-sm text-[#9CA3AF]">No other articles in this topic yet.</p>
+                  <p className="text-sm text-slate">No other articles in this topic yet.</p>
                 )}
               </div>
             </section>

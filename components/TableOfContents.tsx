@@ -19,12 +19,12 @@ export default function TableOfContents({ content }: { content?: PortableTextBlo
   if (headings.length < 2) return null
 
   return (
-    <nav aria-label="Table of contents" className="rounded-xl border border-[#E2E8F0] p-5 mb-10 not-prose">
-      <p className="text-sm font-bold text-[#0D1B2A] mb-3">Contents</p>
+    <nav aria-label="Table of contents" className="rounded-lg border border-line p-5 mb-10 not-prose">
+      <p className="text-sm font-semibold text-ink mb-3">Contents</p>
       <ul className="flex flex-col gap-2">
         {headings.map((h) => (
           <li key={h.slug}>
-            <a href={`#${h.slug}`} className="text-sm text-[#0AAEDB] hover:underline underline-offset-2">
+            <a href={`#${h.slug}`} className="text-sm text-navy hover:underline underline-offset-2">
               {h.text}
             </a>
           </li>

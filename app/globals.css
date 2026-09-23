@@ -1,95 +1,85 @@
 @import "tailwindcss";
 
-body {
-  background: #ffffff;
-  color: #0d1b2a;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+/* MPP brand palette, from the ETL branding
+   (etl/scripts/branding/assets/mpp_etl/additional_styles/custom.css). */
+@theme {
+  --color-navy: #192f50;
+  --color-navy-strong: #10223a;
+  --color-navy-deep: #091626;
+  --color-slate: #52647a;
+  --color-mist: #b9c3ce;
+  --color-line: #dde3e9;
+  --color-tint: #e9edf2;
+  --color-paper: #f7f8fa;
+  --color-ink: #10223a;
+  --color-body: #34465c;
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
-.font-display {
-  /*
-   * Swap this for a real display font - next/font/google works great here
-   * (e.g. Space Grotesk or Sora) once you have network access at build time.
-   */
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  letter-spacing: -0.01em;
+@layer base {
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: #ffffff;
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
-.dot-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-.card-hover {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.card-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-}
-
-.gradient-text {
-  background: linear-gradient(90deg, #0aaedb, #10b981);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-33.333%); }
-}
-
-.animate-marquee {
-  animation: marquee 18s linear infinite;
-}
-
-.legal-content h2 {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  letter-spacing: -0.01em;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #0D1B2A;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-}
-.legal-content h2:first-child {
-  margin-top: 0;
-}
-.legal-content h3 {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #0D1B2A;
-  margin-top: 1.75rem;
-  margin-bottom: 0.75rem;
-}
-.legal-content p {
-  color: #374151;
-  font-size: 1rem;
-  line-height: 1.75;
-  margin-bottom: 1rem;
-}
-.legal-content ul {
-  list-style: disc;
-  padding-left: 1.25rem;
-  color: #374151;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.legal-content li {
-  line-height: 1.7;
-}
-.legal-content a {
-  color: #0AAEDB;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.legal-content a:hover {
-  color: #0074A6;
-}
-.legal-content strong {
-  color: #0D1B2A;
-  font-weight: 700;
+@layer components {
+  .legal-content h2 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .legal-content h2:first-child {
+    margin-top: 0;
+  }
+  .legal-content h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .legal-content p {
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .legal-content ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+  .legal-content li {
+    line-height: 1.7;
+  }
+  .legal-content a {
+    color: var(--color-navy);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .legal-content strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
 }

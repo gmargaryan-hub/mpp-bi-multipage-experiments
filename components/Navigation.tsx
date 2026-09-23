@@ -4,224 +4,69 @@ import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { asset } from '@/lib/basePath'
-import { openDemoModal } from '@/lib/openDemoModal'
+import DemoButton from '@/components/DemoButton'
 
-const primaryNav = [
-  { label: 'Benefits', href: '/benefits' },
-  { label: 'Pricing', href: '/pricing' },
+const links = [
+  { label: 'Features', href: '/features' },
+  { label: 'Architecture', href: '/architecture' },
   { label: 'Why MPP BI', href: '/why-mpp-bi' },
-  { label: 'About Us', href: '/about-us' },
-]
-
-const featuresNav = [
-  { label: 'Data Sources', href: '/features#data-sources', description: 'Connect to your data wherever it lives' },
-  { label: 'Visualization', href: '/features#visualization', description: '30+ visualization types' },
-  { label: 'AI & Machine Learning', href: '/features#ai-ml', description: 'AI and machine learning features' },
-  { label: 'MPP ETL', href: '/features#mpp-etl', description: 'A data preparation engine' },
-  { label: 'Security', href: '/features#security', description: 'Enterprise-grade security' },
-  { label: 'Customization', href: '/features#customization', description: 'Built to be customized' },
-  { label: 'Deployment', href: '/features#deployment-options', description: 'Runs where you want' },
-]
-
-const resourcesNav = [
-  { label: 'Architecture', href: '/architecture', description: 'How MPP BI is built' },
-  { label: 'Blog', href: '/blog', description: 'Product updates, research, and news' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'About', href: '/about-us' },
+  { label: 'Blog', href: '/blog' },
 ]
 
 export default function Navigation() {
-  const [featuresOpen, setFeaturesOpen] = useState(false)
-  const [resourcesOpen, setResourcesOpen] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [open, setOpen] = useState(false)
   const pathname = usePathname()
-  const isHome = pathname === '/'
-
-  const handleLogoClick = (e: React.MouseEvent) => {
-    // Logo always goes to the top of the home page. If we're already there,
-    // navigating to "/" wouldn't scroll anywhere, so scroll manually instead.
-    if (isHome) {
-      e.preventDefault()
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0]">
-      <div className="max-w-[1440px] mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo - always returns to the top of the home page */}
-          <Link href="/" onClick={handleLogoClick} className="flex items-center shrink-0">
-            <Image
-              src={asset('/mppbi-logo.svg')}
-              alt="MPP BI"
-              width={135}
-              height={40}
-              className="object-contain h-8 w-auto"
-              priority
-              unoptimized
-            />
-          </Link>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
+          <Image src={asset('/mppbi-logo.svg')} alt="MPP BI" width={135} height={40} className="h-8 w-auto" priority unoptimized />
+        </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {/* Features dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setFeaturesOpen(true)}
-              onMouseLeave={() => setFeaturesOpen(false)}
-            >
+        <nav className="hidden lg:flex items-center gap-1">
+          {links.map((l) => {
+            const active = pathname === l.href || pathname.startsWith(l.href + '/')
+            return (
               <Link
-                href="/features"
-                className="flex items-center gap-1 px-3.5 py-2 text-sm font-medium text-[#374151] hover:text-[#0D1B2A] transition-colors rounded-lg hover:bg-[#F5F7FA]"
+                key={l.href}
+                href={l.href}
+                aria-current={active ? 'page' : undefined}
+                className={`rounded-md px-3 py-2 text-sm transition-colors ${
+                  active ? 'text-ink font-medium' : 'text-slate hover:text-ink'
+                }`}
               >
-                Features
-                <ChevronDown size={14} className={`transition-transform duration-200 ${featuresOpen ? 'rotate-180' : ''}`} />
+                {l.label}
               </Link>
-              <AnimatePresence>
-                {featuresOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute top-full left-0 pt-2 w-64"
-                  >
-                    <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-[0_12px_36px_rgba(0,0,0,0.12)] p-2">
-                      {featuresNav.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          className="block px-3 py-2.5 rounded-lg hover:bg-[#F5F7FA] transition-colors"
-                        >
-                          <p className="text-sm font-medium text-[#0D1B2A]">{item.label}</p>
-                          <p className="text-xs text-[#6B7280] mt-0.5">{item.description}</p>
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            )
+          })}
+        </nav>
 
-            {primaryNav.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="px-3.5 py-2 text-sm font-medium text-[#374151] hover:text-[#0D1B2A] transition-colors rounded-lg hover:bg-[#F5F7FA]"
-              >
-                {item.label}
-              </Link>
-            ))}
-
-            {/* Resources dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setResourcesOpen(true)}
-              onMouseLeave={() => setResourcesOpen(false)}
-            >
-              <button className="flex items-center gap-1 px-3.5 py-2 text-sm font-medium text-[#374151] hover:text-[#0D1B2A] transition-colors rounded-lg hover:bg-[#F5F7FA]">
-                Resources
-                <ChevronDown size={14} className={`transition-transform duration-200 ${resourcesOpen ? 'rotate-180' : ''}`} />
-              </button>
-              <AnimatePresence>
-                {resourcesOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute top-full left-0 pt-2 w-64"
-                  >
-                    <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-[0_12px_36px_rgba(0,0,0,0.12)] p-2">
-                      {resourcesNav.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          className="block px-3 py-2.5 rounded-lg hover:bg-[#F5F7FA] transition-colors"
-                        >
-                          <p className="text-sm font-medium text-[#0D1B2A]">{item.label}</p>
-                          <p className="text-xs text-[#6B7280] mt-0.5">{item.description}</p>
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </nav>
-
-          {/* CTA */}
-          <div className="hidden lg:flex items-center">
-            <button
-              onClick={openDemoModal}
-              className="px-4 py-2.5 rounded-lg text-sm font-semibold text-[#0A0E1A] transition-all duration-200 hover:opacity-90"
-              style={{ background: '#0AAEDB' }}
-            >
-              Book a Demo
-            </button>
-          </div>
-
-          {/* Mobile toggle */}
-          <button
-            className="lg:hidden text-[#374151]"
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+        <div className="hidden lg:block">
+          <DemoButton className="!py-2.5" />
         </div>
+
+        <button className="lg:hidden text-ink" onClick={() => setOpen((v) => !v)} aria-label="Toggle menu" aria-expanded={open}>
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="lg:hidden overflow-hidden border-t border-[#E2E8F0] bg-white"
-          >
-            <div className="px-6 py-4 flex flex-col gap-1">
-              <Link
-                href="/features"
-                className="px-3 py-2.5 text-sm font-medium text-[#374151] hover:text-[#0D1B2A] rounded-lg hover:bg-[#F5F7FA]"
-                onClick={() => setMobileOpen(false)}
-              >
-                Features
+      {open && (
+        <div className="lg:hidden border-t border-line bg-white">
+          <nav className="mx-auto flex max-w-6xl flex-col px-4 py-3 sm:px-6">
+            {links.map((l) => (
+              <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-2.5 text-base text-ink">
+                {l.label}
               </Link>
-              {featuresNav.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="ml-3 px-3 py-2 text-xs font-medium text-[#6B7280] hover:text-[#0D1B2A] rounded-lg hover:bg-[#F5F7FA] border-l-2 border-[#E2E8F0]"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              {[...primaryNav, ...resourcesNav].map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="px-3 py-2.5 text-sm font-medium text-[#374151] hover:text-[#0D1B2A] rounded-lg hover:bg-[#F5F7FA]"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <button
-                onClick={() => { setMobileOpen(false); openDemoModal() }}
-                className="mt-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-[#0A0E1A] text-center"
-                style={{ background: '#0AAEDB' }}
-              >
-                Book a Demo
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+            <DemoButton className="mt-3 w-full" />
+          </nav>
+        </div>
+      )}
     </header>
   )
 }

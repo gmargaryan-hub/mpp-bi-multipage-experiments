@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+const escapeHtml = (value: unknown) =>
+  String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!)
+
 export async function POST(req: NextRequest) {
   try {
     const { name, email, phone, message } = await req.json()
@@ -23,8 +26,8 @@ export async function POST(req: NextRequest) {
         from: 'MPP BI Website <onboarding@resend.dev>',
         to: 'gmargaryan@mpplabs.io',
         reply_to: email,
-        subject: `New Demo Request from ${name}`,
-        html: `<p><b>Name:</b> ${name}</p><p><b>Email:</b> ${email}</p><p><b>Phone:</b> ${phone || 'Not provided'}</p><p><b>Message:</b> ${message}</p>`,
+        subject: `New Demo Request from ${String(name).slice(0, 120)}`,
+        html: `<p><b>Name:</b> ${escapeHtml(name)}</p><p><b>Email:</b> ${escapeHtml(email)}</p><p><b>Phone:</b> ${escapeHtml(phone || 'Not provided')}</p><p><b>Message:</b> ${escapeHtml(message)}</p>`,
       }),
     })
     if (!res.ok) {

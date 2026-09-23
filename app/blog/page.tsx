@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import { PageHeader } from '@/components/ui'
 import { getAllPosts, getPostsByCategory, getAllCategories } from '@/lib/sanity-queries'
 import { urlForImage } from '@/lib/sanity'
 
@@ -44,25 +45,14 @@ export default async function BlogIndexPage({ searchParams }: Props) {
     <div className="min-h-screen bg-white">
       <Navigation />
       <main>
-        <section className="relative pt-40 pb-20 overflow-hidden bg-[#0D1B2A]">
-          <div className="absolute inset-0 dot-grid opacity-20" />
-          <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <p className="text-[#0AAEDB] text-xs font-semibold tracking-[0.18em] uppercase mb-5">Blog</p>
-            <h1 className="font-display text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-              News &amp; Updates
-            </h1>
-            <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto leading-relaxed">
-              Product updates, engineering deep dives, and news from the MPP BI team.
-            </p>
-          </div>
-        </section>
+        <PageHeader title="Blog" lede="Product updates, engineering notes and news from the MPP BI team." />
 
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-6">
             {fetchFailed && (
-              <div className="rounded-xl border border-[#F97316]/30 bg-[#F97316]/5 p-6 text-center mb-12">
-                <p className="text-sm text-[#0D1B2A] font-semibold mb-1">Couldn&apos;t load posts right now</p>
-                <p className="text-xs text-[#6B7280]">
+              <div className="rounded-lg border border-line bg-paper p-6 text-center mb-12">
+                <p className="text-sm text-ink font-semibold mb-1">Couldn&apos;t load posts right now</p>
+                <p className="text-xs text-slate">
                   The blog couldn&apos;t reach Sanity. If this persists, check that the project ID/dataset in
                   lib/sanity.ts are correct and that the dataset allows public read access.
                 </p>
@@ -77,8 +67,8 @@ export default async function BlogIndexPage({ searchParams }: Props) {
                   href="/blog"
                   className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
                     !selectedCategory
-                      ? 'bg-[#0D1B2A] text-white'
-                      : 'bg-white border border-[#E2E8F0] text-[#374151] hover:border-[#0AAEDB]/40'
+                      ? 'bg-ink text-white'
+                      : 'bg-white border border-line text-body hover:border-navy/40'
                   }`}
                 >
                   All
@@ -91,8 +81,8 @@ export default async function BlogIndexPage({ searchParams }: Props) {
                       href={`/blog?category=${cat.slug}`}
                       className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
                         active
-                          ? 'bg-[#0D1B2A] text-white'
-                          : 'bg-white border border-[#E2E8F0] text-[#374151] hover:border-[#0AAEDB]/40'
+                          ? 'bg-ink text-white'
+                          : 'bg-white border border-line text-body hover:border-navy/40'
                       }`}
                     >
                       {cat.title}
@@ -104,10 +94,10 @@ export default async function BlogIndexPage({ searchParams }: Props) {
 
             {!fetchFailed && posts.length === 0 && (
               <div className="text-center py-20">
-                <p className="text-[#374151] text-lg font-semibold mb-2">
+                <p className="text-body text-lg font-semibold mb-2">
                   {selectedCategory ? 'No posts in this category yet' : 'No posts published yet'}
                 </p>
-                <p className="text-[#6B7280] text-sm">Once something is published in the Studio, it&apos;ll show up here.</p>
+                <p className="text-slate text-sm">Once something is published in the Studio, it&apos;ll show up here.</p>
               </div>
             )}
 
@@ -116,9 +106,9 @@ export default async function BlogIndexPage({ searchParams }: Props) {
                 <Link
                   key={post._id}
                   href={`/blog/${post.slug}`}
-                  className="group rounded-2xl border border-[#E2E8F0] overflow-hidden hover:border-[#0AAEDB]/40 transition-colors"
+                  className="group rounded-lg border border-line overflow-hidden hover:border-navy/40 transition-colors"
                 >
-                  <div className="relative w-full bg-[#F5F7FA]" style={{ aspectRatio: '1.3 / 1' }}>
+                  <div className="relative w-full bg-paper" style={{ aspectRatio: '1.3 / 1' }}>
                     {post.mainImage ? (
                       <Image
                         src={urlForImage(post.mainImage).width(800).height(615).fit('crop').auto('format').url()}
@@ -128,23 +118,23 @@ export default async function BlogIndexPage({ searchParams }: Props) {
                         className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-[#CBD5E1] text-xs">No image</div>
+                      <div className="w-full h-full flex items-center justify-center text-mist text-xs">No image</div>
                     )}
                     {post.category && (
-                      <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide text-white bg-[#0D1B2A]/80 backdrop-blur-sm">
+                      <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-semibold text-white bg-ink/80 backdrop-blur-sm">
                         {post.category.title}
                       </span>
                     )}
                   </div>
                   <div className="p-5">
-                    <h2 className="font-display text-lg font-bold text-[#0D1B2A] leading-snug mb-2 group-hover:text-[#0AAEDB] transition-colors">
+                    <h2 className="text-lg font-semibold text-ink leading-snug mb-2 group-hover:text-navy transition-colors">
                       {post.title}
                     </h2>
                     {post.excerpt && (
-                      <p className="text-sm text-[#6B7280] leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
+                      <p className="text-sm text-slate leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
                     )}
                     {formatDate(post.publishedAt) && (
-                      <p className="text-xs text-[#9CA3AF]">{formatDate(post.publishedAt)}</p>
+                      <p className="text-xs text-slate">{formatDate(post.publishedAt)}</p>
                     )}
                   </div>
                 </Link>

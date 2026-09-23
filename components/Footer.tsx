@@ -2,121 +2,81 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Instagram, Linkedin } from 'lucide-react'
 import { asset } from '@/lib/basePath'
 import { openDemoModal } from '@/lib/openDemoModal'
-
-const MAIN_SITE_URL = 'https://mpp-insights.com/'
-
-const socials = [
-  { label: 'Instagram', href: 'https://www.instagram.com/mppinsights/', icon: Instagram },
-  { label: 'LinkedIn', href: 'https://am.linkedin.com/company/mpp-insights', icon: Linkedin },
-]
 
 const columns = [
   {
     heading: 'Product',
     links: [
       { label: 'Features', href: '/features' },
-      { label: 'Benefits', href: '/benefits' },
-      { label: 'Pricing', href: '/pricing' },
-      { label: 'Why MPP BI', href: '/why-mpp-bi' },
-    ],
-  },
-  {
-    heading: 'Resources',
-    links: [
       { label: 'Architecture', href: '/architecture' },
-      { label: 'Blog', href: '/blog' },
+      { label: 'Why MPP BI', href: '/why-mpp-bi' },
+      { label: 'Pricing', href: '/pricing' },
     ],
   },
   {
     heading: 'Company',
     links: [
-      { label: 'About Us', href: '/about-us' },
-      { label: 'Book a Demo', href: '#booking', isModal: true },
-      { label: 'Contact Support', href: 'mailto:welcome@mpp-insights.com' },
+      { label: 'About', href: '/about-us' },
+      { label: 'Blog', href: '/blog' },
+      { label: 'Support', href: 'mailto:welcome@mpp-insights.com' },
+    ],
+  },
+  {
+    heading: 'Follow',
+    links: [
+      { label: 'LinkedIn', href: 'https://am.linkedin.com/company/mpp-insights' },
+      { label: 'Instagram', href: 'https://www.instagram.com/mppinsights/' },
     ],
   },
 ]
 
+const linkClass = 'text-sm text-mist hover:text-white transition-colors'
+
 export default function Footer() {
   return (
-    <footer className="bg-[#0D1B2A] border-t border-white/8">
-      <div className="max-w-[1440px] mx-auto px-6 py-14">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-          <div className="col-span-2 flex flex-col gap-4">
-            {/* Footer logo redirects to the main MPP Insights website, not a page on this site */}
-            <a href={MAIN_SITE_URL} className="flex items-center gap-2 w-fit">
-              <Image
-                src={asset('/mpp-insights-logo.svg')}
-                alt="MPP Insights"
-                width={121}
-                height={40}
-                className="object-contain h-8 w-auto"
-                unoptimized
-              />
-            </a>
-            <p className="text-xs text-white/40 leading-relaxed max-w-xs">
-              MPP Insights builds MPP BI and MPP ETL. Business intelligence that runs inside
-              your data, with no data extraction, no calculation engine, always live.
-            </p>
-            <div className="flex items-center gap-3">
-              {socials.map((s) => {
-                const Icon = s.icon
-                return (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.label}
-                    className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-colors"
-                  >
-                    <Icon size={15} />
-                  </a>
-                )
-              })}
-            </div>
-          </div>
-
-          {columns.map((col) => (
-            <div key={col.heading}>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-4">
-                {col.heading}
-              </p>
-              <ul className="space-y-2.5">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    {'isModal' in link && link.isModal ? (
-                      <button
-                        onClick={openDemoModal}
-                        className="text-xs text-white/50 hover:text-white transition-colors"
-                      >
-                        {link.label}
-                      </button>
-                    ) : (
-                      <Link href={link.href} className="text-xs text-white/50 hover:text-white transition-colors">
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+    <footer className="bg-navy-deep text-mist">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-10 px-4 py-14 sm:px-6 md:grid-cols-5">
+        <div className="col-span-2 space-y-4">
+          <a href="https://mpp-insights.com/" className="inline-block">
+            <Image src={asset('/mpp-insights-logo.svg')} alt="MPP Insights" width={121} height={40} className="h-8 w-auto" unoptimized />
+          </a>
+          <p className="max-w-xs text-sm leading-relaxed">
+            MPP Insights builds MPP BI and MPP ETL. Headquartered in Richmond, Virginia, with an R&amp;D center in Yerevan, Armenia.
+          </p>
+          <button onClick={openDemoModal} className="text-sm font-medium text-white underline underline-offset-4 decoration-slate hover:decoration-white">
+            Book a demo
+          </button>
         </div>
+
+        {columns.map((col) => (
+          <div key={col.heading}>
+            <p className="mb-4 text-sm font-medium text-white">{col.heading}</p>
+            <ul className="space-y-2.5">
+              {col.links.map((l) => (
+                <li key={l.label}>
+                  {l.href.startsWith('/') ? (
+                    <Link href={l.href} className={linkClass}>{l.label}</Link>
+                  ) : (
+                    <a href={l.href} className={linkClass} {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                      {l.label}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
 
-      <div className="border-t border-white/8">
-        <div className="max-w-[1440px] mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] text-white/25">
-            © {new Date().getFullYear()} MPP Insights LLC. All rights reserved.
-          </p>
-          <div className="flex items-center gap-5 text-[11px] text-white/25">
-            <Link href="/privacy-policy" className="hover:text-white/50 transition-colors">Privacy Policy</Link>
-            <Link href="/terms-of-use" className="hover:text-white/50 transition-colors">Terms of Use</Link>
-            <Link href="/cookie-policy" className="hover:text-white/50 transition-colors">Cookie Policy</Link>
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-5 text-xs sm:px-6 md:flex-row md:items-center md:justify-between">
+          <p>© {new Date().getFullYear()} MPP Insights LLC</p>
+          <div className="flex gap-5">
+            <Link href="/privacy-policy" className="hover:text-white">Privacy</Link>
+            <Link href="/terms-of-use" className="hover:text-white">Terms</Link>
+            <Link href="/cookie-policy" className="hover:text-white">Cookies</Link>
           </div>
         </div>
       </div>
