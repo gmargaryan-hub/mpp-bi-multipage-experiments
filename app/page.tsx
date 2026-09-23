@@ -5,8 +5,8 @@ import Footer from '@/components/Footer'
 import DemoButton from '@/components/DemoButton'
 import ArchitectureDiagram from '@/components/ArchitectureDiagram'
 import CaseStudy from '@/components/CaseStudy'
-import CTABand from '@/components/CTABand'
-import { Container, Section, SectionHeader, Screenshot, TextLink, buttonClass } from '@/components/ui'
+import JobTimeline from '@/components/dashboard/JobTimeline'
+import { Container, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
 
 const clients = [
@@ -19,132 +19,92 @@ const clients = [
   { src: '/logos/marmar.webp', alt: 'Mar Mar Richmond', width: 470, height: 200 },
 ]
 
-const differences = [
-  {
-    title: 'No copy of your data',
-    body: 'Queries go to your database. There is no import mode, no extract to refresh and no second store to secure.',
-  },
-  {
-    title: 'No calculation engine',
-    body: 'There is no in-memory tier to size, license and patch. The MPP BI server runs inside PostgreSQL and only prepares queries.',
-  },
-  {
-    title: 'Every function works live',
-    body: 'The calculation language was designed for pushdown, so nothing is disabled when you connect live. Power BI, by contrast, restricts DAX in DirectQuery.',
-  },
+const engine = [
+  { title: 'No copy of your data', body: 'Queries go to your database. There is no extract to refresh and no second store to secure.' },
+  { title: 'No engine to size', body: 'There is no in-memory tier limited by RAM. The MPP BI server runs inside PostgreSQL and only writes queries.' },
+  { title: 'Every function works live', body: 'The calculation language compiles to SQL, so nothing is switched off when you stay live.' },
 ]
 
-const deployments = [
-  {
-    src: '/dashboards/dashboard-construction.png',
-    width: 2138,
-    height: 1060,
-    alt: 'Procurement transparency dashboard',
-    caption: 'Construction procurement: suspicious items, overpayment and supplier analysis across 500+ entities. Over $1M saved per year.',
-  },
-  {
-    src: '/dashboards/dashboard-oilgas-safety.png',
-    width: 2436,
-    height: 1366,
-    alt: 'Offshore safety command center dashboard',
-    caption: 'Offshore safety: incidents, personnel, equipment and vessels, streamed from Kafka at 7,000+ events per second.',
-  },
-  {
-    src: '/dashboards/dashboard-servicedesk.png',
-    width: 2084,
-    height: 1392,
-    alt: 'Service desk SLA dashboard',
-    caption: 'Service desk: SLA violations, resolution time and agent performance, on a live connection.',
-  },
-  {
-    src: '/dashboards/dashboard-oilgas-wells.png',
-    width: 2532,
-    height: 1302,
-    alt: 'Well profile analytics dashboard',
-    caption: 'Well profiles: spacer placement, collector monitoring and deviation analysis, computed in the database.',
-  },
+const safety = [
+  { art: '/brand/data-source.svg', title: 'The agent works as you', body: 'Its tools run in your own signed-in session. It sees only what you can see and changes only what it created or you gave it.' },
+  { art: '/brand/editor-button.svg', title: 'You approve what lands', body: 'Every step shows in the chat. Charts arrive as previews with a diff; you add them or reject them. Deleting needs a confirmed second call.' },
+  { art: '/brand/atlas-thumbnail.svg', title: 'It stays on your servers', body: 'The agent, its sandbox and its memory run inside your installation, with the model you choose. It works air-gapped.' },
+  { art: '/brand/data-koob.svg', title: 'Permissions before queries', body: 'Access rules down to rows and charts are applied before data is fetched, for people and for the agent alike. Every action is logged.' },
 ]
 
-const capabilities = [
-  { title: 'Dashboards', body: 'More than 30 chart types, maps, floor plans and schematics. Export to PNG, Excel, PDF or PowerPoint, or embed in your own product.', href: '/features#visualization' },
-  { title: 'AI assistant', body: 'Ask in plain language and the assistant queries your data or builds the dashboard. It runs on your infrastructure, with the model you choose.', href: '/features#ai-ml' },
-  { title: 'MPP ETL included', body: 'A visual pipeline builder for Kafka, Redis, SAP RFC, PostgreSQL, ClickHouse and any JDBC source, in every license.', href: '/features#mpp-etl' },
-  { title: 'Security', body: 'Active Directory, Kerberos, OAuth 2.0 and OpenID Connect sign-in, MFA, row-level permissions and SIEM-ready audit logs.', href: '/features#security' },
-  { title: 'Your brand, your code', body: 'White-label the interface, build custom views in React, and get the source code with the right license.', href: '/features#customization' },
-  { title: 'Runs where you need it', body: 'On-premises and air-gapped, on AWS, Azure or Google Cloud, in Docker, or as a VM image. One node or a cluster.', href: '/features#deployment-options' },
+const features = [
+  { title: 'AI assistant', body: 'Ask questions, build and edit dashboards, attach spreadsheets, run subagents for longer research.', href: '/features#ai-ml' },
+  { title: '30+ chart types', body: 'KPIs, maps, floor plans, live schematics, drill-down, export to Excel, PDF and PowerPoint.', href: '/features#visualization' },
+  { title: 'MPP ETL included', body: 'Visual pipelines for Kafka, SAP, ClickHouse, PostgreSQL and any JDBC source, in every license.', href: '/features#mpp-etl' },
+  { title: 'Forecasts and models', body: 'Forecasts drawn next to actuals; models trained and served from the chat through MPP ETL.', href: '/features#ai-ml' },
+  { title: 'Your brand, your code', body: 'White label, custom views in React, source code with the right license.', href: '/features#customization' },
+  { title: 'Runs anywhere', body: 'On-premises, AWS, Azure, Google Cloud, Docker or a VM image; one node or a cluster.', href: '/features#deployment-options' },
 ]
 
-const numbers = [
-  { value: '2B+', label: 'records queried in under 5 seconds' },
-  { value: '500', label: 'concurrent users on 2 nodes of 16 cores and 32 GB' },
-  { value: '51%', label: 'fewer payment defaults at an insurance client' },
-  { value: '$1M+', label: 'saved per year in construction procurement' },
-]
+function Chapter({ n, title, lede }: { n: string; title: string; lede: string }) {
+  return (
+    <div className="mb-10 grid gap-4 md:mb-12 md:grid-cols-[6rem_1fr]">
+      <p className="font-mono text-sm text-brand">{n}</p>
+      <div className="max-w-2xl">
+        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">{title}</h2>
+        <p className="mt-4 text-lg leading-relaxed">{lede}</p>
+      </div>
+    </div>
+  )
+}
 
 export default function HomePage() {
   return (
     <>
       <Navigation />
       <main>
-        <section className="pt-32 pb-16 md:pt-40 md:pb-24">
+        <section className="bg-paper pt-28 pb-16 md:pt-36 md:pb-24">
           <Container>
-            <div className="max-w-3xl">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
-                Business intelligence that runs inside your database
-              </h1>
-              <p className="mt-6 text-lg md:text-xl leading-relaxed">
-                MPP BI sends every calculation to the database your data already lives in. No extracts, no in-memory engine,
-                no second copy to keep in sync. Dashboards stay live on billions of rows, 2 to 12 times faster than
-                traditional BI.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <DemoButton />
-                <Link href="/architecture" className={buttonClass.secondary}>
-                  How it works
-                </Link>
+            <div className="grid items-end gap-8 lg:grid-cols-[1fr_auto]">
+              <div className="max-w-3xl">
+                <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] font-semibold tracking-tight leading-[1.05]">
+                  Describe the dashboards you need. MPP BI builds them, on your data and your servers.
+                </h1>
+                <p className="mt-6 text-lg md:text-xl leading-relaxed">
+                  An analytics engine that computes inside your own database, and an agent that does the BI work in it, as you
+                  and with your permissions. This is what handing over a job looks like.
+                </p>
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <DemoButton label="Try it on your data" />
+                  <Link href="#engine" className={buttonClass.secondary}>
+                    What you gain
+                  </Link>
+                </div>
               </div>
-              <p className="mt-8 text-sm text-slate">
-                In production in government, banking, oil and gas, insurance and construction. UN supplier.
-              </p>
+              <Image src={asset('/brand/mascot-laptop.svg')} alt="" width={200} height={200} className="hidden h-44 w-44 lg:block" priority unoptimized />
             </div>
-            <Screenshot
-              className="mt-14 md:mt-20"
-              src="/dashboards/dashboard-construction.png"
-              alt="An MPP BI procurement dashboard"
-              width={2138}
-              height={1060}
-              priority
-            />
+            <div className="mt-12 md:mt-16">
+              <JobTimeline request="Here is our retail workbook. Rebuild our three-page sales report from it: stores, channels and products, with the same numbers we report today." />
+            </div>
           </Container>
         </section>
 
-        <section className="border-y border-line py-10" aria-label="Clients and partners">
+        <section className="border-b border-line py-10" aria-label="Clients and partners">
           <Container>
             <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
               {clients.map((c) => (
                 <li key={c.alt}>
-                  <Image
-                    src={asset(c.src)}
-                    alt={c.alt}
-                    width={c.width}
-                    height={c.height}
-                    className="h-12 w-auto object-contain grayscale"
-                    unoptimized
-                  />
+                  <Image src={asset(c.src)} alt={c.alt} width={c.width} height={c.height} className="h-12 w-auto object-contain grayscale" unoptimized />
                 </li>
               ))}
             </ul>
           </Container>
         </section>
 
-        <Section id="architecture">
-          <SectionHeader
-            title="The same dashboards, one less tier"
-            lede="Most BI tools were designed when databases were too slow for interactive analysis, so they copy data into an engine of their own. Databases are fast now. MPP BI removes the engine and lets the database do the work."
+        <Section id="engine">
+          <Chapter
+            n="01 Engine"
+            title="Analytics that run inside your database"
+            lede="Most BI tools copy your data into an engine of their own. MPP BI sends every calculation to the database the data already lives in, so dashboards stay live and fast on billions of rows, 2 to 12 times faster than traditional BI."
           />
           <div className="grid gap-8 md:grid-cols-3 mb-12">
-            {differences.map((d) => (
-              <div key={d.title} className="border-t border-navy pt-5">
+            {engine.map((d) => (
+              <div key={d.title} className="border-t-2 border-brand pt-5">
                 <h3 className="text-lg font-semibold">{d.title}</h3>
                 <p className="mt-2 leading-relaxed">{d.body}</p>
               </div>
@@ -152,41 +112,51 @@ export default function HomePage() {
           </div>
           <ArchitectureDiagram />
           <div className="mt-8">
-            <TextLink href="/architecture">Read how the architecture works</TextLink>
+            <TextLink href="/architecture">How the architecture works</TextLink>
           </div>
         </Section>
 
-        <Section tone="paper">
-          <SectionHeader
-            title="Built for real deployments"
-            lede="Dashboards from client projects. Each one queries the client’s own systems directly."
+        <Section tone="paper" id="safety">
+          <Chapter
+            n="02 Safety"
+            title="An agent you can hand work to"
+            lede="Delegating only works if you can trust what the agent touched. In MPP BI that is how the product is built, not a setting to remember."
           />
-          <div className="grid gap-x-8 gap-y-12 md:grid-cols-2">
-            {deployments.map((d) => (
-              <Screenshot key={d.src} {...d} />
-            ))}
-          </div>
-          <dl className="mt-16 grid grid-cols-2 gap-8 border-t border-line pt-10 md:grid-cols-4">
-            {numbers.map((n) => (
-              <div key={n.label}>
-                <dt className="text-3xl font-semibold tracking-tight text-ink">{n.value}</dt>
-                <dd className="mt-1 text-sm leading-snug text-slate">{n.label}</dd>
+          <div className="grid gap-5 md:grid-cols-2">
+            {safety.map((d) => (
+              <div key={d.title} className="grid grid-cols-[6.5rem_1fr] items-start gap-5 rounded-lg border border-line bg-white p-5">
+                <Image src={asset(d.art)} alt="" width={200} height={124} className="w-[6.5rem]" unoptimized />
+                <div>
+                  <h3 className="text-lg font-semibold">{d.title}</h3>
+                  <p className="mt-2 leading-relaxed">{d.body}</p>
+                </div>
               </div>
             ))}
-          </dl>
+          </div>
         </Section>
 
-        <Section>
-          <SectionHeader title="What comes with it" lede="One platform for data preparation, dashboards, AI and administration." />
+        <Section id="features">
+          <Chapter
+            n="03 Platform"
+            title="Everything else a BI team needs"
+            lede="Data preparation, charts, AI and administration in one product, included in every license."
+          />
           <div className="grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-            {capabilities.map((c) => (
-              <div key={c.title}>
+            {features.map((c) => (
+              <div key={c.title} className="border-t border-line pt-5">
                 <h3 className="text-lg font-semibold">
-                  <Link href={c.href} className="hover:text-navy">{c.title}</Link>
+                  <Link href={c.href} className="hover:text-brand">{c.title}</Link>
                 </h3>
                 <p className="mt-2 leading-relaxed">{c.body}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-12 flex flex-col gap-4 rounded-lg border border-line bg-paper p-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-ink">
+              <span className="font-medium">Coming from Power BI?</span>{' '}
+              <span className="text-body">The agent moves your reports for you, and several agents can move a library in parallel.</span>
+            </p>
+            <TextLink href="/power-bi-migration">How migration works</TextLink>
           </div>
         </Section>
 
@@ -194,46 +164,19 @@ export default function HomePage() {
           <CaseStudy />
         </Section>
 
-        <Section>
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">Public pricing, per seat</h2>
-              <p className="mt-4 text-lg leading-relaxed">
-                Pay monthly, or buy the seats once and own them. ETL, on-premises deployment and source-code access are part
-                of the product, not add-ons.
+        <section className="bg-brand py-16 md:py-20" id="booking">
+          <Container className="grid items-center gap-8 md:grid-cols-[auto_1fr_auto]">
+            <Image src={asset('/brand/mascot-like.svg')} alt="" width={200} height={200} className="hidden h-28 w-28 md:block" unoptimized />
+            <div className="max-w-2xl">
+              <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">See it on your own data</h2>
+              <p className="mt-4 text-lg leading-relaxed text-white/85">
+                Bring a workbook or a report. We will hand it to the agent together and look at what comes back. Seats start at
+                $10 a month, with the agent and MPP ETL included.
               </p>
-              <div className="mt-6">
-                <TextLink href="/pricing">See pricing and the cost calculator</TextLink>
-              </div>
             </div>
-            <div className="overflow-hidden rounded-lg border border-line">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-paper text-slate">
-                  <tr>
-                    <th className="px-5 py-3 font-medium">Seat</th>
-                    <th className="px-5 py-3 font-medium">Monthly</th>
-                    <th className="px-5 py-3 font-medium">Perpetual</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-line">
-                  <tr>
-                    <td className="px-5 py-4 text-ink">Viewer</td>
-                    <td className="px-5 py-4"><span className="text-lg font-semibold text-ink">$10</span> / month</td>
-                    <td className="px-5 py-4"><span className="text-lg font-semibold text-ink">$240</span> once</td>
-                  </tr>
-                  <tr>
-                    <td className="px-5 py-4 text-ink">Creator or admin</td>
-                    <td className="px-5 py-4"><span className="text-lg font-semibold text-ink">$18</span> / month</td>
-                    <td className="px-5 py-4"><span className="text-lg font-semibold text-ink">$432</span> once</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p className="border-t border-line bg-paper px-5 py-3 text-xs text-slate">Standard support is 20% of the license.</p>
-            </div>
-          </div>
-        </Section>
-
-        <CTABand />
+            <DemoButton label="Book a session" variant="inverted" className="justify-self-start md:justify-self-end" />
+          </Container>
+        </section>
       </main>
       <Footer />
     </>

@@ -1,12 +1,17 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
+import { IBM_Plex_Mono } from 'next/font/google'
 import ContactFormModal from '@/components/ContactFormModal'
 import './globals.css'
 
-const plexSans = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-plex-sans',
+// Golos UI (ParaType), the typeface of the MPP BI product.
+const golos = localFont({
+  src: [
+    { path: './fonts/GolosUI_Regular.woff2', weight: '400' },
+    { path: './fonts/GolosUI_Medium.woff2', weight: '500' },
+    { path: './fonts/GolosUI_Bold.woff2', weight: '600' },
+  ],
+  variable: '--font-golos',
 })
 
 const plexMono = IBM_Plex_Mono({
@@ -29,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${plexSans.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${golos.variable} ${plexMono.variable}`}>
       <body>
         {children}
         <ContactFormModal />

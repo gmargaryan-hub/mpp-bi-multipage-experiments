@@ -113,8 +113,8 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
                       />
                     </div>
                   ) : (
-                    <div className="w-8 h-8 rounded-full bg-navy/10 border border-navy/25 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[10px] font-semibold text-navy">
+                    <div className="w-8 h-8 rounded-full bg-brand/10 border border-brand/25 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[10px] font-semibold text-brand">
                         {post.author.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                       </span>
                     </div>
@@ -125,7 +125,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
               {post.category && (
                 <Link
                   href={`/blog?category=${post.category.slug}`}
-                  className="px-2.5 py-1 rounded-md text-xs font-medium text-navy bg-navy/8 hover:bg-navy/15 transition-colors"
+                  className="px-2.5 py-1 rounded-md text-xs font-medium text-brand bg-brand/8 hover:bg-brand/15 transition-colors"
                 >
                   {post.category.title}
                 </Link>
@@ -162,8 +162,8 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
                     />
                   </div>
                 ) : (
-                  <div className="w-12 h-12 rounded-full bg-navy/10 border border-navy/25 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm font-semibold text-navy">
+                  <div className="w-12 h-12 rounded-full bg-brand/10 border border-brand/25 flex items-center justify-center flex-shrink-0">
+                    <span className="text-sm font-semibold text-brand">
                       {post.author.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                     </span>
                   </div>
@@ -196,7 +196,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
                         className={`px-3.5 py-2 rounded-full text-xs font-semibold transition-colors ${
                           active
                             ? 'bg-ink text-white'
-                            : 'bg-white border border-line text-body hover:border-navy/40'
+                            : 'bg-white border border-line text-body hover:border-brand/40'
                         }`}
                       >
                         {cat.title}
@@ -211,7 +211,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
                       <Link
                         key={rp._id}
                         href={`/blog/${rp.slug}`}
-                        className="rounded-lg border border-line bg-white overflow-hidden hover:border-navy/40 transition-colors"
+                        className="rounded-lg border border-line bg-white overflow-hidden hover:border-brand/40 transition-colors"
                       >
                         {rp.mainImage && (
                           <div className="relative w-full bg-paper" style={{ aspectRatio: '16 / 9' }}>

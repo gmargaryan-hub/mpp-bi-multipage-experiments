@@ -37,7 +37,7 @@ function StatisticsBlockRenderer({ value }: { value: StatisticsBlock }) {
     <div className="my-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {value.items.map((item, i) => (
         <div key={i} className="rounded-lg border border-line bg-paper p-5">
-          <p className="text-2xl font-black text-navy leading-tight">{item.value}</p>
+          <p className="text-2xl font-black text-brand leading-tight">{item.value}</p>
           <p className="text-xs font-medium text-ink mt-1.5">{item.label}</p>
           {item.description && <p className="text-xs text-slate mt-1.5 leading-relaxed">{item.description}</p>}
         </div>
@@ -62,7 +62,7 @@ function ComparisonTableRenderer({ value }: { value: ComparisonTableBlock }) {
           <thead>
             <tr className="border-b border-line">
               <th className="text-left px-4 sm:px-5 py-2.5 text-xs font-medium text-slate">Feature</th>
-              <th className="text-left px-4 sm:px-5 py-2.5 text-xs font-medium text-navy">MPP BI</th>
+              <th className="text-left px-4 sm:px-5 py-2.5 text-xs font-medium text-brand">MPP BI</th>
               <th className="text-left px-4 sm:px-5 py-2.5 text-xs font-medium text-slate">Power BI</th>
             </tr>
           </thead>
@@ -104,7 +104,7 @@ function CodeBlockRenderer({ value }: { value: CodeBlock }) {
   return (
     <div className="my-8 rounded-lg overflow-hidden not-prose bg-ink border border-white/10">
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10">
-        <span className="text-[11px] font-mono text-navy">
+        <span className="text-[11px] font-mono text-brand">
           {languageLabels[value.language] || value.language}
         </span>
         <CopyCodeButton code={value.code} />
@@ -133,13 +133,13 @@ function CodeBlockRenderer({ value }: { value: CodeBlock }) {
 function CtaBlockRenderer({ value }: { value: CtaBlock }) {
   if (!value) return null
   return (
-    <div className="my-8 rounded-lg border border-navy/25 bg-navy/5 p-6 sm:p-8 text-center not-prose">
+    <div className="my-8 rounded-lg border border-brand/25 bg-brand/5 p-6 sm:p-8 text-center not-prose">
       {value.title && <p className="text-xl sm:text-2xl font-semibold text-ink mb-2">{value.title}</p>}
       {value.text && <p className="text-body text-sm leading-relaxed max-w-xl mx-auto mb-5">{value.text}</p>}
       {value.buttonText && value.buttonUrl && (
         <Link
           href={value.buttonUrl}
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-md text-sm font-medium text-white bg-navy hover:bg-navy-strong transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-md text-sm font-medium text-white bg-brand hover:bg-brand-strong transition-colors"
         >
           {value.buttonText}
           <ArrowRight size={15} className="flex-shrink-0" />
@@ -167,7 +167,7 @@ const components: PortableTextComponents = {
     h3: ({ children }) => <h3 className="text-xl sm:text-2xl font-semibold text-ink mt-8 mb-3">{children}</h3>,
     h4: ({ children }) => <h4 className="text-lg font-semibold text-ink mt-6 mb-2">{children}</h4>,
     blockquote: ({ children }) => (
-      <blockquote className="border-l-2 border-navy pl-5 my-6 text-ink text-lg italic leading-relaxed">
+      <blockquote className="border-l-2 border-brand pl-5 my-6 text-ink text-lg italic leading-relaxed">
         {children}
       </blockquote>
     ),
@@ -192,7 +192,7 @@ const components: PortableTextComponents = {
           href={href}
           target={isExternal ? '_blank' : undefined}
           rel={isExternal ? 'noopener noreferrer' : undefined}
-          className="text-navy underline underline-offset-2 hover:text-navy-strong"
+          className="text-brand underline underline-offset-2 hover:text-brand-strong"
         >
           {children}
         </a>

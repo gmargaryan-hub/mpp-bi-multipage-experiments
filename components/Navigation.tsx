@@ -25,7 +25,7 @@ export default function Navigation() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
-          <Image src={asset('/mppbi-logo.svg')} alt="MPP BI" width={135} height={40} className="h-8 w-auto" priority unoptimized />
+          <Image src={asset('/brand/thumbnail.svg')} alt="MPP BI" width={88} height={22} className="h-7 w-auto" priority unoptimized />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">

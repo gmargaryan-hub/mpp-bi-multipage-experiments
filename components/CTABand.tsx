@@ -11,11 +11,11 @@ export default function CTABand({
   label?: string
 }) {
   return (
-    <section className="bg-navy py-16 md:py-20" id="booking">
+    <section className="bg-brand py-16 md:py-20" id="booking">
       <Container className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">{title}</h2>
-          <p className="mt-4 text-lg leading-relaxed text-mist">{body}</p>
+          <p className="mt-4 text-lg leading-relaxed text-white/85">{body}</p>
         </div>
         <DemoButton label={label} variant="inverted" className="shrink-0" />
       </Container>

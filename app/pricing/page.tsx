@@ -66,7 +66,7 @@ export default function PricingPage() {
                 </div>
               </dl>
             </div>
-            <div className="rounded-lg border border-navy p-6 sm:p-8">
+            <div className="rounded-lg border border-brand p-6 sm:p-8">
               <h2 className="text-xl font-semibold">Perpetual license</h2>
               <p className="mt-2 text-slate">Pay once and keep the seats. Pays for itself in about two years; suited to regulated and air-gapped sites.</p>
               <dl className="mt-6 grid grid-cols-2 gap-6">

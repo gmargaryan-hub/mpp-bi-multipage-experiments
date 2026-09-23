@@ -24,7 +24,7 @@ export default function TableOfContents({ content }: { content?: PortableTextBlo
       <ul className="flex flex-col gap-2">
         {headings.map((h) => (
           <li key={h.slug}>
-            <a href={`#${h.slug}`} className="text-sm text-navy hover:underline underline-offset-2">
+            <a href={`#${h.slug}`} className="text-sm text-brand hover:underline underline-offset-2">
               {h.text}
             </a>
           </li>

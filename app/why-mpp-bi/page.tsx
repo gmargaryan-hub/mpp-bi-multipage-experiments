@@ -81,7 +81,7 @@ export default function WhyMppBiPage() {
         <Section tone="paper" id="benefits">
           <div className="grid gap-x-12 gap-y-10 md:grid-cols-2">
             {reasons.map((r) => (
-              <div key={r.title} className="border-t border-navy pt-5">
+              <div key={r.title} className="border-t border-brand pt-5">
                 <h3 className="text-lg font-semibold">{r.title}</h3>
                 <p className="mt-2 leading-relaxed">{r.body}</p>
               </div>

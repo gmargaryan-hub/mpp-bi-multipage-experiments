@@ -19,7 +19,7 @@ function Slider({ label, price, value, max, onChange }: { label: string; price: 
           max={max}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="w-full accent-navy"
+          className="w-full accent-brand"
         />
         <input
           type="number"

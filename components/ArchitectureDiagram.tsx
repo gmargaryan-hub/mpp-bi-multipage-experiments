@@ -2,8 +2,8 @@ function Box({ title, note, tone = 'plain' }: { title: string; note: string; ton
   const styles = {
     plain: 'border-line bg-white',
     extra: 'border-dashed border-mist bg-paper',
-    mpp: 'border-navy bg-navy text-white',
-    data: 'border-navy bg-tint',
+    mpp: 'border-brand bg-brand text-white',
+    data: 'border-brand bg-tint',
   }[tone]
   return (
     <div className={`rounded-md border px-4 py-3 ${styles}`}>
@@ -43,7 +43,7 @@ export default function ArchitectureDiagram() {
         <Box title="Your database" note="Data is copied out" />
       </div>
 
-      <div className="rounded-lg border border-navy p-5 sm:p-6">
+      <div className="rounded-lg border border-brand p-5 sm:p-6">
         <p className="text-sm font-medium text-ink">MPP BI</p>
         <p className="mb-5 text-xs text-slate">Two tiers, no engine in between</p>
         <Box title="Browser" note="The same dashboards" />

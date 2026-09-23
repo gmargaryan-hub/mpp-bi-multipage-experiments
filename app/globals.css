@@ -1,21 +1,27 @@
 @import "tailwindcss";
 
-/* MPP brand palette, from the ETL branding
-   (etl/scripts/branding/assets/mpp_etl/additional_styles/custom.css). */
+/* MPP BI brand, from the product itself: codification/web/packages/face/src/store/themes.js
+   (light theme: active_first*, system_*, neutral_*) and brandings/mppbi (logo #4F4F9B, Golos UI). */
 @theme {
-  --color-navy: #192f50;
-  --color-navy-strong: #10223a;
-  --color-navy-deep: #091626;
-  --color-slate: #52647a;
-  --color-mist: #b9c3ce;
-  --color-line: #dde3e9;
-  --color-tint: #e9edf2;
-  --color-paper: #f7f8fa;
-  --color-ink: #10223a;
-  --color-body: #34465c;
+  --color-brand: #6666ad;
+  --color-brand-strong: #5a5aa3;
+  --color-brand-ink: #4f4f9b;
+  --color-brand-deep: #17163b;
+  --color-ink: #363636;
+  --color-body: #4f4f4f;
+  --color-slate: #686868;
+  --color-mist: #b7b9c5;
+  --color-line: #e3e3f0;
+  --color-tint: #e9e9f5;
+  --color-paper: #f6f6f9;
 
-  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-golos), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+:root {
+  /* The product's AI accent (active_gradient); used only where the agent is at work. */
+  --gradient-ai: linear-gradient(90deg, #86a8e7 0%, #8d9ff9 25%, #a492ff 50%, #c67eff 75%, #ed5ffb 100%);
 }
 
 @layer base {
@@ -74,7 +80,7 @@
     line-height: 1.7;
   }
   .legal-content a {
-    color: var(--color-navy);
+    color: var(--color-brand);
     text-decoration: underline;
     text-underline-offset: 2px;
   }

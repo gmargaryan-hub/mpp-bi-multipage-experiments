@@ -68,7 +68,7 @@ export default async function BlogIndexPage({ searchParams }: Props) {
                   className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
                     !selectedCategory
                       ? 'bg-ink text-white'
-                      : 'bg-white border border-line text-body hover:border-navy/40'
+                      : 'bg-white border border-line text-body hover:border-brand/40'
                   }`}
                 >
                   All
@@ -82,7 +82,7 @@ export default async function BlogIndexPage({ searchParams }: Props) {
                       className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
                         active
                           ? 'bg-ink text-white'
-                          : 'bg-white border border-line text-body hover:border-navy/40'
+                          : 'bg-white border border-line text-body hover:border-brand/40'
                       }`}
                     >
                       {cat.title}
@@ -106,7 +106,7 @@ export default async function BlogIndexPage({ searchParams }: Props) {
                 <Link
                   key={post._id}
                   href={`/blog/${post.slug}`}
-                  className="group rounded-lg border border-line overflow-hidden hover:border-navy/40 transition-colors"
+                  className="group rounded-lg border border-line overflow-hidden hover:border-brand/40 transition-colors"
                 >
                   <div className="relative w-full bg-paper" style={{ aspectRatio: '1.3 / 1' }}>
                     {post.mainImage ? (
@@ -127,7 +127,7 @@ export default async function BlogIndexPage({ searchParams }: Props) {
                     )}
                   </div>
                   <div className="p-5">
-                    <h2 className="text-lg font-semibold text-ink leading-snug mb-2 group-hover:text-navy transition-colors">
+                    <h2 className="text-lg font-semibold text-ink leading-snug mb-2 group-hover:text-brand transition-colors">
                       {post.title}
                     </h2>
                     {post.excerpt && (

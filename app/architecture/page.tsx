@@ -81,7 +81,7 @@ export default function ArchitecturePage() {
           <SectionHeader title="What MPP BI does instead" />
           <div className="grid gap-8 md:grid-cols-3">
             {design.map((c) => (
-              <div key={c.title} className="border-t border-navy pt-5">
+              <div key={c.title} className="border-t border-brand pt-5">
                 <h3 className="text-lg font-semibold">{c.title}</h3>
                 <p className="mt-2 leading-relaxed">{c.body}</p>
               </div>

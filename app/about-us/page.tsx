@@ -64,7 +64,7 @@ export default function AboutUsPage() {
           <ol className="max-w-3xl divide-y divide-line border-y border-line">
             {history.map((h) => (
               <li key={h.year} className="grid gap-2 py-5 sm:grid-cols-[6rem_1fr] sm:gap-6">
-                <span className="font-mono text-sm text-navy">{h.year}</span>
+                <span className="font-mono text-sm text-brand">{h.year}</span>
                 <p className="leading-relaxed">{h.body}</p>
               </li>
             ))}
@@ -88,7 +88,7 @@ export default function AboutUsPage() {
                 UN supplier.
               </p>
               <p className="mt-4">
-                <a href="mailto:welcome@mpp-insights.com" className="text-navy underline underline-offset-4 decoration-mist hover:decoration-navy">
+                <a href="mailto:welcome@mpp-insights.com" className="text-brand underline underline-offset-4 decoration-mist hover:decoration-brand">
                   welcome@mpp-insights.com
                 </a>
               </p>

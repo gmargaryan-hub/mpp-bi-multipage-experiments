@@ -36,7 +36,7 @@ export default function CaseStudy() {
         </div>
         <a
           href="https://mpp-insights.com/blog/social-services-analytics"
-          className="mt-8 inline-block text-sm font-medium text-navy underline underline-offset-4 decoration-mist hover:decoration-navy"
+          className="mt-8 inline-block text-sm font-medium text-brand underline underline-offset-4 decoration-mist hover:decoration-brand"
         >
           Read the full case study
         </a>

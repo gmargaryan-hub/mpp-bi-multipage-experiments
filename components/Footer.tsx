@@ -36,7 +36,7 @@ const linkClass = 'text-sm text-mist hover:text-white transition-colors'
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-deep text-mist">
+    <footer className="bg-brand-deep text-mist">
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-10 px-4 py-14 sm:px-6 md:grid-cols-5">
         <div className="col-span-2 space-y-4">
           <a href="https://mpp-insights.com/" className="inline-block">

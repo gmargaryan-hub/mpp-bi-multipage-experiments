@@ -9,7 +9,7 @@ export function Container({ children, className = '' }: { children: React.ReactN
 const tones = {
   white: 'bg-white',
   paper: 'bg-paper border-y border-line',
-  navy: 'bg-navy text-mist',
+  brand: 'bg-brand text-mist',
 }
 
 export function Section({
@@ -72,12 +72,12 @@ export function PageHeader({
 
 export const buttonClass = {
   primary:
-    'inline-flex items-center justify-center rounded-md bg-navy px-5 py-3 text-sm font-medium text-white hover:bg-navy-strong transition-colors',
+    'inline-flex items-center justify-center rounded-md bg-brand px-5 py-3 text-sm font-medium text-white hover:bg-brand-strong transition-colors',
   secondary:
     'inline-flex items-center justify-center rounded-md border border-line bg-white px-5 py-3 text-sm font-medium text-ink hover:border-mist transition-colors',
   inverted:
-    'inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-medium text-navy hover:bg-tint transition-colors',
-  link: 'text-sm font-medium text-navy underline underline-offset-4 decoration-mist hover:decoration-navy',
+    'inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-medium text-brand hover:bg-tint transition-colors',
+  link: 'text-sm font-medium text-brand underline underline-offset-4 decoration-mist hover:decoration-brand',
 }
 
 export function TextLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -124,13 +124,13 @@ export function Screenshot({
   )
 }
 
-/** Simple list with a short navy rule as the marker. */
+/** Simple list with a short brand rule as the marker. */
 export function RuleList({ items, className = '' }: { items: React.ReactNode[]; className?: string }) {
   return (
     <ul className={`space-y-2.5 ${className}`}>
       {items.map((item, i) => (
         <li key={i} className="relative pl-5 leading-relaxed">
-          <span className="absolute left-0 top-[0.7em] h-px w-2.5 bg-navy" aria-hidden />
+          <span className="absolute left-0 top-[0.7em] h-px w-2.5 bg-brand" aria-hidden />
           {item}
         </li>
       ))}

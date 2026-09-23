@@ -79,7 +79,7 @@ export default function ContactFormModal() {
         name={name}
         value={form[name]}
         onChange={handleChange}
-        className={`w-full rounded-md border bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-navy ${
+        className={`w-full rounded-md border bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-brand ${
           errors[name] ? 'border-red-400' : 'border-line'
         }`}
         {...props}
@@ -90,7 +90,7 @@ export default function ContactFormModal() {
 
   return (
     <div className="fixed inset-0 z-[900] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-navy-deep/60" onClick={() => setOpen(false)} />
+      <div className="absolute inset-0 bg-brand-deep/60" onClick={() => setOpen(false)} />
       <div
         role="dialog"
         aria-modal="true"
@@ -117,7 +117,7 @@ export default function ContactFormModal() {
             <h2 id="demo-title" className="text-2xl font-semibold">Book a demo</h2>
             <p className="mt-2 text-sm">
               Tell us what data you work with and what you want to see. We&apos;ll reply by email, or write to{' '}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-navy underline underline-offset-2">{CONTACT_EMAIL}</a>.
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-brand underline underline-offset-2">{CONTACT_EMAIL}</a>.
             </p>
             <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
               {field('name', 'Name', { autoComplete: 'name' })}
@@ -131,7 +131,7 @@ export default function ContactFormModal() {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Your data sources, team size, what you use today"
-                  className={`w-full resize-none rounded-md border bg-white px-3 py-2.5 text-sm text-ink outline-none placeholder:text-mist focus:border-navy ${
+                  className={`w-full resize-none rounded-md border bg-white px-3 py-2.5 text-sm text-ink outline-none placeholder:text-mist focus:border-brand ${
                     errors.message ? 'border-red-400' : 'border-line'
                   }`}
                 />
