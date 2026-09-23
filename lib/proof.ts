@@ -67,6 +67,26 @@ export const trial24Summary = {
   model: 'DeepSeek V4 Flash',
 }
 
+// Retail Stores (task 006): the agent's real steps, seconds from its first tool call
+// (turns.json). Dashboard captures are the harness's own screenshots after reload.
+export const retailRun = {
+  minutes: 10.4,
+  steps: [
+    { at: 0, text: 'Opens the attached project with the Power BI migration skill' },
+    { at: 31, text: 'Reads the model: 3 tables, 6 measures, 3 pages, 16 visuals' },
+    { at: 77, text: 'Creates the atlas Retail Stores' },
+    { at: 94, text: 'Adds retail-sales.xlsx as its data source' },
+    { at: 160, text: 'Builds 5 cubes with the model’s field names' },
+    { at: 204, text: 'Creates one dashboard per report page' },
+    { at: 228, text: 'Runs 9 preview queries against the new cubes' },
+    { at: 297, text: 'Builds the Overview page: 8 visuals' },
+    { at: 375, text: 'Builds Stores and Products: 8 more' },
+    { at: 433, text: 'Reviews the result and edits 15 charts' },
+    { at: 465, text: 'Takes a picture of each dashboard to check the layout' },
+    { at: 622, text: 'Writes the report: 10 mapped exactly, 6 approximated, 0 skipped' },
+  ],
+}
+
 export const notYetMigrated = [
   'Row-level security roles',
   'DirectQuery and live connections',

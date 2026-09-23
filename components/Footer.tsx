@@ -12,6 +12,7 @@ const columns = [
       { label: 'Features', href: '/features' },
       { label: 'Architecture', href: '/architecture' },
       { label: 'Why MPP BI', href: '/why-mpp-bi' },
+      { label: 'Moving from Power BI', href: '/power-bi-migration' },
       { label: 'Pricing', href: '/pricing' },
     ],
   },

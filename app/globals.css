@@ -1,27 +1,28 @@
 @import "tailwindcss";
 
-/* MPP BI brand, from the product itself: codification/web/packages/face/src/store/themes.js
-   (light theme: active_first*, system_*, neutral_*) and brandings/mppbi (logo #4F4F9B, Golos UI). */
+/* MPP BI brand: the blue MPP palette from the branding custom styles
+   (etl/scripts/branding/assets/mpp_etl/additional_styles/custom.css), with the MPP BI
+   logo, mascot and Golos UI from web/brandings/mppbi. */
 @theme {
-  --color-brand: #6666ad;
-  --color-brand-strong: #5a5aa3;
-  --color-brand-ink: #4f4f9b;
-  --color-brand-deep: #17163b;
-  --color-ink: #363636;
-  --color-body: #4f4f4f;
-  --color-slate: #686868;
-  --color-mist: #b7b9c5;
-  --color-line: #e3e3f0;
-  --color-tint: #e9e9f5;
-  --color-paper: #f6f6f9;
+  --color-brand: #192f50;
+  --color-brand-strong: #10223a;
+  --color-brand-ink: #192f50;
+  --color-brand-deep: #091626;
+  --color-ink: #10223a;
+  --color-body: #34465c;
+  --color-slate: #52647a;
+  --color-mist: #b9c3ce;
+  --color-line: #dde3e9;
+  --color-tint: #e9edf2;
+  --color-paper: #f7f8fa;
 
   --font-sans: var(--font-golos), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
 :root {
-  /* The product's AI accent (active_gradient); used only where the agent is at work. */
-  --gradient-ai: linear-gradient(90deg, #86a8e7 0%, #8d9ff9 25%, #a492ff 50%, #c67eff 75%, #ed5ffb 100%);
+  /* Marks the agent at work, in the same blues. */
+  --gradient-ai: linear-gradient(90deg, #b9c3ce 0%, #7f9ab8 40%, #365f8e 75%, #192f50 100%);
 }
 
 @layer base {

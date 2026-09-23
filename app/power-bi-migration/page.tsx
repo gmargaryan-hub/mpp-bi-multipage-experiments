@@ -4,11 +4,11 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import DemoButton from '@/components/DemoButton'
 import CTABand from '@/components/CTABand'
-import JobTimeline from '@/components/dashboard/JobTimeline'
+import Execution from '@/components/Execution'
 import RunGrid from '@/components/proof/RunGrid'
 import { PageHeader, RuleList, Section, SectionHeader } from '@/components/ui'
 import { asset } from '@/lib/basePath'
-import { notYetMigrated } from '@/lib/proof'
+import { notYetMigrated, retailRun } from '@/lib/proof'
 
 export const metadata: Metadata = {
   title: 'Move from Power BI to MPP BI | MPP BI',
@@ -49,9 +49,15 @@ export default function PowerBiMigrationPage() {
         <Section tone="paper">
           <SectionHeader
             title="What happens when you hand over a report"
-            lede="A three-page retail report in Power BI, handed to the agent. The phases and their lengths are the agent’s own; the dashboards are built from the report’s real data."
+            lede="A three-page retail report in Power BI, handed to the agent. The steps and times are the agent’s own; the screens are the dashboards it built, captured after reload."
           />
-          <JobTimeline request="Here is our Power BI project and the workbook it reads. Move it to MPP BI: same pages, same visuals, same numbers. Tell me what you mapped, approximated or skipped." />
+          <Execution
+            intent="Here is our Power BI project and the workbook it reads. Move it to MPP BI: same pages, same visuals, same numbers. Tell me what you mapped, approximated or skipped."
+            steps={retailRun.steps}
+            seconds={626}
+            sources="a Power BI project (TMDL model, PBIR report) and retail-sales.xlsx"
+            results={[]}
+          />
         </Section>
 
         <Section id="runs">

@@ -5,7 +5,8 @@ import Footer from '@/components/Footer'
 import DemoButton from '@/components/DemoButton'
 import ArchitectureDiagram from '@/components/ArchitectureDiagram'
 import CaseStudy from '@/components/CaseStudy'
-import JobTimeline from '@/components/dashboard/JobTimeline'
+import IntentShowcase from '@/components/IntentShowcase'
+import { intents } from '@/lib/intents'
 import { Container, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
 
@@ -63,11 +64,12 @@ export default function HomePage() {
             <div className="grid items-end gap-8 lg:grid-cols-[1fr_auto]">
               <div className="max-w-3xl">
                 <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] font-semibold tracking-tight leading-[1.05]">
-                  Describe the dashboards you need. MPP BI builds them, on your data and your servers.
+                  Say what you want to achieve. MPP BI does the work.
                 </h1>
                 <p className="mt-6 text-lg md:text-xl leading-relaxed">
-                  An analytics engine that computes inside your own database, and an agent that does the BI work in it, as you
-                  and with your permissions. This is what handing over a job looks like.
+                  Ask for a dashboard for store managers, a forecast next to the actuals, a model that predicts churn. MPP BI
+                  plans the steps and carries them out inside your own BI, on your databases, files and streams, with your
+                  permissions and on your servers. These are real goals and what it did with them.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <DemoButton label="Try it on your data" />
@@ -79,7 +81,7 @@ export default function HomePage() {
               <Image src={asset('/brand/mascot-laptop.svg')} alt="" width={200} height={200} className="hidden h-44 w-44 lg:block" priority unoptimized />
             </div>
             <div className="mt-12 md:mt-16">
-              <JobTimeline request="Here is our retail workbook. Rebuild our three-page sales report from it: stores, channels and products, with the same numbers we report today." />
+              <IntentShowcase intents={intents} />
             </div>
           </Container>
         </section>
