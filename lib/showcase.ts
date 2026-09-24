@@ -1,4 +1,6 @@
-// What the agent built in MPP BI on public data: the home gallery and /showcase.
+// What the agent built in MPP BI: the home gallery and /showcase. The Edge lab projects
+// use public data; the report uses our sample hotel dataset (600 bookings, 2024–2025).
+// Each ask is the real brief, condensed to one sentence.
 // Every number here was measured on the build; before → after is the agent's
 // performance round (it renders the page, reads requests, rows, main-thread time
 // and memory, and fixes what they show).
@@ -36,7 +38,7 @@ export const examples: Example[] = [
     title: 'Galaxy of worlds',
     kicker: 'NASA Exoplanet Archive',
     caption: '6,366 exoplanets as a galaxy you can fly into.',
-    asked: 'Show every confirmed exoplanet in a way that invites exploring.',
+    asked: 'Make a sunburst of every known exoplanet shaped like a spiral galaxy, with a stats page and a scroll-driven story of how they were found.',
     did: [
       'Drew a sunburst shaped like a galaxy: discovery method at the core, then the facility, then its systems.',
       'Made each facility something you fly into, to see every system and planet it found.',
@@ -58,7 +60,7 @@ export const examples: Example[] = [
     title: 'Shaking Earth',
     kicker: 'USGS Earthquake Hazards Program',
     caption: '10,718 earthquakes in 30 days on a 3D globe.',
-    asked: 'Show the last 30 days of earthquakes around the world.',
+    asked: 'Put every earthquake of the last 30 days on a 3D globe, sized by magnitude and colored by depth, with a stats page next to it.',
     did: [
       'Drew a 3D globe in the browser with every quake as a glowing beam: height is magnitude, color is depth.',
       'Added a daily timeline you can replay.',
@@ -66,7 +68,7 @@ export const examples: Example[] = [
       'Wrote a stats page whose sentences are computed from the data, such as “one every 4.0 minutes”.',
     ],
     numbers: [
-      { value: '10,718', label: 'earthquakes' },
+      { value: '10,718', label: 'earthquakes of every magnitude' },
       { value: '3.5 MB → 0.8 MB', label: 'loaded, before and after the performance round' },
       { value: '2.3 s → 0.17 s', label: 'the page blocked the browser while loading' },
     ],
@@ -81,7 +83,7 @@ export const examples: Example[] = [
     title: 'Climate pulse',
     kicker: 'Our World in Data',
     caption: 'CO₂ since 1950, with a live carbon clock.',
-    asked: 'Tell the story of the world’s CO₂ emissions from 1950 to 2024.',
+    asked: 'Make a full-screen stats wall of a few huge numbers about global CO₂ over an animated background, every number from the data, and a page on who emits it.',
     did: [
       'Built a dark stats wall with an animated aurora and numbers that count up: 38.6 Gt in 2024, 4.73 t per person, +69.8% since 1990.',
       'Added a carbon clock that counts the CO₂ emitted since you opened the page.',
@@ -111,7 +113,7 @@ export const examples: Example[] = [
     title: 'Market track',
     kicker: 'NASDAQ screener snapshot, Sep 24, 2026',
     caption: '3,500 listed companies on one circular track.',
-    asked: 'Show the whole market on one screen.',
+    asked: 'Show the whole NASDAQ as a circular track, with each sector’s arc a treemap of its companies sized by market cap and colored by today’s change.',
     did: [
       'Laid the market out as a circular track: each sector is an arc, and each arc is a treemap of its companies.',
       'Sized companies by market cap and colored them by the day’s change.',
@@ -132,7 +134,7 @@ export const examples: Example[] = [
     title: 'The oval',
     kicker: 'nascaR.data, Cup Series results 1949–2026',
     caption: 'Every Cup Series season since 1949 on a speedway.',
-    asked: 'Show the history of the Cup Series in a form a race fan would recognize.',
+    asked: 'Draw a NASCAR oval whose track surface is itself a treemap of the current season’s field, with a season picker to replay history.',
     did: [
       'Made the racing surface a treemap of the season’s field: manufacturer, team, driver, with area by points.',
       'Put the standings in the infield and one pit stall per race on pit road, in the winner’s colors.',
@@ -162,9 +164,9 @@ export const examples: Example[] = [
   {
     slug: 'raw',
     title: 'From a raw feed to a dashboard',
-    kicker: 'USGS GeoJSON feed · DeepSeek V4 Flash',
+    kicker: 'USGS feed of M2.5+ earthquakes · DeepSeek V4 Flash',
     caption: 'A small model took a raw feed to a dashboard.',
-    asked: 'Turn the raw USGS earthquake feed into a dashboard.',
+    asked: 'Download the raw USGS feed of M2.5+ earthquakes from the last 30 days, clean it with a script, import it and build a dashboard from it.',
     did: [
       'Downloaded the raw GeoJSON feed.',
       'Wrote a script in its sandbox to clean it, then imported the result.',
@@ -185,10 +187,10 @@ export const examples: Example[] = [
     slug: 'report',
     title: 'Report from a sentence',
     heading: 'Every number traceable',
-    kicker: 'Report from a sentence',
-    caption: 'An annual report filled in 10.7 minutes, no code written.',
+    kicker: 'Sample hotel dataset, 600 bookings 2024–2025',
+    caption: 'An annual report on a sample hotel dataset.',
     focus: '14% 0%',
-    asked: 'Write the annual report for a hotel portfolio.',
+    asked: 'Build a 2025 annual report page on the hotel data without writing any code, with every number a declared query.',
     did: [
       'Filled the report kit, a reviewed report page, by configuration only. Neither model wrote code.',
       'Declared every number as a query: hover a number to see the query behind it.',

@@ -9,7 +9,7 @@ import { examples, speedups, type Example } from '@/lib/showcase'
 export const metadata: Metadata = {
   title: 'What the engine builds | MPP BI',
   description:
-    'Exoplanets, earthquakes, CO₂, a stock market and 78 seasons of racing: what an AI agent built inside MPP BI on public data, with the measured numbers.',
+    'Exoplanets, earthquakes, CO₂, a stock market, 78 seasons of racing and an annual report: what an AI agent built inside MPP BI, with the measured numbers.',
 }
 
 const credits = [
@@ -83,7 +83,7 @@ export default function ShowcasePage() {
       <main>
         <PageHeader
           title="What the engine builds"
-          lede="An AI agent built each of these inside an MPP BI installation, on public data, with MPP BI’s own agent tools. It imported the data, modeled it and drew the visuals, then measured each page and moved the heavy work into the database. The agent was Claude Opus, working through MPP BI’s MCP server, except where DeepSeek V4 Flash is named."
+          lede="An AI agent built each of these inside an MPP BI installation with MPP BI’s own agent tools. Six use public data: the agent imported it, modeled it and drew the visuals, and for the first five it then measured each page and moved the heavy work into the database. The report uses a sample hotel dataset. The agent was Claude Opus, working through MPP BI’s MCP server, except where DeepSeek V4 Flash is named."
         >
           <DemoButton label="Try it on your data" />
           <TextLink href="#fast">How it stays fast</TextLink>

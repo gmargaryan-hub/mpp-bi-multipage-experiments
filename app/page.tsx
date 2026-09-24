@@ -38,7 +38,7 @@ const proof = [
   },
   {
     value: '5.8 minutes',
-    body: 'The time a small model, DeepSeek V4 Flash, took to fill a full report from the product’s chat, without writing code.',
+    body: 'The time a small model, DeepSeek V4 Flash, took to fill a full report on a sample hotel dataset from the product’s chat, without writing code.',
   },
 ]
 
@@ -138,7 +138,7 @@ export default function HomePage() {
           <Chapter
             n="02 Analyze with ease"
             title="The engine that runs your analytics now builds them"
-            lede="Say what you want to see. The agent imports the data, models it, draws visuals no chart menu has, and moves the heavy math into the database so pages stay fast. An agent built each of these in MPP BI, on public data."
+            lede="Say what you want to see. The agent imports the data, models it, draws visuals no chart menu has, and moves the heavy math into the database so pages stay fast. An agent built each of these in MPP BI: five on public data, the report on a sample hotel dataset."
           />
           <ul className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 lg:grid-cols-3">
             {gallery.map((e) => (
