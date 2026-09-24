@@ -6,6 +6,9 @@ import type { NextConfig } from 'next'
 // static export silently drops API routes from the build output — the form
 // would need to fall back to a mailto: link instead, as it did previously.)
 const nextConfig: NextConfig = {
+  // Dev only: Next 16 blocks its dev scripts for any origin but localhost, so a page
+  // opened by this machine's address renders but never becomes interactive.
+  allowedDevOrigins: ['100.64.0.3', '192.168.0.106', 'theia', '*.local'],
   // The Benefits page was folded into Why MPP BI.
   async redirects() {
     return [{ source: '/benefits', destination: '/why-mpp-bi', permanent: true }]
