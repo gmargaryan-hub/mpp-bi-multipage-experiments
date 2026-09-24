@@ -96,6 +96,7 @@ export function Screenshot({
   height,
   caption,
   priority,
+  unoptimized,
   className = '',
 }: {
   src: string
@@ -104,6 +105,7 @@ export function Screenshot({
   height: number
   caption?: React.ReactNode
   priority?: boolean
+  unoptimized?: boolean
   className?: string
 }) {
   return (
@@ -115,6 +117,7 @@ export function Screenshot({
           width={width}
           height={height}
           priority={priority}
+          unoptimized={unoptimized}
           sizes="(max-width: 1152px) 100vw, 1152px"
           className="block h-auto w-full"
         />

@@ -10,6 +10,7 @@ import DemoButton from '@/components/DemoButton'
 
 const links = [
   { label: 'Features', href: '/features' },
+  { label: 'Showcase', href: '/showcase' },
   { label: 'Architecture', href: '/architecture' },
   { label: 'Why MPP BI', href: '/why-mpp-bi' },
   { label: 'Pricing', href: '/pricing' },

@@ -10,6 +10,7 @@ const columns = [
     heading: 'Product',
     links: [
       { label: 'Features', href: '/features' },
+      { label: 'Showcase', href: '/showcase' },
       { label: 'Architecture', href: '/architecture' },
       { label: 'Why MPP BI', href: '/why-mpp-bi' },
       { label: 'Moving from Power BI', href: '/power-bi-migration' },

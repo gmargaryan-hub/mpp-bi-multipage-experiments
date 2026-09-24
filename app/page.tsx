@@ -7,6 +7,7 @@ import ArchitectureDiagram from '@/components/ArchitectureDiagram'
 import CaseStudy from '@/components/CaseStudy'
 import IntentShowcase from '@/components/IntentShowcase'
 import { intents } from '@/lib/intents'
+import { gallery } from '@/lib/showcase'
 import { Container, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
 
@@ -24,6 +25,21 @@ const engine = [
   { title: 'No copy of your data', body: 'Queries go to your database. There is no extract to refresh and no second store to secure.' },
   { title: 'No engine to size', body: 'There is no in-memory tier limited by RAM. The MPP BI server runs inside PostgreSQL and only writes queries.' },
   { title: 'Every function works live', body: 'The calculation language compiles to SQL, so nothing is switched off when you stay live.' },
+]
+
+const proof = [
+  {
+    value: '55,732 → 2,251 rows',
+    body: 'What the racing oval loads, before and after the agent moved rankings and career totals into the database. Its slowest query fell from 3.2 s to 0.21 s.',
+  },
+  {
+    value: 'Every number traceable',
+    body: 'In a report the agent fills, each number is a declared query. Hover it to see the query; a Sources section lists them all.',
+  },
+  {
+    value: '5.8 minutes',
+    body: 'The time a small model, DeepSeek V4 Flash, took to fill a full report from the product’s chat, without writing code.',
+  },
 ]
 
 const safety = [
@@ -118,9 +134,49 @@ export default function HomePage() {
           </div>
         </Section>
 
+        <Section id="analyze" className="border-t border-line">
+          <Chapter
+            n="02 Analyze with ease"
+            title="The engine that runs your analytics now builds them"
+            lede="Say what you want to see. The agent imports the data, models it, draws visuals no chart menu has, and moves the heavy math into the database so pages stay fast. An agent built each of these in MPP BI, on public data."
+          />
+          <ul className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 lg:grid-cols-3">
+            {gallery.map((e) => (
+              <li key={e.slug}>
+                <Link href={`/showcase#${e.slug}`} className="group block">
+                  <div className="overflow-hidden rounded-lg border border-line bg-paper transition-colors group-hover:border-mist">
+                    <Image
+                      src={asset(e.shot.src)}
+                      alt=""
+                      width={e.shot.width}
+                      height={e.shot.height}
+                      className="block aspect-[16/10] w-full object-cover object-left-top"
+                      style={e.focus ? { objectPosition: e.focus } : undefined}
+                      unoptimized
+                    />
+                  </div>
+                  <h3 className="mt-3 font-semibold group-hover:text-brand">{e.title}</h3>
+                  <p className="mt-1 text-sm leading-snug text-slate">{e.caption}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-14 grid gap-8 md:grid-cols-3">
+            {proof.map((p) => (
+              <div key={p.value} className="border-t-2 border-brand pt-5">
+                <h3 className="text-lg font-semibold tabular-nums">{p.value}</h3>
+                <p className="mt-2 leading-relaxed">{p.body}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8">
+            <TextLink href="/showcase">See what it built</TextLink>
+          </div>
+        </Section>
+
         <Section tone="paper" id="safety">
           <Chapter
-            n="02 Safety"
+            n="03 Safety"
             title="An agent you can hand work to"
             lede="Delegating only works if you can trust what the agent touched. In MPP BI that is how the product is built, not a setting to remember."
           />
@@ -139,7 +195,7 @@ export default function HomePage() {
 
         <Section id="features">
           <Chapter
-            n="03 Platform"
+            n="04 Platform"
             title="Everything else a BI team needs"
             lede="Data preparation, charts, AI and administration in one product, included in every license."
           />
