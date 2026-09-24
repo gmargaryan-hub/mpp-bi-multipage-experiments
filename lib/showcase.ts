@@ -185,7 +185,7 @@ export const examples: Example[] = [
   },
   {
     slug: 'report',
-    title: 'Report from a sentence',
+    title: 'An annual report, no code',
     heading: 'Every number traceable',
     kicker: 'Sample hotel dataset, 600 bookings 2024–2025',
     caption: 'An annual report on a sample hotel dataset.',
