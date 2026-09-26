@@ -44,7 +44,7 @@ const features = [
 ]
 
 /** Chapter 02: cases beyond the goals at the top of the page. */
-const more = ['climate', 'who-emits', 'quake-stats', 'legends', 'report'].map((slug) => cases.find((c) => c.slug === slug)!)
+const more = ['europe', 'who-emits', 'quake-stats', 'legends', 'report'].map((slug) => cases.find((c) => c.slug === slug)!)
 
 function Chapter({ n, title, lede }: { n: string; title: string; lede: string }) {
   return (

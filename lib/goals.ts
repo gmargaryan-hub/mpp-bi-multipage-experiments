@@ -1,9 +1,9 @@
 // The home page's examples: our top showcase projects as goals handed to the agent, what it
-// did with them and what came out. Each goal is the real brief, shortened; each step is taken
-// from the run's own report and tool trace (notes: bi-mcp/run-edge-*.jsonl and the Edge lab
-// page); each number was measured on the build or in the agent's performance round.
+// did with them and what came out, in the same order as the showcase's five use cases. Each
+// goal is the real brief, shortened; each step is taken from the run's own report and tool
+// trace (notes: bi-mcp/run-edge-*.jsonl and the Edge lab page).
 
-import type { Shot, Stat } from '@/lib/showcase'
+import type { Shot } from '@/lib/showcase'
 
 export type GoalStep = { text: string; tag: string }
 
@@ -13,9 +13,6 @@ export type Goal = {
   goal: string
   data: string
   steps: GoalStep[]
-  facts: Stat[]
-  /** Time and cost of the first build. */
-  built: string
   shot: Shot
 }
 
@@ -23,28 +20,23 @@ const hero = { width: 2304, height: 1333 }
 
 export const goals: Goal[] = [
   {
-    slug: 'galaxy',
-    tab: 'Galaxy of worlds',
-    goal: 'Make a sunburst of every known exoplanet shaped like a spiral galaxy, with a stats page and a scroll-driven story of how they were found.',
-    data: 'NASA Exoplanet Archive, 6,366 planets',
+    slug: 'armenia',
+    tab: 'Armenia',
+    goal: 'Build the most beautiful, genuinely insightful project on Armenia: the country in hexagons, Yerevan up close and the numbers behind its rise. Then refactor it with our design guidance.',
+    data: 'Kontur Population, OpenStreetMap, geoBoundaries, World Bank',
     steps: [
-      { text: 'Imported the archive and built a cube with derived fields: size class, temperature class, decade and a grouped discovery method.', tag: 'Import · cube SQL' },
-      { text: 'Drew the galaxy on canvas: discovery method at the core, then the facility, then one spike per system. Fly into a facility to see its planets.', tag: 'Custom visual' },
-      { text: 'Added a filter mode: a click on the galaxy filters the four panels docked beside it.', tag: 'Click filters' },
-      { text: 'Built a stats page of records and charts, and a scroll-driven story, “How we found them”.', tag: 'Pages · spec charts' },
-      { text: 'When the first version proved too heavy for real browsers, rewrote it to a budget: one 30 fps loop, at most 1,500 segments.', tag: 'Checked and fixed' },
-      { text: 'In the performance round, loaded planets only for the facility you fly into.', tag: 'Performance' },
+      { text: 'Imported population cells, OpenStreetMap buildings and places, province and district outlines, and World Bank series.', tag: 'Import' },
+      { text: 'Built eight cubes, some joining the files: places onto Yerevan’s 175 m grid, population spread down to those cells, hexagon geometry.', tag: 'Cube SQL' },
+      { text: 'Drew the country as 3D hexagon towers in three.js with a fly-in to each province, and Yerevan as a hexagon map with four layers.', tag: 'Custom visuals' },
+      { text: 'Built three pages, the last a report on the rise with a heatmap spec chart.', tag: 'Pages · spec chart' },
+      { text: 'Re-read our design guidance and refactored: a palette from tuff and apricot, findings computed per hexagon, a wave rising from Ararat, the pages linked as one journey.', tag: 'Design round' },
+      { text: 'Checked each page at 1920 and 1366 px, tall and at double density, with hovers and clicks.', tag: 'Checked' },
     ],
-    facts: [
-      { value: '6,366', label: 'planets, from the core to a single world' },
-      { value: '1.46 MB → 63 KB', label: 'loaded per view after the performance round' },
-      { value: '3 dashboards', label: 'the galaxy, a stats page and a scroll-driven story' },
-    ],
-    built: '17.0 min · $13.48',
     shot: {
-      src: '/showcase/hero-galaxy.webp',
-      ...hero,
-      alt: 'Galaxy of worlds: a sunburst of 6,366 exoplanets shaped like a spiral galaxy, next to panels for discoveries per year, planet sizes and temperatures',
+      src: '/showcase/hero-armenia.webp',
+      width: 2304,
+      height: 1280,
+      alt: 'Armenia in hexagons: the country as 3D hexagon towers in basalt and apricot tuff, Mount Ararat across the border',
     },
   },
   {
@@ -59,12 +51,6 @@ export const goals: Goal[] = [
       { text: 'Wrote a stats page whose sentences are query results, such as “one every 4.0 minutes”, with a day × hour heatmap.', tag: 'Page · spec charts' },
       { text: 'In the performance round, moved the strongest-quakes list into the database and removed a texture blur that blocked loading.', tag: 'Performance' },
     ],
-    facts: [
-      { value: '10,718', label: 'earthquakes of every magnitude' },
-      { value: '2.3 s → 0.17 s', label: 'the page blocked the browser while loading' },
-      { value: '30 days', label: 'replayable day by day, the five M6+ quakes ringed' },
-    ],
-    built: '26.8 min · $8.42',
     shot: {
       src: '/showcase/hero-globe.webp',
       ...hero,
@@ -83,12 +69,6 @@ export const goals: Goal[] = [
       { text: 'Built a sector stats page: a scoreboard and a concentration curve, with spec charts for movers and size against move.', tag: 'Custom visuals · spec charts' },
       { text: 'Checked it at 1920 and 1366 px and zoomed; the performance round cut the scoreboard’s query from 3,500 rows to 24.', tag: 'Checked · performance' },
     ],
-    facts: [
-      { value: '3,500', label: 'companies on one lap, $58.22T in all' },
-      { value: '744 KB → 413 KB', label: 'loaded by the track after the performance round' },
-      { value: '13 sectors', label: 'around the ring, largest first' },
-    ],
-    built: '17.6 min · $5.90',
     shot: {
       src: '/showcase/hero-market.webp',
       ...hero,
@@ -107,12 +87,6 @@ export const goals: Goal[] = [
       { text: 'Wrote one page for three dashboards, the oval, season stats and Legends, with a season picker that replays history to 1949.', tag: 'Page · spec charts' },
       { text: 'In the performance round, moved rankings and career totals into four small pre-aggregated cubes.', tag: 'Performance' },
     ],
-    facts: [
-      { value: '101,230', label: 'race results in one cube' },
-      { value: '78 seasons', label: 'replayable on the oval, 1949 to 2026' },
-      { value: '3 dashboards', label: 'the oval, season stats and Legends, from one page' },
-    ],
-    built: '39.3 min · $12.18',
     shot: {
       src: '/showcase/hero-oval.webp',
       ...hero,
@@ -120,53 +94,21 @@ export const goals: Goal[] = [
     },
   },
   {
-    slug: 'armenia',
-    tab: 'Armenia',
-    goal: 'Build the most beautiful, genuinely insightful project on Armenia: the country in hexagons, Yerevan up close and the numbers behind its rise. Then refactor it with our design guidance.',
-    data: 'Kontur Population, OpenStreetMap, geoBoundaries, World Bank',
+    slug: 'climate',
+    tab: 'Climate pulse',
+    goal: 'Make a full-screen stats wall of a few huge numbers about global CO₂ over an animated background, every number from the data, and a page on who emits it.',
+    data: 'Our World in Data, CO₂ from fossil fuels and industry, 1950–2024',
     steps: [
-      { text: 'Imported population cells, OpenStreetMap buildings and places, province and district outlines, and World Bank series.', tag: 'Import' },
-      { text: 'Built eight cubes, some joining the files: places onto Yerevan’s 175 m grid, population spread down to those cells, hexagon geometry.', tag: 'Cube SQL' },
-      { text: 'Drew the country as 3D hexagon towers in three.js with a fly-in to each province, and Yerevan as a hexagon map with four layers.', tag: 'Custom visuals' },
-      { text: 'Built three pages, the last a report on the rise with a heatmap spec chart.', tag: 'Pages · spec chart' },
-      { text: 'Re-read our design guidance and refactored: a palette from tuff and apricot, findings computed per hexagon, a wave rising from Ararat, the pages linked as one journey.', tag: 'Design round' },
-      { text: 'Checked each page at 1920 and 1366 px, tall and at double density, with hovers and clicks.', tag: 'Checked' },
+      { text: 'Imported the data; the cube’s SQL marks each row as a country or an aggregate, maps countries to continents and computes the latest year and 1990 values, so no year is typed in.', tag: 'Import · cube SQL' },
+      { text: 'Took world totals only from the World row and ranked the 218 countries alone, so no tonne is counted twice.', tag: 'Data check' },
+      { text: 'Wrote the stats wall as a page: an aurora drawn on the GPU with three.js, five figures that count up over sparklines, and a live carbon clock.', tag: 'Custom page · three.js' },
+      { text: 'Built “Who emits”: a continent → country treemap that replays 1950–2024, bubbles, a dumbbell and the fuel mix, all filtered by pills and clicks.', tag: 'Custom visuals · spec chart · clicks' },
+      { text: 'Checked both pages at 1920 and 1366 px; in the performance round a pre-aggregated cube took Who emits from 17,982 rows to 974.', tag: 'Checked · performance' },
     ],
-    facts: [
-      { value: '7 in 10', label: 'Armenians live within 100 km of Mount Ararat, computed per hexagon' },
-      { value: '31 + 47 min', label: 'first pass, then the design round' },
-      { value: 'Unchanged', label: 'requests and data after the design round; idle CPU 0' },
-    ],
-    built: '31.1 min, then 47.4 min for the design round',
     shot: {
-      src: '/showcase/hero-armenia.webp',
-      width: 2304,
-      height: 1234,
-      alt: 'Armenia in hexagons: the country as 3D hexagon towers in basalt and apricot tuff, Mount Ararat across the border',
-    },
-  },
-  {
-    slug: 'europe',
-    tab: 'Europe in charts',
-    goal: 'Rebuild a published data report on entrepreneurship and industry in Europe card for card, on World Bank data, with Armenia added to every card.',
-    data: 'World Bank World Development Indicators, 26 economies, 1960–2025',
-    steps: [
-      { text: 'Imported the series; the cube’s SQL computes the 1992 index, a 3-year moving average and the latest year with window functions.', tag: 'Import · window functions' },
-      { text: 'Added a pre-aggregated cube that compares Armenia with the EU on ten indicators.', tag: 'Pre-aggregated cube' },
-      { text: 'Wrote one component that draws all 15 cards in seven chart types, placing line-end labels itself so they don’t collide.', tag: 'Custom visual' },
-      { text: 'Laid the cards out in a page whose rounded cards hold real, editable dashboard items.', tag: 'Page' },
-      { text: 'Checked at 1920, 1366 and double density with a hover; widened the page when the check flagged empty space at 1920.', tag: 'Checked and fixed' },
-    ],
-    facts: [
-      { value: '15 cards', label: 'in the report’s order and style' },
-      { value: '26 economies', label: 'with Armenia added to every card' },
-      { value: '93 KB', label: 'loaded per view, in 15 requests' },
-    ],
-    built: '16.0 min · $5.12',
-    shot: {
-      src: '/showcase/hero-europe.webp',
+      src: '/showcase/hero-pulse.webp',
       ...hero,
-      alt: 'Europe in charts: rounded grey cards with cumulative GDP growth since 1992 and household consumption per head, each line labelled at its end, Armenia in green',
+      alt: 'Climate pulse: 38.6 Gt of CO₂ in 2024 in large type over an aurora, with four more figures over sparklines and a live carbon clock',
     },
   },
 ]

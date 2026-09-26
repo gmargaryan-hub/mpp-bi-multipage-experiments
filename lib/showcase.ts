@@ -1,6 +1,7 @@
 // What the agent built in MPP BI: the home teaser and /showcase.
 //
-// /showcase has three parts: five hero use cases with the most striking custom plots, every
+// /showcase has three parts: five hero use cases with the most striking custom plots (Armenia
+// first; the exoplanet galaxy is left out on purpose, its render doesn't hold up), every
 // case with the problem it answers, how it was solved and what it measured, and the data they
 // ran on. The Edge lab projects use public data; the report kit and the reference samples use
 // our sample hotel dataset (600 bookings, 2024–2025). Europe in charts rebuilds a published
@@ -28,8 +29,6 @@ export type Hero = {
   numbers: Stat[]
   /** The big picture: a fresh dpr-2 shot from the showcase stand. */
   shot: Shot
-  /** The home teaser's picture. */
-  thumb: Shot
   asked: string
   did: string[]
   /** Before → after rounds on the same dashboards. */
@@ -82,110 +81,9 @@ const wide = { width: 1600, height: 925 }
 const half = { width: 1200, height: 694 }
 const hero = { width: 2304, height: 1333 }
 const armenia = { width: 1200, height: 749 }
+const armenia17 = { width: 1200, height: 711 }
 
 export const heroes: Hero[] = [
-  {
-    slug: 'galaxy',
-    title: 'Galaxy of worlds',
-    kicker: 'NASA Exoplanet Archive',
-    hook: 'All 6,366 known exoplanets as a spiral galaxy you can fly into.',
-    question: 'How were the worlds beyond our solar system found, and by which telescopes?',
-    numbers: [
-      { value: '6,366', label: 'confirmed planets' },
-      { value: '1.46 MB → 63 KB', label: 'loaded per view, before and after the performance round' },
-      { value: '17.0 min · $13.48', label: 'the first build' },
-    ],
-    shot: {
-      src: '/showcase/hero-galaxy.webp',
-      ...hero,
-      alt: 'Galaxy of worlds: a sunburst of 6,366 exoplanets shaped like a spiral galaxy, by discovery method, facility and system, next to panels for discoveries per year, planet sizes and temperatures',
-    },
-    thumb: { src: '/showcase/galaxy.webp', ...wide, alt: '' },
-    asked:
-      'Make a sunburst of every known exoplanet shaped like a spiral galaxy, with a stats page and a scroll-driven story of how they were found.',
-    did: [
-      'Drew a sunburst shaped like a galaxy: discovery method at the core, then the facility, then its systems.',
-      'Made each facility something you fly into, to see every system and planet it found.',
-      'Added a filter mode, in which a click on the galaxy filters the other panels instead.',
-      'Wrote a stats page and a scroll-driven story, “How we found them”.',
-    ],
-  },
-  {
-    slug: 'globe',
-    title: 'Shaking Earth',
-    kicker: 'USGS Earthquake Hazards Program',
-    hook: 'Every earthquake of the last 30 days, 10,718 of them, as beams of light on a 3D globe.',
-    question: 'Where did the Earth shake this month, how hard and how deep?',
-    numbers: [
-      { value: '10,718', label: 'earthquakes of every magnitude' },
-      { value: '2.3 s → 0.17 s', label: 'the page blocked the browser while loading' },
-      { value: '3.5 MB → 0.8 MB', label: 'loaded, before and after the performance round' },
-    ],
-    shot: {
-      src: '/showcase/hero-globe.webp',
-      ...hero,
-      alt: 'Shaking Earth: a 3D globe with earthquakes as glowing beams and a daily timeline, next to the most active regions and the strongest quakes',
-    },
-    thumb: { src: '/showcase/globe.webp', ...wide, alt: '' },
-    asked: 'Put every earthquake of the last 30 days on a 3D globe, sized by magnitude and colored by depth, with a stats page next to it.',
-    did: [
-      'Drew a 3D globe in the browser with every quake as a glowing beam: height is magnitude, color is depth.',
-      'Drew the continents in code, since a component loads no images from the internet.',
-      'Added a daily timeline you can replay, and made a click on a region or a quake filter the page.',
-      'Wrote a stats page whose sentences are computed from the data, such as “one every 4.0 minutes”.',
-    ],
-  },
-  {
-    slug: 'market',
-    title: 'Market track',
-    kicker: 'NASDAQ screener snapshot, Sep 24, 2026',
-    hook: 'The whole NASDAQ on one lap: every sector an arc, every arc a treemap of its companies.',
-    question: 'How is the market doing today, and which giants move it?',
-    numbers: [
-      { value: '3,500', label: 'listed companies, area true to market cap' },
-      { value: '744 KB → 413 KB', label: 'loaded by the track, before and after the performance round' },
-      { value: '17.6 min · $5.90', label: 'the first build' },
-    ],
-    shot: {
-      src: '/showcase/hero-market.webp',
-      ...hero,
-      alt: 'Market track: a ring of sectors, each a treemap of companies sized by market cap and colored by the day’s change, with $58.22T in the centre and a table of the largest companies',
-    },
-    thumb: { src: '/showcase/nasdaq-track.webp', ...wide, alt: '' },
-    asked:
-      'Show the whole NASDAQ as a circular track, with each sector’s arc a treemap of its companies sized by market cap and colored by today’s change.',
-    did: [
-      'Laid the market out as a circular track: each sector is an arc, and each arc is a treemap of its companies.',
-      'Kept the geometry honest: tile area is proportional to market cap, and the smallest companies merge into “+N others”.',
-      'Sized companies by market cap and colored them by the day’s change.',
-      'Made a click on a sector zoom it around the ring; in filter mode, a click filters the table beside it instead.',
-    ],
-  },
-  {
-    slug: 'oval',
-    title: 'The oval',
-    kicker: 'nascaR.data, Cup Series results 1949–2026',
-    hook: 'A speedway whose racing surface is a treemap of the season’s field.',
-    question: 'Who is winning this season, and how does it compare with 78 seasons of history?',
-    numbers: [
-      { value: '101,230', label: 'rows of race results' },
-      { value: '55,732 → 2,251', label: 'rows loaded, before and after the performance round' },
-      { value: '3.2 s → 0.21 s', label: 'slowest query' },
-    ],
-    shot: {
-      src: '/showcase/hero-oval.webp',
-      ...hero,
-      alt: 'The oval: a speedway whose racing surface is a treemap of the season’s drivers, with the season leader and standings in the infield and one pit stall per race',
-    },
-    thumb: { src: '/showcase/nascar-oval.webp', ...wide, alt: '' },
-    asked: 'Draw a NASCAR oval whose track surface is itself a treemap of the current season’s field, with a season picker to replay history.',
-    did: [
-      'Made the racing surface a treemap of the season’s field: manufacturer, team, driver, with area by points.',
-      'Put the standings in the infield and one pit stall per race on pit road, in the winner’s colors.',
-      'Added a season picker that replays history back to 1949, and a Legends page.',
-      'Moved rankings and career totals into small pre-aggregated tables in the database.',
-    ],
-  },
   {
     slug: 'armenia',
     title: 'Armenia',
@@ -200,10 +98,9 @@ export const heroes: Hero[] = [
     shot: {
       src: '/showcase/hero-armenia.webp',
       width: 2304,
-      height: 1234,
+      height: 1280,
       alt: 'Armenia in hexagons: the country as 3D hexagon towers in basalt and apricot tuff, Mount Ararat across the border, under the headline “Half of Armenia lives on 1.0% of its land”',
     },
-    thumb: { src: '/showcase/armenia-17-after.webp', ...armenia, alt: '' },
     asked:
       'Build the most beautiful, genuinely insightful project on Armenia: the whole country in hexagons, Yerevan up close, and the numbers behind its rise. Then read our new design guidance and refactor it into the design only Armenia could have.',
     did: [
@@ -219,10 +116,10 @@ export const heroes: Hero[] = [
       items: [
         {
           title: 'Armenia in hexagons',
-          before: { src: '/showcase/armenia-17-before.webp', ...armenia, alt: 'First pass: a purple night map of Armenia in hexagons with a side rail of province bars' },
+          before: { src: '/showcase/armenia-17-before.webp', ...armenia17, alt: 'First pass: a purple night map of Armenia in hexagons with a side rail of province bars' },
           after: {
             src: '/showcase/armenia-17-after.webp',
-            ...armenia,
+            ...armenia17,
             alt: 'After the guidance: Armenia as hexagon towers in basalt and apricot tuff, Mount Ararat standing across the border',
           },
           text: 'A generic purple night map became basalt and tuff that warms to apricot, with Ararat standing across the border. The new finding is computed per hexagon: seven in ten Armenians, 1,991,468 people, live within 100 km of the mountain.',
@@ -250,19 +147,117 @@ export const heroes: Hero[] = [
       ],
     },
   },
+  {
+    slug: 'globe',
+    title: 'Shaking Earth',
+    kicker: 'USGS Earthquake Hazards Program',
+    hook: 'Every earthquake of the last 30 days, 10,718 of them, as beams of light on a 3D globe.',
+    question: 'Where did the Earth shake this month, how hard and how deep?',
+    numbers: [
+      { value: '10,718', label: 'earthquakes of every magnitude' },
+      { value: '2.3 s → 0.17 s', label: 'the page blocked the browser while loading' },
+      { value: '3.5 MB → 0.8 MB', label: 'loaded, before and after the performance round' },
+    ],
+    shot: {
+      src: '/showcase/hero-globe.webp',
+      ...hero,
+      alt: 'Shaking Earth: a 3D globe with earthquakes as glowing beams and a daily timeline, next to the most active regions and the strongest quakes',
+    },
+    asked: 'Put every earthquake of the last 30 days on a 3D globe, sized by magnitude and colored by depth, with a stats page next to it.',
+    did: [
+      'Drew a 3D globe in the browser with every quake as a glowing beam: height is magnitude, color is depth.',
+      'Drew the continents in code, since a component loads no images from the internet.',
+      'Added a daily timeline you can replay, and made a click on a region or a quake filter the page.',
+      'Wrote a stats page whose sentences are computed from the data, such as “one every 4.0 minutes”.',
+    ],
+  },
+  {
+    slug: 'market',
+    title: 'Market track',
+    kicker: 'NASDAQ screener snapshot, Sep 24, 2026',
+    hook: 'The whole NASDAQ on one lap: every sector an arc, every arc a treemap of its companies.',
+    question: 'How is the market doing today, and which giants move it?',
+    numbers: [
+      { value: '3,500', label: 'listed companies, area true to market cap' },
+      { value: '744 KB → 413 KB', label: 'loaded by the track, before and after the performance round' },
+      { value: '17.6 min · $5.90', label: 'the first build' },
+    ],
+    shot: {
+      src: '/showcase/hero-market.webp',
+      ...hero,
+      alt: 'Market track: a ring of sectors, each a treemap of companies sized by market cap and colored by the day’s change, with $58.22T in the centre and a table of the largest companies',
+    },
+    asked:
+      'Show the whole NASDAQ as a circular track, with each sector’s arc a treemap of its companies sized by market cap and colored by today’s change.',
+    did: [
+      'Laid the market out as a circular track: each sector is an arc, and each arc is a treemap of its companies.',
+      'Kept the geometry honest: tile area is proportional to market cap, and the smallest companies merge into “+N others”.',
+      'Sized companies by market cap and colored them by the day’s change.',
+      'Made a click on a sector zoom it around the ring; in filter mode, a click filters the table beside it instead.',
+    ],
+  },
+  {
+    slug: 'oval',
+    title: 'The oval',
+    kicker: 'nascaR.data, Cup Series results 1949–2026',
+    hook: 'A speedway whose racing surface is a treemap of the season’s field.',
+    question: 'Who is winning this season, and how does it compare with 78 seasons of history?',
+    numbers: [
+      { value: '101,230', label: 'rows of race results' },
+      { value: '55,732 → 2,251', label: 'rows loaded, before and after the performance round' },
+      { value: '3.2 s → 0.21 s', label: 'slowest query' },
+    ],
+    shot: {
+      src: '/showcase/hero-oval.webp',
+      ...hero,
+      alt: 'The oval: a speedway whose racing surface is a treemap of the season’s drivers, with the season leader and standings in the infield and one pit stall per race',
+    },
+    asked: 'Draw a NASCAR oval whose track surface is itself a treemap of the current season’s field, with a season picker to replay history.',
+    did: [
+      'Made the racing surface a treemap of the season’s field: manufacturer, team, driver, with area by points.',
+      'Put the standings in the infield and one pit stall per race on pit road, in the winner’s colors.',
+      'Added a season picker that replays history back to 1949, and a Legends page.',
+      'Moved rankings and career totals into small pre-aggregated tables in the database.',
+    ],
+  },
+  {
+    slug: 'climate',
+    title: 'Climate pulse',
+    kicker: 'Our World in Data, CO₂ 1950–2024',
+    hook: 'The world’s CO₂ as a wall of numbers over a live aurora, with a clock that counts from the moment you arrive.',
+    question: 'How much CO₂ does the world emit, and who emits it?',
+    numbers: [
+      { value: '38.6 Gt', label: 'emitted in 2024, taken from the World row of the data' },
+      { value: '1,223 t', label: 'of CO₂ a second, the 2024 rate the live clock counts at' },
+      { value: '17,982 → 974', label: 'rows loaded by Who emits after the performance round' },
+    ],
+    shot: {
+      src: '/showcase/hero-pulse.webp',
+      ...hero,
+      alt: 'Climate pulse: 38.6 Gt of CO₂ in 2024 in large type over an aurora, with per-person, change-since-1990, top-emitter and cumulative figures, each over a sparkline, and a live carbon clock',
+    },
+    asked:
+      'Make a full-screen stats wall of a few huge numbers about global CO₂ over an animated background, every number from the data, and a page on who emits it.',
+    did: [
+      'Built a cube that marks each row as a country or an aggregate, maps countries to continents and computes the latest year and 1990 values, so no year is typed in.',
+      'Took world totals only from the World row and ranked the 218 countries alone, so no tonne is counted twice.',
+      'Wrote the stats wall as a page: an aurora drawn on the GPU with three.js, five figures that count up over sparklines, and a live carbon clock.',
+      'Built a second page, “Who emits”: a treemap of continents and countries that replays 1950–2024, bubbles, a dumbbell and the fuel mix, all filtered by pills and clicks.',
+    ],
+  },
 ]
 
 export const cases: Case[] = [
   {
-    slug: 'galaxy',
-    title: 'Galaxy of worlds',
-    data: 'NASA Exoplanet Archive, 6,366 planets',
-    thumb: { src: '/showcase/galaxy.webp', ...wide, alt: '' },
-    question: 'How do I let people explore a big hierarchy, from the whole down to one item?',
-    how: 'A sunburst shaped like a galaxy, drawn on canvas: method, facility, system, planet. Fly into a facility, or switch to a mode where a click filters the other panels. A stats page and a scroll-driven story sit beside it.',
-    uses: ['custom-visual', 'custom-page', 'clicks'],
-    result: ['Built in 17.0 min · $13.48', '1.46 MB → 63 KB per view: planets load only for the facility you fly into'],
-    href: '#galaxy',
+    slug: 'armenia',
+    title: 'Armenia',
+    data: 'Kontur Population, OpenStreetMap, geoBoundaries, World Bank',
+    thumb: { src: '/showcase/armenia-17-after.webp', ...armenia17, alt: '' },
+    question: 'How do I map where people live, down to a city block, with no map tiles?',
+    how: 'Three dashboards: the country as 3D hexagons in three.js, Yerevan in 175 m hexagons with four layers, and a report on the rise. Joins and geometry live in the cube. A second round with our design guidance reworked the look.',
+    uses: ['custom-visual', 'custom-page', 'spec-chart'],
+    result: ['31 min, then 47 min for the design round', 'The design round added no requests and no data; idle CPU stayed 0'],
+    href: '#armenia',
   },
   {
     slug: 'globe',
@@ -328,15 +323,25 @@ export const cases: Case[] = [
     result: ['Slowest query 2.7 s → 0.26 s after the performance round'],
   },
   {
-    slug: 'armenia',
-    title: 'Armenia',
-    data: 'Kontur Population, OpenStreetMap, geoBoundaries, World Bank',
-    thumb: { src: '/showcase/armenia-17-after.webp', ...armenia, alt: '' },
-    question: 'How do I map where people live, down to a city block, with no map tiles?',
-    how: 'Three dashboards: the country as 3D hexagons in three.js, Yerevan in 175 m hexagons with four layers, and a report on the rise. Joins and geometry live in the cube. A second round with our design guidance reworked the look.',
-    uses: ['custom-visual', 'custom-page', 'spec-chart'],
-    result: ['31 min, then 47 min for the design round', 'The design round added no requests and no data; idle CPU stayed 0'],
-    href: '#armenia',
+    slug: 'climate',
+    title: 'Climate pulse',
+    data: 'Our World in Data, CO₂ 1950–2024',
+    thumb: { src: '/showcase/pulse.webp', ...wide, alt: '' },
+    question: 'What is the one number about CO₂ everyone should see?',
+    how: 'A full-screen stats wall over an aurora drawn by shaders, with figures that count up, a sparkline under each and a live carbon clock: 38.6 Gt in 2024, 1,223 tonnes every second. Every number comes from the data.',
+    uses: ['custom-page'],
+    result: ['Built with Who emits in 19.1 min · $5.87', 'Blocking while loading 178 → 76 ms after the performance round'],
+    href: '#climate',
+  },
+  {
+    slug: 'who-emits',
+    title: 'Who emits',
+    data: 'Our World in Data, 218 countries',
+    thumb: { src: '/showcase/who-emits.webp', width: 1200, height: 806, alt: '' },
+    question: 'Who emits the most, and how has that changed since 1950?',
+    how: 'A continent → country treemap you can replay from 1950 to 2024, bubbles for emissions per person against the total, a dumbbell and the fuel mix. Pills and clicks filter everything.',
+    uses: ['custom-page', 'custom-visual', 'pre-aggregated', 'clicks'],
+    result: ['11 → 6 requests, 17,982 → 974 rows, 1.27 MB → 99 KB after the performance round'],
   },
   {
     slug: 'europe',
@@ -349,30 +354,10 @@ export const cases: Case[] = [
     result: ['Built in 16.0 min · $5.12', '93 KB in 15 requests per load; 0 ms of CPU while idle'],
   },
   {
-    slug: 'climate',
-    title: 'Climate pulse',
-    data: 'Our World in Data, CO₂ 1950–2024',
-    thumb: { src: '/showcase/pulse.webp', ...wide, alt: '' },
-    question: 'What is the one number about CO₂ everyone should see?',
-    how: 'A full-screen stats wall over an aurora drawn by shaders, with figures that count up, a sparkline under each and a live carbon clock: 38.6 Gt in 2024, 1,223 tonnes every second. Every number comes from the data.',
-    uses: ['custom-page'],
-    result: ['Built with Who emits in 19.1 min · $5.87', 'Blocking while loading 178 → 76 ms after the performance round'],
-  },
-  {
-    slug: 'who-emits',
-    title: 'Who emits',
-    data: 'Our World in Data, 218 countries',
-    thumb: { src: '/showcase/who-emits.webp', ...half, alt: '' },
-    question: 'Who emits the most, and how has that changed since 1950?',
-    how: 'A continent → country treemap you can replay from 1950 to 2024, bubbles for emissions per person against the total, a dumbbell and the fuel mix. Pills and clicks filter everything.',
-    uses: ['custom-page', 'custom-visual', 'pre-aggregated', 'clicks'],
-    result: ['11 → 6 requests, 17,982 → 974 rows, 1.27 MB → 99 KB after the performance round'],
-  },
-  {
     slug: 'raw',
     title: 'From a raw feed to a dashboard',
     data: 'USGS raw GeoJSON feed, M2.5+, 30 days',
-    thumb: { src: '/showcase/raw-feed.webp', ...wide, alt: '' },
+    thumb: { src: '/showcase/raw-feed.webp', width: 1200, height: 818, alt: '' },
     question: 'Can a small model go from a raw feed to a dashboard on its own?',
     how: 'In the product’s chat, the model downloaded the feed, cleaned it with a Python script in its sandbox, imported it, modeled it and built an 8-panel dashboard.',
     uses: ['chat', 'built-in'],
@@ -478,9 +463,6 @@ export const dataCases: { data: string; problem: string; handled: string; projec
   },
 ]
 
-/** The home teaser: the five heroes. */
-export const gallery = heroes
-
 /** The performance round, before → after. */
 export const speedups = [
   { page: 'The oval', measure: 'Rows loaded', before: '55,732', after: '2,251' },
@@ -488,7 +470,6 @@ export const speedups = [
   { page: 'The oval', measure: 'Slowest query', before: '3.2 s', after: '0.21 s' },
   { page: 'Climate pulse', measure: 'Rows loaded', before: '17,982', after: '974' },
   { page: 'Climate pulse', measure: 'Data loaded', before: '1.27 MB', after: '99 KB' },
-  { page: 'Galaxy of worlds', measure: 'Data loaded per view', before: '1.46 MB', after: '63 KB' },
   { page: 'Shaking Earth', measure: 'Data loaded', before: '3.5 MB', after: '0.8 MB' },
   { page: 'Shaking Earth', measure: 'Browser blocked while loading', before: '2.3 s', after: '0.17 s' },
   { page: 'Market track', measure: 'Data for the sector stats', before: '718 KB', after: '184 KB' },

@@ -12,11 +12,10 @@ import { cases, dataCases, heroes, mechanisms, speedups, type Case, type Hero, t
 export const metadata: Metadata = {
   title: 'What the engine builds | MPP BI',
   description:
-    'Exoplanets as a galaxy, earthquakes on a 3D globe, the NASDAQ as a ring of treemaps, 78 seasons of racing on an oval and Armenia in 3D hexagons: what an AI agent built inside MPP BI, every case and how it was solved, with the measured numbers.',
+    'Armenia in 3D hexagons, earthquakes on a 3D globe, the NASDAQ as a ring of treemaps, 78 seasons of racing on an oval and CO₂ over a live aurora: what an AI agent built inside MPP BI, every case and how it was solved, with the measured numbers.',
 }
 
 const credits = [
-  { what: 'Galaxy of worlds', source: 'NASA Exoplanet Archive (Caltech/IPAC).' },
   { what: 'Shaking Earth and the raw feed', source: 'USGS Earthquake Hazards Program.' },
   { what: 'Climate pulse and Who emits', source: 'Our World in Data, CC BY 4.0.' },
   { what: 'Market track and Sector stats', source: 'NASDAQ stock screener snapshot, Sep 24, 2026.' },
@@ -315,7 +314,7 @@ export default function ShowcasePage() {
               ))}
             </ul>
             <p className="mt-4 max-w-3xl text-sm text-slate">
-              NASA, USGS, Nasdaq, NASCAR and the World Bank are trademarks of their respective owners. These are independent
+              USGS, Nasdaq, NASCAR and the World Bank are trademarks of their respective owners. These are independent
               demos on public data and are not endorsed by them. The report kit and the samples use a sample hotel dataset.
             </p>
           </Container>
