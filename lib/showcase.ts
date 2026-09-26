@@ -50,8 +50,6 @@ export const mechanisms: Record<Mechanism, { label: string; text: string }> = {
   preview: { label: 'In the lab', text: 'A preview that is not in the released product yet.' },
 }
 
-/** The mechanisms shown in “one platform”, in order. */
-export const capabilityOrder: Mechanism[] = ['custom-visual', 'custom-page', 'spec-chart', 'clicks', 'cube', 'config-page']
 
 export type Hero = {
   slug: string

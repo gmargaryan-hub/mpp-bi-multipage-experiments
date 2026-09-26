@@ -7,7 +7,7 @@ import DemoButton from '@/components/DemoButton'
 import CTABand from '@/components/CTABand'
 import { Container, PageHeader, Preview, RuleList, Screenshot, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
-import { capabilityOrder, cases, dataCases, heroes, mechanisms, type Case, type Hero, type Mechanism } from '@/lib/showcase'
+import { cases, dataCases, heroes, mechanisms, type Case, type Hero, type Mechanism } from '@/lib/showcase'
 
 export const metadata: Metadata = {
   title: 'What the engine builds | MPP BI',
@@ -26,7 +26,6 @@ const credits = [
 
 const contents = [
   { href: '#use-cases', label: 'Five use cases' },
-  { href: '#platform', label: 'One platform' },
   { href: '#cases', label: 'Every case' },
   { href: '#data', label: 'Data of any complexity' },
   { href: '#grounded', label: 'What keeps it grounded' },
@@ -178,7 +177,6 @@ function CaseCard({ c }: { c: Case }) {
 }
 
 export default function ShowcasePage() {
-  const usedIn = (m: Mechanism) => cases.filter((c) => c.uses.includes(m)).map((c) => c.title)
 
   return (
     <>
@@ -212,29 +210,7 @@ export default function ShowcasePage() {
           ))}
         </div>
 
-        <Section id="platform" tone={heroes.length % 2 ? 'paper' : 'white'}>
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">One platform, very different results</h2>
-            <p className="mt-4 text-lg leading-relaxed">
-              None of the views above is a chart type MPP BI ships. They come from the same few mechanisms, which the agent
-              can use as freely as a developer, and all of them read the same semantic model as every other chart.
-            </p>
-          </div>
-          <ul className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
-            {capabilityOrder.map((m) => (
-              <li key={m} className="border-t-2 border-brand pt-5">
-                <h3 className="text-lg font-semibold">{mechanisms[m].label}</h3>
-                <p className="mt-2 leading-relaxed">{mechanisms[m].text}</p>
-                <p className="mt-3 text-sm leading-snug text-slate">
-                  <span className="font-medium text-body">Used in: </span>
-                  {usedIn(m).join(', ')}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        <Section id="cases" tone={heroes.length % 2 ? 'white' : 'paper'}>
+        <Section id="cases" tone={heroes.length % 2 ? 'paper' : 'white'}>
           <div className="max-w-2xl">
             <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">Every case, and how it was solved</h2>
             <p className="mt-4 text-lg leading-relaxed">
@@ -249,7 +225,7 @@ export default function ShowcasePage() {
           </ul>
         </Section>
 
-        <Section id="data" tone={heroes.length % 2 ? 'paper' : 'white'}>
+        <Section id="data" tone={heroes.length % 2 ? 'white' : 'paper'}>
           <div className="max-w-2xl">
             <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">Data of any complexity</h2>
             <p className="mt-4 text-lg leading-relaxed">
@@ -282,7 +258,7 @@ export default function ShowcasePage() {
           </div>
         </Section>
 
-        <Section id="grounded" tone={heroes.length % 2 ? 'white' : 'paper'}>
+        <Section id="grounded" tone={heroes.length % 2 ? 'paper' : 'white'}>
           <div className="max-w-2xl">
             <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">What keeps the agent’s work grounded</h2>
             <p className="mt-4 text-lg leading-relaxed">
@@ -308,7 +284,7 @@ export default function ShowcasePage() {
           </ul>
         </Section>
 
-        <Section id="lab" tone={heroes.length % 2 ? 'paper' : 'white'}>
+        <Section id="lab" tone={heroes.length % 2 ? 'white' : 'paper'}>
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-12">
             <div>
               <Preview />
