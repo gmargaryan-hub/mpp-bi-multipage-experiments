@@ -5,10 +5,10 @@ import Footer from '@/components/Footer'
 import DemoButton from '@/components/DemoButton'
 import ArchitectureDiagram from '@/components/ArchitectureDiagram'
 import CaseStudy from '@/components/CaseStudy'
-import IntentShowcase from '@/components/IntentShowcase'
-import { intents } from '@/lib/intents'
-import { cases, gallery } from '@/lib/showcase'
-import { Container, Preview, Section, TextLink, buttonClass } from '@/components/ui'
+import GoalShowcase from '@/components/GoalShowcase'
+import { goals } from '@/lib/goals'
+import { cases } from '@/lib/showcase'
+import { Container, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
 
 const clients = [
@@ -27,21 +27,6 @@ const engine = [
   { title: 'Every function works live', body: 'The calculation language compiles to SQL, so nothing is switched off when you stay live.' },
 ]
 
-const proof = [
-  {
-    value: '55,732 → 2,251 rows',
-    body: 'What the racing oval loads, before and after the agent moved rankings and career totals into the database. Its slowest query fell from 3.2 s to 0.21 s.',
-  },
-  {
-    value: 'Every number traceable',
-    body: 'In a report the agent fills, each number is a declared query. Hover it to see the query; a Sources section lists them all.',
-  },
-  {
-    value: '5.8 minutes',
-    body: 'The time a small model, DeepSeek V4 Flash, took to fill a full report on a sample hotel dataset from the product’s chat, without writing code.',
-  },
-]
-
 const safety = [
   { art: '/brand/data-source.svg', title: 'The agent works as you', body: 'Its tools run in your own signed-in session. It sees only what you can see and changes only what it created or you gave it.' },
   { art: '/brand/editor-button.svg', title: 'You approve what lands', body: 'Every step shows in the chat. Charts arrive as previews with a diff; you add them or reject them. Deleting needs a confirmed second call.' },
@@ -57,6 +42,9 @@ const features = [
   { title: 'Your brand, your code', body: 'White label, custom views in React, source code with the right license.', href: '/features#customization' },
   { title: 'Runs anywhere', body: 'On-premises, AWS, Azure, Google Cloud, Docker or a VM image; one node or a cluster.', href: '/features#deployment-options' },
 ]
+
+/** Chapter 02: cases beyond the goals at the top of the page. */
+const more = ['climate', 'who-emits', 'quake-stats', 'legends', 'report'].map((slug) => cases.find((c) => c.slug === slug)!)
 
 function Chapter({ n, title, lede }: { n: string; title: string; lede: string }) {
   return (
@@ -83,7 +71,7 @@ export default function HomePage() {
                   Say what you want to achieve. MPP BI does the work.
                 </h1>
                 <p className="mt-6 text-lg md:text-xl leading-relaxed">
-                  Ask for a dashboard for store managers, a forecast next to the actuals, a model that predicts churn. MPP BI
+                  Ask for a view no chart menu has, a report rebuilt in your own BI, a dashboard for store managers. MPP BI
                   plans the steps and carries them out inside your own BI, on your databases, files and streams, with your
                   permissions and on your servers. These are real goals and what it did with them.
                 </p>
@@ -97,7 +85,7 @@ export default function HomePage() {
               <Image src={asset('/brand/mascot-laptop.svg')} alt="" width={200} height={200} className="hidden h-44 w-44 lg:block" priority unoptimized />
             </div>
             <div className="mt-12 md:mt-16">
-              <IntentShowcase intents={intents} />
+              <GoalShowcase goals={goals} />
             </div>
           </Container>
         </section>
@@ -138,24 +126,25 @@ export default function HomePage() {
           <Chapter
             n="02 Analyze with ease"
             title="The engine that runs your analytics now builds them"
-            lede="Say what you want to see. The agent imports the data, models it, draws visuals no chart menu has, and moves the heavy math into the database so pages stay fast. An agent built each of these in MPP BI, on public data."
+            lede="Say what you want to see. The agent imports the data, models it, draws visuals no chart menu has, and moves the heavy math into the database so pages stay fast. Beyond the goals above, here is more of what it built in MPP BI: pages on public data, and a report kit whose every number is a declared query."
           />
           <ul className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 lg:grid-cols-3">
-            {gallery.map((e) => (
-              <li key={e.slug}>
-                <Link href={`/showcase#${e.slug}`} className="group block">
+            {more.map((c) => (
+              <li key={c.slug}>
+                <Link href={`/showcase#case-${c.slug}`} className="group block">
                   <div className="overflow-hidden rounded-lg border border-line bg-paper transition-colors group-hover:border-mist">
                     <Image
-                      src={asset(e.thumb.src)}
+                      src={asset(c.thumb.src)}
                       alt=""
-                      width={e.thumb.width}
-                      height={e.thumb.height}
+                      width={c.thumb.width}
+                      height={c.thumb.height}
                       className="block aspect-[16/10] w-full object-cover object-left-top"
+                      style={c.focus ? { objectPosition: c.focus } : undefined}
                       unoptimized
                     />
                   </div>
-                  <h3 className="mt-3 font-semibold group-hover:text-brand">{e.title}</h3>
-                  <p className="mt-1 text-sm leading-snug text-slate">{e.hook}</p>
+                  <h3 className="mt-3 font-semibold group-hover:text-brand">{c.title}</h3>
+                  <p className="mt-1 text-sm leading-snug text-slate">{c.question}</p>
                 </Link>
               </li>
             ))}
@@ -172,31 +161,8 @@ export default function HomePage() {
               </Link>
             </li>
           </ul>
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {proof.map((p) => (
-              <div key={p.value} className="border-t-2 border-brand pt-5">
-                <h3 className="text-lg font-semibold tabular-nums">{p.value}</h3>
-                <p className="mt-2 leading-relaxed">{p.body}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8">
+          <div className="mt-10">
             <TextLink href="/showcase">See what it built</TextLink>
-          </div>
-          <div className="mt-12 flex flex-col gap-4 rounded-lg border border-line bg-paper p-6 md:flex-row md:items-center md:justify-between md:gap-8">
-            <div>
-              <Preview />
-              <p className="mt-3 text-ink">
-                <span className="font-medium">Every number explains itself.</span>{' '}
-                <span className="text-body">
-                  Hover a number on a dashboard the agent built to see the cube aggregates it is made of and what moved it,
-                  with no change to the agent’s code.
-                </span>
-              </p>
-            </div>
-            <div className="shrink-0">
-              <TextLink href="/values-graph">See the preview</TextLink>
-            </div>
           </div>
         </Section>
 
