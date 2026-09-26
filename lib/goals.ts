@@ -30,7 +30,7 @@ export const goals: Goal[] = [
       { text: 'Drew the country as 3D hexagon towers in three.js with a fly-in to each province, and Yerevan as a hexagon map with four layers.', tag: 'Custom visuals' },
       { text: 'Built three pages, the last a report on the rise with a heatmap spec chart.', tag: 'Pages · spec chart' },
       { text: 'Re-read our design guidance and refactored: a palette from tuff and apricot, findings computed per hexagon, a wave rising from Ararat, the pages linked as one journey.', tag: 'Design round' },
-      { text: 'Checked each page at 1920 and 1366 px, tall and at double density, with hovers and clicks.', tag: 'Checked' },
+      { text: 'Checked every page in a browser at two widths and at double density, with hovers and clicks.', tag: 'Checked' },
     ],
     shot: {
       src: '/showcase/hero-armenia.webp',
@@ -49,7 +49,7 @@ export const goals: Goal[] = [
       { text: 'Wrote a three.js globe with the continents drawn in code: every quake a beam, height for magnitude, colour for depth, rings for M6+.', tag: 'Custom visual' },
       { text: 'Made a click on a quake set the page’s region filter; the globe flies there and the charts beside it follow.', tag: 'Click filters' },
       { text: 'Wrote a stats page whose sentences are query results, such as “one every 4.0 minutes”, with a day × hour heatmap.', tag: 'Page · spec charts' },
-      { text: 'In the performance round, moved the strongest-quakes list into the database and removed a texture blur that blocked loading.', tag: 'Performance' },
+      { text: 'Looked at the result, then moved the strongest-quakes list into the database and removed a texture blur that held the page up while loading.', tag: 'Checked and fixed' },
     ],
     shot: {
       src: '/showcase/hero-globe.webp',
@@ -67,7 +67,7 @@ export const goals: Goal[] = [
       { text: 'Invented the chart in SVG and React: sectors as arcs, each a treemap with area exactly proportional to market cap.', tag: 'Custom visual' },
       { text: 'Gave it click modes: zoom a sector around the ring, or filter the rest of the page.', tag: 'Click filters' },
       { text: 'Built a sector stats page: a scoreboard and a concentration curve, with spec charts for movers and size against move.', tag: 'Custom visuals · spec charts' },
-      { text: 'Checked it at 1920 and 1366 px and zoomed; the performance round cut the scoreboard’s query from 3,500 rows to 24.', tag: 'Checked · performance' },
+      { text: 'Checked it in a browser at two widths and in its zoomed state, then moved the scoreboard’s sums into the database.', tag: 'Checked and fixed' },
     ],
     shot: {
       src: '/showcase/hero-market.webp',
@@ -85,7 +85,7 @@ export const goals: Goal[] = [
       { text: 'Turned season rank, main manufacturer and career wins into fields with window functions in the cube.', tag: 'Window functions' },
       { text: 'Drew the speedway in SVG: the racing surface a treemap of make, team and driver, standings in the infield, a pit stall per race.', tag: 'Custom visual' },
       { text: 'Wrote one page for three dashboards, the oval, season stats and Legends, with a season picker that replays history to 1949.', tag: 'Page · spec charts' },
-      { text: 'In the performance round, moved rankings and career totals into four small pre-aggregated cubes.', tag: 'Performance' },
+      { text: 'Moved rankings and career totals into small pre-aggregated cubes, so the page reads a few thousand rows instead of tens of thousands.', tag: 'Pre-aggregated cubes' },
     ],
     shot: {
       src: '/showcase/hero-oval.webp',
@@ -103,7 +103,7 @@ export const goals: Goal[] = [
       { text: 'Took world totals only from the World row and ranked the 218 countries alone, so no tonne is counted twice.', tag: 'Data check' },
       { text: 'Wrote the stats wall as a page: an aurora drawn on the GPU with three.js, five figures that count up over sparklines, and a live carbon clock.', tag: 'Custom page · three.js' },
       { text: 'Built “Who emits”: a continent → country treemap that replays 1950–2024, bubbles, a dumbbell and the fuel mix, all filtered by pills and clicks.', tag: 'Custom visuals · spec chart · clicks' },
-      { text: 'Checked both pages at 1920 and 1366 px; in the performance round a pre-aggregated cube took Who emits from 17,982 rows to 974.', tag: 'Checked · performance' },
+      { text: 'Checked both pages in a browser at two widths, then moved the heavy country totals into a pre-aggregated cube and made the charts follow their box when the width changes.', tag: 'Checked and fixed' },
     ],
     shot: {
       src: '/showcase/hero-pulse.webp',

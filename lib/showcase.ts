@@ -1,21 +1,57 @@
 // What the agent built in MPP BI: the home teaser and /showcase.
 //
-// /showcase has three parts: five hero use cases with the most striking custom plots (Armenia
-// first; the exoplanet galaxy is left out on purpose, its render doesn't hold up), every
-// case with the problem it answers, how it was solved and what it measured, and the data they
-// ran on. The Edge lab projects use public data; the report kit and the reference samples use
-// our sample hotel dataset (600 bookings, 2024–2025). Europe in charts rebuilds a published
-// data report; the site never shows or names the report's owner, and its screenshots are
-// cropped to our dashboard only.
+// /showcase tells what the agents did and what the platform made possible, not how fast or
+// cheap each build was: five use cases with the most striking custom work, every case with the
+// question it answers and how it was solved, the mechanisms behind them, the data they ran on,
+// and what grounds the work (the model, checks, traceability, permissions). Numbers appear only
+// where the number is the story. The exoplanet galaxy is left out on purpose: its render doesn't
+// hold up.
 //
-// Each ask is the real brief, condensed. Every number was measured on the build; before → after
-// is the agent's performance round (it renders the page, reads requests, rows, main-thread time
-// and memory, and fixes what they show). Sources: web-res docs/viz/WORKLOG.md and the notes'
-// Edge lab page and run reports.
+// The Edge lab projects use public data; the report kit and the reference samples use our sample
+// hotel dataset (600 bookings, 2024–2025). Europe in charts rebuilds a published data report; the
+// site never shows or names the report's owner, and its screenshots show only our dashboard.
+// Each ask is the real brief, condensed; each step comes from the run's own report (web-res
+// docs/viz/WORKLOG.md, the notes' Edge lab page and bi-mcp/run-edge-*.jsonl).
 
 export type Shot = { src: string; width: number; height: number; alt: string }
 
-export type Stat = { value: string; label: string }
+export type Mechanism =
+  | 'custom-visual'
+  | 'custom-page'
+  | 'config-page'
+  | 'spec-chart'
+  | 'built-in'
+  | 'clicks'
+  | 'cube'
+  | 'chat'
+  | 'preview'
+
+export const mechanisms: Record<Mechanism, { label: string; text: string }> = {
+  'custom-visual': {
+    label: 'Custom visual',
+    text: 'A chart no menu has, written by the agent in React with SVG, canvas or three.js, published into the atlas and used like any other chart.',
+  },
+  'custom-page': {
+    label: 'Page with slots',
+    text: 'A page layout that replaces a dashboard’s body and holds real dashboard items, which stay editable in the product.',
+  },
+  'spec-chart': {
+    label: 'Spec chart',
+    text: 'Heatmaps, dumbbells, annotated trends and more, declared as a JSON spec for our chart package and edited in the chart editor.',
+  },
+  clicks: { label: 'Click actions', text: 'A click on a mark filters the page, zooms in or opens more.' },
+  cube: {
+    label: 'Cube logic',
+    text: 'Derived fields, window functions for ranks, indexes and running totals, and small pre-aggregated cubes for heavy history.',
+  },
+  'config-page': { label: 'Config-only kit', text: 'A reviewed page filled by settings alone. No code to review.' },
+  'built-in': { label: 'Built-in charts', text: 'The product’s own charts, set up by the agent.' },
+  chat: { label: 'Product chat', text: 'Built in MPP BI’s own chat, with its sandbox, by a small model.' },
+  preview: { label: 'In the lab', text: 'A preview that is not in the released product yet.' },
+}
+
+/** The mechanisms shown in “one platform”, in order. */
+export const capabilityOrder: Mechanism[] = ['custom-visual', 'custom-page', 'spec-chart', 'clicks', 'cube', 'config-page']
 
 export type Hero = {
   slug: string
@@ -26,38 +62,11 @@ export type Hero = {
   hook: string
   /** The question it answers for someone looking at it. */
   question: string
-  numbers: Stat[]
   /** The big picture: a fresh dpr-2 shot from the showcase stand. */
   shot: Shot
   asked: string
   did: string[]
-  /** Before → after rounds on the same dashboards. */
-  rounds?: { intro: string; items: { title: string; before: Shot; after: Shot; text: string }[] }
-}
-
-export type Mechanism =
-  | 'custom-visual'
-  | 'custom-page'
-  | 'config-page'
-  | 'spec-chart'
-  | 'built-in'
-  | 'window'
-  | 'pre-aggregated'
-  | 'clicks'
-  | 'chat'
-  | 'preview'
-
-export const mechanisms: Record<Mechanism, { label: string; text: string }> = {
-  'custom-visual': { label: 'Custom visual', text: 'A chart the agent writes in React (SVG, canvas or WebGL) and publishes as a package.' },
-  'custom-page': { label: 'Custom page', text: 'A page layout that replaces a dashboard’s body and holds real dashboard items in slots.' },
-  'config-page': { label: 'Config-only page', text: 'A reviewed page, a kit, filled by settings alone. No code.' },
-  'spec-chart': { label: 'Spec chart', text: 'A chart declared as a JSON spec for our chart package, edited in the chart editor.' },
-  'built-in': { label: 'Built-in charts', text: 'The product’s own charts, set up by the agent.' },
-  window: { label: 'Window functions', text: 'Ranks, shares, indexes and running totals computed in the cube’s SQL.' },
-  'pre-aggregated': { label: 'Pre-aggregated cube', text: 'Heavy derived data computed once into a small cube and queried cheaply.' },
-  clicks: { label: 'Click filters', text: 'A click on a mark filters the rest of the page.' },
-  chat: { label: 'Product chat', text: 'Built in MPP BI’s own chat, with its sandbox, by a small model.' },
-  preview: { label: 'In the lab', text: 'A preview that is not in the released product yet.' },
+  uses: Mechanism[]
 }
 
 export type Case = {
@@ -70,8 +79,7 @@ export type Case = {
   question: string
   how: string
   uses: Mechanism[]
-  result: string[]
-  /** Where the card leads: a hero on /showcase or another page. */
+  /** Where the card leads: a use case on /showcase or another page. */
   href?: string
   /** Which model built it, when it isn't Claude Opus over the MCP server. */
   by?: string
@@ -80,72 +88,31 @@ export type Case = {
 const wide = { width: 1600, height: 925 }
 const half = { width: 1200, height: 694 }
 const hero = { width: 2304, height: 1333 }
-const armenia = { width: 1200, height: 749 }
-const armenia17 = { width: 1200, height: 711 }
+const armeniaHero = { width: 2304, height: 1280 }
 
 export const heroes: Hero[] = [
   {
     slug: 'armenia',
     title: 'Armenia',
     kicker: 'Kontur Population, OpenStreetMap, geoBoundaries, World Bank',
-    hook: 'A country in 3D hexagons, then redesigned from its own stone and light.',
+    hook: 'A whole country in 3,823 glowing 3D hexagons, Yerevan in 175 m cells, and the numbers behind its rise.',
     question: 'Where do Armenia’s people live, down to a city block, and how fast is the country rising?',
-    numbers: [
-      { value: '12,708', label: 'inhabited hexagons; Yerevan in 175 m cells' },
-      { value: '31 min + 47 min', label: 'first pass, then the design round' },
-      { value: 'Unchanged', label: 'requests and data loaded after the design round; idle CPU 0' },
-    ],
     shot: {
       src: '/showcase/hero-armenia.webp',
-      width: 2304,
-      height: 1280,
+      ...armeniaHero,
       alt: 'Armenia in hexagons: the country as 3D hexagon towers in basalt and apricot tuff, Mount Ararat across the border, under the headline “Half of Armenia lives on 1.0% of its land”',
     },
     asked:
-      'Build the most beautiful, genuinely insightful project on Armenia: the whole country in hexagons, Yerevan up close, and the numbers behind its rise. Then read our new design guidance and refactor it into the design only Armenia could have.',
+      'Build the most beautiful, genuinely insightful project on Armenia: the whole country in hexagons, Yerevan up close, and the numbers behind its rise.',
     did: [
-      'First pass: the country as 3D hexagons in three.js with a fly-in to each province, Yerevan in 2,167 hexagons of 175 m, and a report on the rise. Correct and cheap, but generic: a dark dashboard with a neon colour ramp.',
-      'Refactored with the guidance, keeping the cubes, the dashboard items and the settings.',
-      'Took the palette from the place: basalt, pink and apricot tuff, pomegranate, the blue of Lake Sevan. It stays a setting.',
-      'Led with findings computed from the data: seven in ten Armenians live within 100 km of Mount Ararat; half of Yerevan’s cafés, restaurants and bars are within 1.2 km of Republic Square.',
-      'Made the motion explain: the country rises in a wave spreading from Ararat, and the report replays 1995–2025 and marks the years that bent the line.',
+      'Took on population cells, OpenStreetMap buildings and places, province and district outlines, and World Bank series, each its own file.',
+      'Built cubes that join them: places land on Yerevan’s 175 m grid, population is spread down to those cells, and the hexagon geometry lives in the cube, so no map tiles are needed.',
+      'Drew the country as 3D hexagon towers in three.js with a fly-in to each province, and Yerevan as a hexagon map with four layers and a district scoreboard.',
+      'Wrote three linked pages, the last a report on the rise with a heatmap spec chart.',
+      'Then read our design guidance and reworked the look: a palette from basalt, tuff and apricot, findings computed per hexagon (seven in ten Armenians live within 100 km of Mount Ararat), and a wave that rises from Ararat.',
+      'Checked every page in a browser at two widths and at double density, with hovers and clicks.',
     ],
-    rounds: {
-      intro:
-        'The same agent and the same data. On the left the first pass; on the right the refactor after it read our design guidance.',
-      items: [
-        {
-          title: 'Armenia in hexagons',
-          before: { src: '/showcase/armenia-17-before.webp', ...armenia17, alt: 'First pass: a purple night map of Armenia in hexagons with a side rail of province bars' },
-          after: {
-            src: '/showcase/armenia-17-after.webp',
-            ...armenia17,
-            alt: 'After the guidance: Armenia as hexagon towers in basalt and apricot tuff, Mount Ararat standing across the border',
-          },
-          text: 'A generic purple night map became basalt and tuff that warms to apricot, with Ararat standing across the border. The new finding is computed per hexagon: seven in ten Armenians, 1,991,468 people, live within 100 km of the mountain.',
-        },
-        {
-          title: 'Yerevan, up close',
-          before: { src: '/showcase/armenia-18-before.webp', ...armenia, alt: 'First pass: Yerevan in 175 m hexagons in pink, with a district scoreboard' },
-          after: {
-            src: '/showcase/armenia-18-after.webp',
-            ...armenia,
-            alt: 'After the guidance: Yerevan in tuff-coloured hexagons with rings around Republic Square and a bearing to Mount Ararat',
-          },
-          text: 'The headline became a finding about distance: half of Yerevan’s cafés, restaurants and bars are within 1.2 km of Republic Square, while half its people live more than 4.9 km out. The layers follow the day, from morning errands to night.',
-        },
-        {
-          title: 'Armenia rising',
-          before: { src: '/showcase/armenia-19-before.webp', ...armenia, alt: 'First pass: a dark report on Armenia’s growth with four headline figures and a line chart' },
-          after: {
-            src: '/showcase/armenia-19-after.webp',
-            ...armenia,
-            alt: 'After the guidance: a daylight report in limestone and apricot with a replayable line of GDP per person and the years that bent it marked',
-          },
-          text: 'A dark report became a daylight document in limestone and apricot. The hero chart replays 1995–2025 and marks the years that bent the line: 2009, 2020 and 2022.',
-        },
-      ],
-    },
+    uses: ['custom-visual', 'custom-page', 'spec-chart', 'cube'],
   },
   {
     slug: 'globe',
@@ -153,11 +120,6 @@ export const heroes: Hero[] = [
     kicker: 'USGS Earthquake Hazards Program',
     hook: 'Every earthquake of the last 30 days, 10,718 of them, as beams of light on a 3D globe.',
     question: 'Where did the Earth shake this month, how hard and how deep?',
-    numbers: [
-      { value: '10,718', label: 'earthquakes of every magnitude' },
-      { value: '2.3 s → 0.17 s', label: 'the page blocked the browser while loading' },
-      { value: '3.5 MB → 0.8 MB', label: 'loaded, before and after the performance round' },
-    ],
     shot: {
       src: '/showcase/hero-globe.webp',
       ...hero,
@@ -165,11 +127,13 @@ export const heroes: Hero[] = [
     },
     asked: 'Put every earthquake of the last 30 days on a 3D globe, sized by magnitude and colored by depth, with a stats page next to it.',
     did: [
-      'Drew a 3D globe in the browser with every quake as a glowing beam: height is magnitude, color is depth.',
-      'Drew the continents in code, since a component loads no images from the internet.',
-      'Added a daily timeline you can replay, and made a click on a region or a quake filter the page.',
-      'Wrote a stats page whose sentences are computed from the data, such as “one every 4.0 minutes”.',
+      'Imported the events and built a cube that parses the region out of each place name and adds day, hour, depth and magnitude bands.',
+      'Wrote a three.js globe with the continents drawn in code: every quake a beam, height for magnitude, colour for depth, rings for the M6+ events.',
+      'Added a daily timeline you can replay, and made a click on a quake filter the page to its region.',
+      'Wrote a stats page whose sentences are query results, such as “one every 4.0 minutes”, with a day × hour heatmap.',
+      'Looked at the result, then moved the strongest-quakes list into the database and removed a texture blur that held the page up while loading.',
     ],
+    uses: ['custom-visual', 'custom-page', 'spec-chart', 'clicks'],
   },
   {
     slug: 'market',
@@ -177,36 +141,28 @@ export const heroes: Hero[] = [
     kicker: 'NASDAQ screener snapshot, Sep 24, 2026',
     hook: 'The whole NASDAQ on one lap: every sector an arc, every arc a treemap of its companies.',
     question: 'How is the market doing today, and which giants move it?',
-    numbers: [
-      { value: '3,500', label: 'listed companies, area true to market cap' },
-      { value: '744 KB → 413 KB', label: 'loaded by the track, before and after the performance round' },
-      { value: '17.6 min · $5.90', label: 'the first build' },
-    ],
     shot: {
       src: '/showcase/hero-market.webp',
       ...hero,
-      alt: 'Market track: a ring of sectors, each a treemap of companies sized by market cap and colored by the day’s change, with $58.22T in the centre and a table of the largest companies',
+      alt: 'Market track: a ring of sectors, each a treemap of companies sized by market cap and colored by the day’s change, with the NASDAQ total in the centre and a table of the largest companies',
     },
     asked:
       'Show the whole NASDAQ as a circular track, with each sector’s arc a treemap of its companies sized by market cap and colored by today’s change.',
     did: [
-      'Laid the market out as a circular track: each sector is an arc, and each arc is a treemap of its companies.',
-      'Kept the geometry honest: tile area is proportional to market cap, and the smallest companies merge into “+N others”.',
-      'Sized companies by market cap and colored them by the day’s change.',
-      'Made a click on a sector zoom it around the ring; in filter mode, a click filters the table beside it instead.',
+      'Imported the snapshot and built a cube that adds each company’s cap change, advancer and decliner flags, cap tiers and move bands.',
+      'Invented the chart in SVG and React: sectors as arcs, each a treemap whose tile area is exactly proportional to market cap, with the smallest companies merged into “+N others”.',
+      'Gave it click modes: zoom a sector around the ring, or filter the table beside it.',
+      'Built a sector stats page: a scoreboard and a concentration curve, with spec charts for sector moves, gainers, losers and size against move.',
+      'Checked it in a browser at two widths and in its zoomed state, then moved the scoreboard’s sums into the database.',
     ],
+    uses: ['custom-visual', 'spec-chart', 'clicks', 'cube'],
   },
   {
     slug: 'oval',
     title: 'The oval',
     kicker: 'nascaR.data, Cup Series results 1949–2026',
-    hook: 'A speedway whose racing surface is a treemap of the season’s field.',
-    question: 'Who is winning this season, and how does it compare with 78 seasons of history?',
-    numbers: [
-      { value: '101,230', label: 'rows of race results' },
-      { value: '55,732 → 2,251', label: 'rows loaded, before and after the performance round' },
-      { value: '3.2 s → 0.21 s', label: 'slowest query' },
-    ],
+    hook: 'A speedway whose racing surface is a treemap of the season’s field, with 78 seasons to replay.',
+    question: 'Who is winning this season, and how does it compare with every season since 1949?',
     shot: {
       src: '/showcase/hero-oval.webp',
       ...hero,
@@ -214,11 +170,13 @@ export const heroes: Hero[] = [
     },
     asked: 'Draw a NASCAR oval whose track surface is itself a treemap of the current season’s field, with a season picker to replay history.',
     did: [
-      'Made the racing surface a treemap of the season’s field: manufacturer, team, driver, with area by points.',
-      'Put the standings in the infield and one pit stall per race on pit road, in the winner’s colors.',
-      'Added a season picker that replays history back to 1949, and a Legends page.',
-      'Moved rankings and career totals into small pre-aggregated tables in the database.',
+      'Imported 101,230 race results. When the first import turned car “07” into 7, it re-imported them as text and typed the columns in the cube.',
+      'Turned season rank, main manufacturer and career wins into ordinary fields with window functions in the cube.',
+      'Drew the speedway in SVG: the racing surface a treemap of make, team and driver, the standings in the infield, a pit stall per race in the winner’s colours.',
+      'Wrote one page for three dashboards, the oval, season stats and Legends, with a season picker that replays history back to 1949.',
+      'Moved rankings and career totals into small pre-aggregated cubes, so the page reads a few thousand rows instead of tens of thousands.',
     ],
+    uses: ['custom-visual', 'custom-page', 'spec-chart', 'cube'],
   },
   {
     slug: 'climate',
@@ -226,11 +184,6 @@ export const heroes: Hero[] = [
     kicker: 'Our World in Data, CO₂ 1950–2024',
     hook: 'The world’s CO₂ as a wall of numbers over a live aurora, with a clock that counts from the moment you arrive.',
     question: 'How much CO₂ does the world emit, and who emits it?',
-    numbers: [
-      { value: '38.6 Gt', label: 'emitted in 2024, taken from the World row of the data' },
-      { value: '1,223 t', label: 'of CO₂ a second, the 2024 rate the live clock counts at' },
-      { value: '17,982 → 974', label: 'rows loaded by Who emits after the performance round' },
-    ],
     shot: {
       src: '/showcase/hero-pulse.webp',
       ...hero,
@@ -243,7 +196,9 @@ export const heroes: Hero[] = [
       'Took world totals only from the World row and ranked the 218 countries alone, so no tonne is counted twice.',
       'Wrote the stats wall as a page: an aurora drawn on the GPU with three.js, five figures that count up over sparklines, and a live carbon clock.',
       'Built a second page, “Who emits”: a treemap of continents and countries that replays 1950–2024, bubbles, a dumbbell and the fuel mix, all filtered by pills and clicks.',
+      'Made the charts follow their box when the page or the side panel changes width.',
     ],
+    uses: ['custom-page', 'custom-visual', 'spec-chart', 'clicks', 'cube'],
   },
 ]
 
@@ -252,11 +207,10 @@ export const cases: Case[] = [
     slug: 'armenia',
     title: 'Armenia',
     data: 'Kontur Population, OpenStreetMap, geoBoundaries, World Bank',
-    thumb: { src: '/showcase/armenia-17-after.webp', ...armenia17, alt: '' },
+    thumb: { src: '/showcase/hero-armenia.webp', ...armeniaHero, alt: '' },
     question: 'How do I map where people live, down to a city block, with no map tiles?',
-    how: 'Three dashboards: the country as 3D hexagons in three.js, Yerevan in 175 m hexagons with four layers, and a report on the rise. Joins and geometry live in the cube. A second round with our design guidance reworked the look.',
-    uses: ['custom-visual', 'custom-page', 'spec-chart'],
-    result: ['31 min, then 47 min for the design round', 'The design round added no requests and no data; idle CPU stayed 0'],
+    how: 'The country as 3D hexagons in three.js, Yerevan in 175 m hexagons with four layers, and a report on the rise. The joins and the geometry live in the cube.',
+    uses: ['custom-visual', 'custom-page', 'cube'],
     href: '#armenia',
   },
   {
@@ -265,20 +219,18 @@ export const cases: Case[] = [
     data: 'USGS, 10,718 earthquakes in 30 days',
     thumb: { src: '/showcase/globe.webp', ...wide, alt: '' },
     question: 'How do I show thousands of events in space and in time?',
-    how: 'A WebGL globe in three.js with every quake as a beam (height is magnitude, colour is depth), a daily timeline you can replay, and clicks that filter the built-in charts beside it.',
+    how: 'A WebGL globe with every quake as a beam, a daily timeline you can replay, and clicks that filter the charts beside it.',
     uses: ['custom-visual', 'built-in', 'clicks'],
-    result: ['Built in 26.8 min · $8.42', '3.5 MB → 0.8 MB loaded; the browser blocked 2.3 s → 0.17 s'],
     href: '#globe',
   },
   {
     slug: 'quake-stats',
     title: 'The last 30 days',
-    data: 'USGS, the same 10,718 earthquakes',
+    data: 'USGS, the same earthquakes',
     thumb: { src: '/showcase/quake-stats.webp', width: 1000, height: 625, alt: '' },
     question: 'Can the headline be computed from the data instead of typed?',
     how: 'A report page where every sentence is a query result, such as “one every 4.0 minutes” and “240 were not earthquakes”, with a day × hour heatmap and the M6+ events marked.',
     uses: ['custom-page', 'spec-chart'],
-    result: ['13,213 → 2,336 rows and 1.65 MB → 94 KB after the performance round', 'The strongest-quakes list: 1.5 MB sorted in the browser → 1.2 KB from the database'],
   },
   {
     slug: 'market',
@@ -286,9 +238,8 @@ export const cases: Case[] = [
     data: 'NASDAQ screener, 3,500 companies',
     thumb: { src: '/showcase/nasdaq-track.webp', ...wide, alt: '' },
     question: 'How do I show a whole market, its sectors and its giants on one screen?',
-    how: 'An invented chart form in SVG and React: a ring of sectors, each a treemap of its companies with area true to market cap. A click zooms a sector around the ring, or in filter mode filters the table beside it.',
+    how: 'An invented chart form: a ring of sectors, each a treemap of its companies with area true to market cap. A click zooms a sector around the ring or filters the table beside it.',
     uses: ['custom-visual', 'clicks'],
-    result: ['Built in 17.6 min · $5.90', '744 KB → 413 KB loaded after the performance round'],
     href: '#market',
   },
   {
@@ -299,17 +250,15 @@ export const cases: Case[] = [
     question: 'How concentrated is the market, and who moved today?',
     how: 'A scoreboard and a concentration curve as custom visuals, with spec charts for sector moves, the biggest gainers and losers, and size against move. Everything follows the filters.',
     uses: ['custom-visual', 'spec-chart', 'clicks'],
-    result: ['10,491 → 3,880 rows and 718 KB → 184 KB after the performance round', 'The scoreboard reads 24 rows instead of 3,500'],
   },
   {
     slug: 'oval',
     title: 'The oval',
-    data: 'nascaR.data, 101,230 race results, 1949–2026',
+    data: 'nascaR.data, Cup Series results 1949–2026',
     thumb: { src: '/showcase/nascar-oval.webp', ...wide, alt: '' },
     question: 'How do I show this season’s standings and 78 seasons of history in one view?',
-    how: 'The racing surface is a treemap of the field (manufacturer, team, driver), with the standings in the infield, a pit stall per race and a season replay back to 1949. Season ranks are window functions in the cube.',
-    uses: ['custom-visual', 'window', 'pre-aggregated'],
-    result: ['Built in 39.3 min · $12.18', '55,732 → 2,251 rows, 3.37 MB → 129 KB; slowest query 3.2 s → 0.21 s'],
+    how: 'The racing surface is a treemap of the field, with the standings in the infield, a pit stall per race and a season replay back to 1949. Season ranks are window functions in the cube.',
+    uses: ['custom-visual', 'cube'],
     href: '#oval',
   },
   {
@@ -318,9 +267,8 @@ export const cases: Case[] = [
     data: 'nascaR.data, every Cup season since 1949',
     thumb: { src: '/showcase/nascar-legends.webp', ...half, alt: '' },
     question: 'Who are the greatest drivers, and when did they win?',
-    how: 'A page with a headline computed from the data, “Richard Petty’s 200 wins still top the list — 95 more than David Pearson”, career wins and every 50-win career on one timeline. Career totals come from small pre-aggregated cubes.',
-    uses: ['custom-page', 'pre-aggregated'],
-    result: ['Slowest query 2.7 s → 0.26 s after the performance round'],
+    how: 'A page with a headline computed from the data, “Richard Petty’s 200 wins still top the list — 95 more than David Pearson”, career wins and every 50-win career on one timeline.',
+    uses: ['custom-page', 'cube'],
   },
   {
     slug: 'climate',
@@ -328,9 +276,8 @@ export const cases: Case[] = [
     data: 'Our World in Data, CO₂ 1950–2024',
     thumb: { src: '/showcase/pulse.webp', ...wide, alt: '' },
     question: 'What is the one number about CO₂ everyone should see?',
-    how: 'A full-screen stats wall over an aurora drawn by shaders, with figures that count up, a sparkline under each and a live carbon clock: 38.6 Gt in 2024, 1,223 tonnes every second. Every number comes from the data.',
+    how: 'A full-screen wall of figures over an aurora drawn by shaders, each counting up over a sparkline, with a live carbon clock. Every number comes from the data.',
     uses: ['custom-page'],
-    result: ['Built with Who emits in 19.1 min · $5.87', 'Blocking while loading 178 → 76 ms after the performance round'],
     href: '#climate',
   },
   {
@@ -340,8 +287,7 @@ export const cases: Case[] = [
     thumb: { src: '/showcase/who-emits.webp', width: 1200, height: 806, alt: '' },
     question: 'Who emits the most, and how has that changed since 1950?',
     how: 'A continent → country treemap you can replay from 1950 to 2024, bubbles for emissions per person against the total, a dumbbell and the fuel mix. Pills and clicks filter everything.',
-    uses: ['custom-page', 'custom-visual', 'pre-aggregated', 'clicks'],
-    result: ['11 → 6 requests, 17,982 → 974 rows, 1.27 MB → 99 KB after the performance round'],
+    uses: ['custom-page', 'custom-visual', 'clicks'],
   },
   {
     slug: 'europe',
@@ -349,9 +295,8 @@ export const cases: Case[] = [
     data: 'World Bank WDI, 26 economies, 1960–2025',
     thumb: { src: '/showcase/europe.webp', ...wide, alt: '' },
     question: 'Can the agent rebuild a published report we like, inside our BI?',
-    how: 'A published data report rebuilt card for card, with Armenia added: 15 cards drawn by one custom visual with seven chart types, in a page whose cards are real, editable dashboard items. Indexes and moving averages are window functions in the cube.',
-    uses: ['custom-visual', 'custom-page', 'window', 'pre-aggregated'],
-    result: ['Built in 16.0 min · $5.12', '93 KB in 15 requests per load; 0 ms of CPU while idle'],
+    how: 'Card for card, with Armenia added: one custom visual draws all 15 cards in a page whose cards are real, editable dashboard items. Indexes and moving averages are window functions in the cube.',
+    uses: ['custom-visual', 'custom-page', 'cube'],
   },
   {
     slug: 'raw',
@@ -361,7 +306,6 @@ export const cases: Case[] = [
     question: 'Can a small model go from a raw feed to a dashboard on its own?',
     how: 'In the product’s chat, the model downloaded the feed, cleaned it with a Python script in its sandbox, imported it, modeled it and built an 8-panel dashboard.',
     uses: ['chat', 'built-in'],
-    result: ['24.1 min, 114 tool calls; 16 failed on arguments and all recovered', 'Correct data, plain charts'],
     by: 'DeepSeek V4 Flash',
   },
   {
@@ -371,12 +315,8 @@ export const cases: Case[] = [
     thumb: { src: '/showcase/report-opus.webp', width: 1200, height: 582, alt: '' },
     focus: '14% 0%',
     question: 'Can a small model produce a polished report without writing code?',
-    how: 'A reviewed report page filled by configuration only: every number a declared query you can hover to see, charts in slots, every text editable in the product’s layout settings.',
+    how: 'A reviewed report page filled by configuration only: every number a declared query you can hover to trace, charts in slots, every text editable in the layout settings. Claude Opus and DeepSeek V4 Flash both filled it without writing code.',
     uses: ['config-page', 'spec-chart'],
-    result: [
-      'Claude Opus: 10.7 min · $4.11, against 26 min · $8.14 when it wrote a report page as code',
-      'DeepSeek V4 Flash in the product’s chat: 5.8 min',
-    ],
   },
   {
     slug: 'samples',
@@ -386,53 +326,40 @@ export const cases: Case[] = [
     question: 'Which way of customizing MPP BI fits my case?',
     how: 'Our reference atlas: one dashboard per mechanism, each pushed to its maximum. Chart settings, click actions, a theme, a chart package, a markdown story, a page with slots, an LPE layout, a shell override and spec charts.',
     uses: ['built-in', 'spec-chart', 'custom-page', 'clicks'],
-    result: ['Nine dashboards, one per mechanism, on the same data'],
-  },
-  {
-    slug: 'values',
-    title: 'Every number explains itself',
-    data: 'All of the above, in our lab',
-    thumb: { src: '/values-graph/pulse-edit.webp', width: 905, height: 944, alt: '' },
-    focus: '0% 100%',
-    question: 'Where does this number come from, and what moved it?',
-    how: 'In edit mode every number shows the cube aggregates it is made of, its formula and what moved it between two periods, with no change to the code the agent wrote. Agents read the same graph.',
-    uses: ['preview'],
-    result: ['288 of 288 values equal the database’s own answer', '535 hovers on two atlases, 0 mismatches'],
-    href: '/values-graph',
   },
 ]
 
 /** Data of any complexity: the data, the problem it posed, how the platform handled it. */
 export const dataCases: { data: string; problem: string; handled: string; project: string }[] = [
   {
-    data: 'A raw GeoJSON feed from USGS: 2,020 quakes of M2.5+ over 30 days',
+    data: 'A raw GeoJSON feed from USGS',
     problem: 'Not a table: nested features, with the region buried in a free-text place name.',
     handled:
       'In the product’s chat the model downloaded it into its sandbox, wrote a Python script that made one clean row per quake and parsed the region, checked the result and imported the file.',
     project: 'From a raw feed to a dashboard',
   },
   {
-    data: '101,230 rows of NASCAR results, 1949–2026',
-    problem: 'Car numbers such as “07” are codes, not numbers, and the first import turned them into 7.',
+    data: 'Car numbers such as “07” and “00” in 101,230 race results',
+    problem: 'They are codes, not numbers, and the first import turned “07” into 7.',
     handled:
-      'The agent re-imported the column as text and typed the rest in the cube’s SQL. The import now spots leading zeros by itself and keeps such codes as text: “07” and “00” stay as they are.',
+      'The agent re-imported the column as text and typed the rest in the cube. The import now spots leading zeros by itself and keeps such codes as text.',
     project: 'The oval',
   },
   {
     data: 'World population: 8,045,311,447',
-    problem: 'Past the 32-bit range. The first import stored the column as a 32-bit integer and 8 billion came back empty.',
-    handled: 'The import now samples the tail rows and stores such columns as 64-bit numbers; 8,045,311,447 comes back intact.',
+    problem: 'Past the 32-bit range: the first import stored the column as a 32-bit integer and 8 billion came back empty.',
+    handled: 'The import now samples the tail rows too and stores such columns as 64-bit numbers.',
     project: 'Climate pulse',
   },
   {
     data: 'CO₂ for 218 countries, mixed in one column with “World” and other aggregate rows',
     problem: 'Add it up naively and the same tonnes are counted more than once.',
     handled:
-      'The cube’s SQL tags each row as a country or an aggregate and adds continents by ISO code. World totals come from the World row; rankings use countries only.',
+      'The cube tags each row as a country or an aggregate and adds continents by ISO code. World totals come from the World row; rankings use countries only.',
     project: 'Climate pulse, Who emits',
   },
   {
-    data: 'Kontur Population H3 cells, 12,708 for Armenia, with OpenStreetMap buildings and places',
+    data: 'Population in H3 cells, with OpenStreetMap buildings and places',
     problem: 'Separate files at different resolutions: people per cell, places as points, districts as polygons.',
     handled: 'Cubes join the uploaded files: places land on Yerevan’s 175 m grid, and population is spread down to those cells.',
     project: 'Armenia',
@@ -444,9 +371,9 @@ export const dataCases: { data: string; problem: string; handled: string; projec
     project: 'Armenia',
   },
   {
-    data: 'World Bank series in long format: 26 economies, 13 indicators, 1960–2025',
+    data: 'World Bank series in long format: 26 economies, 13 indicators',
     problem: 'One row per economy, indicator and year, while the charts need an index to 1992, moving averages and the latest values.',
-    handled: 'Window functions in the cube compute the index, a 3-year moving average and the latest year. The browser only groups rows into lines.',
+    handled: 'Window functions in the cube compute the index, the moving average and the latest year. The browser only groups rows into lines.',
     project: 'Europe in charts',
   },
   {
@@ -456,21 +383,9 @@ export const dataCases: { data: string; problem: string; handled: string; projec
     project: 'The oval',
   },
   {
-    data: '55,732 rows the oval pulled on every load',
-    problem: 'Rankings and career totals computed from raw results: 3.37 MB per load, and a slowest query of 3.2 s.',
-    handled: 'Four small pre-aggregated cubes (driver by season, career, career seasons, race finishes): 2,251 rows, 129 KB, 0.21 s.',
+    data: 'Seventy-eight seasons of history behind one page',
+    problem: 'Rankings and career totals computed from raw results on every load made the page slow.',
+    handled: 'Small pre-aggregated cubes (driver by season, career, career seasons, race finishes) hold the heavy work, computed once and queried cheaply.',
     project: 'The oval',
   },
-]
-
-/** The performance round, before → after. */
-export const speedups = [
-  { page: 'The oval', measure: 'Rows loaded', before: '55,732', after: '2,251' },
-  { page: 'The oval', measure: 'Data loaded', before: '3.37 MB', after: '129 KB' },
-  { page: 'The oval', measure: 'Slowest query', before: '3.2 s', after: '0.21 s' },
-  { page: 'Climate pulse', measure: 'Rows loaded', before: '17,982', after: '974' },
-  { page: 'Climate pulse', measure: 'Data loaded', before: '1.27 MB', after: '99 KB' },
-  { page: 'Shaking Earth', measure: 'Data loaded', before: '3.5 MB', after: '0.8 MB' },
-  { page: 'Shaking Earth', measure: 'Browser blocked while loading', before: '2.3 s', after: '0.17 s' },
-  { page: 'Market track', measure: 'Data for the sector stats', before: '718 KB', after: '184 KB' },
 ]

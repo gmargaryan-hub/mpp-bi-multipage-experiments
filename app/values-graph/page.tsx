@@ -118,7 +118,7 @@ export default function ValuesGraphPage() {
             </p>
             <p className="mt-4 leading-relaxed">
               View mode is untouched: each component runs its own published code byte for byte, with the same requests,
-              script time and memory. Entering edit mode costs about 150 to 180 ms more, and 2 to 5 MB of memory.
+              script time and memory.
             </p>
           </div>
 
@@ -128,7 +128,7 @@ export default function ValuesGraphPage() {
               alt="Climate pulse in edit mode: hovering 38.6 opens a card showing sum of CO₂ for 2024 divided by 1,000"
               width={905}
               height={944}
-              caption="Climate pulse, the page an agent wrote, unchanged. In edit mode, 38.6 opens as sum(co2) for 2024 ÷ 1,000; opening it costs no request."
+              caption="Climate pulse, the page an agent wrote, unchanged. In edit mode, 38.6 opens as sum(co2) for 2024 ÷ 1,000."
               unoptimized
             />
             <div>
@@ -143,7 +143,7 @@ export default function ValuesGraphPage() {
             alt="A card explaining 1,623 Gt: the page’s running total, recognised as one sum of CO₂ over 1950–2024 divided by 1,000, split by year"
             width={1600}
             height={661}
-            caption="A running total the page adds up in the browser is recognised as one cube aggregate, sum(co2) over 1950–2024 ÷ 1,000, and splits by year in one request."
+            caption="A running total the page adds up in the browser is recognised as one cube aggregate, sum(co2) over 1950–2024 ÷ 1,000, and splits by year."
             unoptimized
           />
           <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -181,7 +181,7 @@ export default function ValuesGraphPage() {
             alt="How the rate per night is made: $151.37 equals revenue 32,846.5 divided by nights 217, both split by channel, with what moved it from June to July"
             width={1600}
             height={506}
-            caption="$151.37 = sum(revenue) 32,846.5 ÷ sum(nights) 217. The sensitivities are the ones you get by hand: 1/217 = 0.00461 and −0.698. Four requests in all."
+            caption="$151.37 = sum(revenue) 32,846.5 ÷ sum(nights) 217. The sensitivities are the ones you get by hand: 1/217 = 0.00461 and −0.698."
             unoptimized
           />
           <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -198,7 +198,7 @@ export default function ValuesGraphPage() {
               alt="Cumulative CO₂ from 1950 to 1991 split by year, seven years shown and 35 more folded"
               width={1600}
               height={664}
-              caption="A sparkline point on Climate pulse, CO₂ from 1950 to 1991, split by year in one request. The 42 years add up to the page’s own sum."
+              caption="A sparkline point on Climate pulse, CO₂ from 1950 to 1991, split by year. The 42 years add up to the page’s own sum."
               unoptimized
             />
           </div>
@@ -253,7 +253,7 @@ export default function ValuesGraphPage() {
               alt="The NASDAQ market track in edit mode: $58.22T opens as the sum of market cap over all 3,500 rows divided by a trillion, split into sectors"
               width={1200}
               height={1012}
-              caption="The NASDAQ total, $58.22T: one sum(market_cap) over all 3,500 rows, split by sector in one request."
+              caption="The NASDAQ total, $58.22T: one sum(market_cap) over all 3,500 rows, split by sector."
               unoptimized
             />
             <div>

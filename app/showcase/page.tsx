@@ -7,45 +7,100 @@ import DemoButton from '@/components/DemoButton'
 import CTABand from '@/components/CTABand'
 import { Container, PageHeader, Preview, RuleList, Screenshot, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
-import { cases, dataCases, heroes, mechanisms, speedups, type Case, type Hero, type Stat } from '@/lib/showcase'
+import { capabilityOrder, cases, dataCases, heroes, mechanisms, type Case, type Hero, type Mechanism } from '@/lib/showcase'
 
 export const metadata: Metadata = {
   title: 'What the engine builds | MPP BI',
   description:
-    'Armenia in 3D hexagons, earthquakes on a 3D globe, the NASDAQ as a ring of treemaps, 78 seasons of racing on an oval and CO₂ over a live aurora: what an AI agent built inside MPP BI, every case and how it was solved, with the measured numbers.',
+    'Armenia in 3D hexagons, earthquakes on a 3D globe, the NASDAQ as a ring of treemaps, 78 seasons of racing on an oval and CO₂ over a live aurora: what AI agents built inside MPP BI, how, and what keeps their work grounded.',
 }
 
 const credits = [
+  { what: 'Armenia', source: 'Kontur Population 2023 (CC BY 4.0), © OpenStreetMap contributors (ODbL) via Geofabrik, geoBoundaries (CC BY 4.0), World Bank World Development Indicators (CC BY 4.0).' },
   { what: 'Shaking Earth and the raw feed', source: 'USGS Earthquake Hazards Program.' },
-  { what: 'Climate pulse and Who emits', source: 'Our World in Data, CC BY 4.0.' },
-  { what: 'Market track and Sector stats', source: 'NASDAQ stock screener snapshot, Sep 24, 2026.' },
   { what: 'The oval and Legends', source: 'nascaR.data, with race results from DriverAverages.com.' },
+  { what: 'Climate pulse and Who emits', source: 'Our World in Data, CC BY 4.0.' },
   { what: 'Europe in charts', source: 'World Bank World Development Indicators, CC BY 4.0.' },
-  {
-    what: 'Armenia',
-    source:
-      'Kontur Population 2023 (CC BY 4.0), © OpenStreetMap contributors (ODbL) via Geofabrik, geoBoundaries (CC BY 4.0), World Bank World Development Indicators (CC BY 4.0).',
-  },
+  { what: 'Market track and Sector stats', source: 'NASDAQ stock screener snapshot, Sep 24, 2026.' },
 ]
 
 const contents = [
   { href: '#use-cases', label: 'Five use cases' },
-  { href: '#cases', label: 'Every case, and how it was solved' },
+  { href: '#platform', label: 'One platform' },
+  { href: '#cases', label: 'Every case' },
   { href: '#data', label: 'Data of any complexity' },
-  { href: '#fast', label: 'How it stays fast' },
-  { href: '#values', label: 'Every number explains itself' },
+  { href: '#grounded', label: 'What keeps it grounded' },
+  { href: '#lab', label: 'From the lab' },
 ]
 
-function Stats({ items }: { items: Stat[] }) {
+type Status = 'available' | 'lab'
+
+const grounding: { title: string; body: string; status: Status[]; href: string; link: string }[] = [
+  {
+    title: 'One semantic model',
+    body: 'Every visual above asks a cube, never a raw table. Measures are LPE expressions that run in your database, and heavy logic lives in the cube, where every chart can use it.',
+    status: ['available'],
+    href: '/governance#model',
+    link: 'The data model',
+  },
+  {
+    title: 'Checks that look at what’s rendered',
+    body: 'The agent opens what it built in a browser, as you, and reads what a viewer sees and what the page costs to load. Then it fixes what it finds: labels that collide, a heatmap scrambled by a partial day, heavy work that belongs in the database.',
+    status: ['available'],
+    href: '/governance#quality',
+    link: 'Checks on what it builds',
+  },
+  {
+    title: 'Every number traceable',
+    body: 'In a report kit page every number is a declared query you can hover to trace. In our lab, any number on any dashboard opens down to the cube aggregates it is made of.',
+    status: ['available', 'lab'],
+    href: '/values-graph',
+    link: 'Every number explains itself',
+  },
+  {
+    title: 'The agent acts as you',
+    body: 'It works in your signed-in session, with your permissions and no service account, so it sees and changes only what you may. Its code passes publish checks before it reaches a dashboard.',
+    status: ['available'],
+    href: '/governance#access',
+    link: 'Access control',
+  },
+]
+
+const lab = [
+  {
+    title: 'Every number explains itself',
+    body: 'Hover any number in edit mode, including on the pages above, and see the cube aggregates it is made of and what moved it between two periods.',
+    href: '/values-graph',
+  },
+  {
+    title: 'Answers from the data',
+    body: 'Assistants read the same graph, so “why did the rate per night fall?” is answered from the split, not from a guess.',
+    href: '/values-graph#agents',
+  },
+  {
+    title: 'Numbers that must add up',
+    body: 'The render check splits a chart’s numbers by a field and flags one whose parts don’t add up to its total.',
+    href: '/governance#quality',
+  },
+]
+
+function Tags({ uses, className = '' }: { uses: Mechanism[]; className?: string }) {
   return (
-    <dl className="mt-8 grid grid-cols-1 gap-x-8 gap-y-5 border-t border-line pt-6 sm:grid-cols-3">
-      {items.map((n) => (
-        <div key={n.label} className="flex flex-col-reverse justify-end">
-          <dt className="mt-1 text-sm leading-snug text-slate">{n.label}</dt>
-          <dd className="text-lg font-semibold tabular-nums text-ink md:text-xl">{n.value}</dd>
-        </div>
+    <ul className={`flex flex-wrap gap-1.5 ${className}`} aria-label="How it was built">
+      {uses.map((u) => (
+        <li key={u} className="rounded bg-tint px-2 py-0.5 text-xs text-brand">
+          {mechanisms[u].label}
+        </li>
       ))}
-    </dl>
+    </ul>
+  )
+}
+
+function StatusBadge({ s }: { s: Status }) {
+  return s === 'lab' ? (
+    <span className="whitespace-nowrap rounded-full border border-brand/30 bg-tint px-2.5 py-0.5 font-mono text-[11px] text-brand">In the lab</span>
+  ) : (
+    <span className="whitespace-nowrap rounded-full border border-brand bg-brand px-2.5 py-0.5 font-mono text-[11px] text-white">Available</span>
   )
 }
 
@@ -67,37 +122,23 @@ function HeroSection({ h, n, tone }: { h: Hero; n: number; tone: 'white' | 'pape
       </div>
 
       <Screenshot className="mt-10" src={h.shot.src} alt={h.shot.alt} width={h.shot.width} height={h.shot.height} priority={n === 1} unoptimized />
-      <Stats items={h.numbers} />
 
-      {h.rounds && (
-        <div className="mt-12">
-          <h3 className="text-xl font-semibold">Before and after our design guidance</h3>
-          <p className="mt-2 max-w-2xl leading-relaxed">{h.rounds.intro}</p>
-          <div className="mt-8 space-y-10">
-            {h.rounds.items.map((r) => (
-              <div key={r.title}>
-                <h4 className="font-semibold text-ink">{r.title}</h4>
-                <div className="mt-3 grid grid-cols-2 gap-3 md:gap-6">
-                  <Screenshot src={r.before.src} alt={r.before.alt} width={r.before.width} height={r.before.height} caption="First pass" unoptimized />
-                  <Screenshot src={r.after.src} alt={r.after.alt} width={r.after.width} height={r.after.height} caption="After the guidance" unoptimized />
-                </div>
-                <p className="mt-3 max-w-3xl leading-relaxed">{r.text}</p>
-              </div>
-            ))}
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+        <div>
+          <h3 className="text-sm font-medium text-slate">What the agent did</h3>
+          <RuleList className="mt-3" items={h.did} />
+        </div>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-sm font-medium text-slate">The ask</h3>
+            <p className="mt-2 rounded-lg rounded-tl-sm bg-tint px-4 py-3 leading-relaxed text-ink">{h.asked}</p>
+          </div>
+          <div>
+            <h3 className="text-sm font-medium text-slate">Built with</h3>
+            <Tags className="mt-2" uses={h.uses} />
           </div>
         </div>
-      )}
-
-      <details className="mt-8 border-t border-line pt-5">
-        <summary className="cursor-pointer text-sm font-medium text-brand">The brief, and what the agent did</summary>
-        <div className="mt-5 grid gap-8 lg:grid-cols-2 lg:gap-12">
-          <p className="leading-relaxed">
-            <span className="font-medium text-ink">The ask: </span>
-            {h.asked}
-          </p>
-          <RuleList items={h.did} />
-        </div>
-      </details>
+      </div>
     </Section>
   )
 }
@@ -123,21 +164,7 @@ function CaseCard({ c }: { c: Case }) {
         </p>
         <h3 className="mt-2 text-lg font-semibold leading-snug">{c.question}</h3>
         <p className="mt-2 text-sm leading-relaxed">{c.how}</p>
-        <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="How it was solved">
-          {c.uses.map((u) => (
-            <li key={u} className="rounded bg-tint px-2 py-0.5 text-xs text-brand">
-              {mechanisms[u].label}
-            </li>
-          ))}
-        </ul>
-        <div className="mt-4 border-t border-line pt-3">
-          <p className="text-xs font-medium uppercase tracking-wide text-slate">Result</p>
-          <ul className="mt-1.5 space-y-1 text-sm leading-snug text-ink">
-            {c.result.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ul>
-        </div>
+        <Tags className="mt-3" uses={c.uses} />
         {c.href && (
           <div className="mt-auto pt-4">
             <Link href={c.href.startsWith('#') ? `/showcase${c.href}` : c.href} className={buttonClass.link}>
@@ -151,13 +178,15 @@ function CaseCard({ c }: { c: Case }) {
 }
 
 export default function ShowcasePage() {
+  const usedIn = (m: Mechanism) => cases.filter((c) => c.uses.includes(m)).map((c) => c.title)
+
   return (
     <>
       <Navigation />
       <main>
         <PageHeader
           title="What the engine builds"
-          lede="An AI agent built these projects inside an MPP BI installation, with MPP BI’s own agent tools. First, five with custom plots no chart menu has. Then every case we have run: the question it answers, how it was solved and what it measured. Then the data they ran on. The agent was Claude Opus, working through MPP BI’s MCP server, except where DeepSeek V4 Flash is named."
+          lede="AI agents built these inside an MPP BI installation with MPP BI’s own agent tools: they took on the data, modeled it, wrote the visuals and pages, then looked at the result and fixed what they found. A country in hexagons, a 3D globe, a market as a ring of treemaps, a racing oval that is a treemap and a live aurora page, all on one semantic model. The agent was Claude Opus, working through MPP BI’s MCP server, except where DeepSeek V4 Flash is named."
         >
           <DemoButton label="Try it on your data" />
           <TextLink href="#cases">Find a case like yours</TextLink>
@@ -183,25 +212,36 @@ export default function ShowcasePage() {
           ))}
         </div>
 
-        <Section id="cases" tone={heroes.length % 2 ? 'paper' : 'white'}>
+        <Section id="platform" tone={heroes.length % 2 ? 'paper' : 'white'}>
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">One platform, very different results</h2>
+            <p className="mt-4 text-lg leading-relaxed">
+              None of the views above is a chart type MPP BI ships. They come from the same few mechanisms, which the agent
+              can use as freely as a developer, and all of them read the same semantic model as every other chart.
+            </p>
+          </div>
+          <ul className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
+            {capabilityOrder.map((m) => (
+              <li key={m} className="border-t-2 border-brand pt-5">
+                <h3 className="text-lg font-semibold">{mechanisms[m].label}</h3>
+                <p className="mt-2 leading-relaxed">{mechanisms[m].text}</p>
+                <p className="mt-3 text-sm leading-snug text-slate">
+                  <span className="font-medium text-body">Used in: </span>
+                  {usedIn(m).join(', ')}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section id="cases" tone={heroes.length % 2 ? 'white' : 'paper'}>
           <div className="max-w-2xl">
             <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">Every case, and how it was solved</h2>
             <p className="mt-4 text-lg leading-relaxed">
-              Every project the agent built, with our reference samples and a preview from the lab. Each card starts with the
-              question it answers, so you can find the one that looks like yours, then says how it was solved and what we
-              measured.
+              Every project the agents built, with our reference samples. Each card starts with the question it answers, so
+              you can find the one that looks like yours, then says how it was solved.
             </p>
           </div>
-          <dl className="mt-8 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
-            {Object.values(mechanisms)
-              .filter((m) => m.label !== 'In the lab')
-              .map((m) => (
-                <div key={m.label}>
-                  <dt className="inline rounded bg-tint px-2 py-0.5 text-xs text-brand">{m.label}</dt>
-                  <dd className="mt-1 leading-snug text-slate">{m.text}</dd>
-                </div>
-              ))}
-          </dl>
           <ul className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {cases.map((c) => (
               <CaseCard key={c.slug} c={c} />
@@ -209,7 +249,7 @@ export default function ShowcasePage() {
           </ul>
         </Section>
 
-        <Section id="data" tone={heroes.length % 2 ? 'white' : 'paper'}>
+        <Section id="data" tone={heroes.length % 2 ? 'paper' : 'white'}>
           <div className="max-w-2xl">
             <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">Data of any complexity</h2>
             <p className="mt-4 text-lg leading-relaxed">
@@ -242,64 +282,53 @@ export default function ShowcasePage() {
           </div>
         </Section>
 
-        <Section id="fast" tone={heroes.length % 2 ? 'paper' : 'white'}>
-          <div className="mb-10 max-w-2xl md:mb-12">
-            <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">How it stays fast</h2>
+        <Section id="grounded" tone={heroes.length % 2 ? 'white' : 'paper'}>
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">What keeps the agent’s work grounded</h2>
             <p className="mt-4 text-lg leading-relaxed">
-              After building, the agent opens the page and gets measured feedback: requests, rows, main-thread time and
-              memory. Then it fixes what the numbers show, mostly by moving aggregation into the database, where MPP BI runs
-              every calculation anyway.
-            </p>
-            <p className="mt-4 leading-relaxed">
-              The lessons went into the agent’s skills, so later projects start lean: Europe in charts loaded 93 KB in 15
-              requests on its first build, and Armenia’s design round added no requests and no data.
+              Freedom to build anything only helps if you can trust what was built. The same things hold under every project
+              on this page.
             </p>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[20rem] max-w-3xl text-left text-sm">
-              <thead className="border-b border-line text-slate">
-                <tr>
-                  <th scope="col" className="py-2 pr-4 font-medium">Page</th>
-                  <th scope="col" className="py-2 pr-4 font-medium">Measured</th>
-                  <th scope="col" className="py-2 pr-4 text-right font-medium">Before</th>
-                  <th scope="col" className="py-2 text-right font-medium">After</th>
-                </tr>
-              </thead>
-              <tbody className="tabular-nums">
-                {speedups.map((r) => (
-                  <tr key={`${r.page}-${r.measure}`} className="border-b border-line">
-                    <td className="py-2.5 pr-4 text-ink">{r.page}</td>
-                    <td className="py-2.5 pr-4">{r.measure}</td>
-                    <td className="whitespace-nowrap py-2.5 pr-4 text-right text-slate">{r.before}</td>
-                    <td className="whitespace-nowrap py-2.5 text-right font-medium text-ink">{r.after}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ul className="mt-10 grid gap-5 md:grid-cols-2">
+            {grounding.map((g) => (
+              <li key={g.title} className="flex flex-col rounded-lg border border-line bg-white p-5">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                  <h3 className="text-lg font-semibold">{g.title}</h3>
+                  {g.status.map((st) => (
+                    <StatusBadge key={st} s={st} />
+                  ))}
+                </div>
+                <p className="mt-2 leading-relaxed">{g.body}</p>
+                <div className="mt-auto pt-4">
+                  <TextLink href={g.href}>{g.link}</TextLink>
+                </div>
+              </li>
+            ))}
+          </ul>
         </Section>
 
-        <Section id="values" tone={heroes.length % 2 ? 'white' : 'paper'}>
-          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        <Section id="lab" tone={heroes.length % 2 ? 'paper' : 'white'}>
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-12">
             <div>
               <Preview />
-              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight md:text-4xl">Every number explains itself</h2>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight md:text-4xl">From the lab</h2>
               <p className="mt-4 text-lg leading-relaxed">
-                The report kit traces the numbers it declares. In our lab, every number on a dashboard does: hover it in edit
-                mode to see the cube aggregates it is made of and what moved it. It works on the pages above as they are, with
-                no change to the code the agent wrote.
+                What we are building next on top of these pages. It runs on our lab installation, not in the released product.
               </p>
-              <div className="mt-6">
-                <TextLink href="/values-graph">See the preview</TextLink>
-              </div>
             </div>
-            <Screenshot
-              src="/values-graph/pulse-edit.webp"
-              alt="Climate pulse in edit mode: hovering 38.6 opens a card showing it is sum of CO₂ for 2024 divided by 1,000"
-              width={905}
-              height={944}
-              unoptimized
-            />
+            <ul className="divide-y divide-line border-y border-line">
+              {lab.map((l) => (
+                <li key={l.title} className="py-5">
+                  <h3 className="text-lg font-semibold">
+                    <Link href={l.href} className="hover:text-brand">
+                      {l.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-1.5 leading-relaxed">{l.body}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </Section>
 
@@ -314,8 +343,8 @@ export default function ShowcasePage() {
               ))}
             </ul>
             <p className="mt-4 max-w-3xl text-sm text-slate">
-              USGS, Nasdaq, NASCAR and the World Bank are trademarks of their respective owners. These are independent
-              demos on public data and are not endorsed by them. The report kit and the samples use a sample hotel dataset.
+              USGS, Nasdaq, NASCAR and the World Bank are trademarks of their respective owners. These are independent demos
+              on public data and are not endorsed by them. The report kit and the samples use a sample hotel dataset.
             </p>
           </Container>
         </section>
