@@ -7,12 +7,12 @@ import DemoButton from '@/components/DemoButton'
 import CTABand from '@/components/CTABand'
 import { Container, PageHeader, Preview, RuleList, Screenshot, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
-import { cases, dataCases, heroes, mechanisms, type Case, type Hero, type Mechanism } from '@/lib/showcase'
+import { cases, dataCases, heroes, type Case, type Hero } from '@/lib/showcase'
 
 export const metadata: Metadata = {
   title: 'What the engine builds | MPP BI',
   description:
-    'Armenia in 3D hexagons, earthquakes on a 3D globe, the NASDAQ as a ring of treemaps, 78 seasons of racing on an oval and CO₂ over a live aurora: what AI agents built inside MPP BI, how, and what keeps their work grounded.',
+    'Armenia in 3D hexagons, earthquakes on a 3D globe, the NASDAQ as a ring, 78 seasons of racing on an oval and CO₂ over a live aurora: what AI agents built inside MPP BI, what they did for each question, and what keeps their work trustworthy.',
 }
 
 const credits = [
@@ -28,7 +28,7 @@ const contents = [
   { href: '#use-cases', label: 'Five use cases' },
   { href: '#cases', label: 'Every case' },
   { href: '#data', label: 'Data of any complexity' },
-  { href: '#grounded', label: 'What keeps it grounded' },
+  { href: '#grounded', label: 'Why you can trust it' },
   { href: '#lab', label: 'From the lab' },
 ]
 
@@ -36,64 +36,52 @@ type Status = 'available' | 'lab'
 
 const grounding: { title: string; body: string; status: Status[]; href: string; link: string }[] = [
   {
-    title: 'One semantic model',
-    body: 'Every visual above asks a cube, never a raw table. Measures are LPE expressions that run in your database, and heavy logic lives in the cube, where every chart can use it.',
+    title: 'One model of your data',
+    body: 'Every chart on this page reads the same model of the data, not raw tables. Measures are defined once, calculated in your own database, and shared by every chart.',
     status: ['available'],
     href: '/governance#model',
-    link: 'The data model',
+    link: 'Your data model',
   },
   {
-    title: 'Checks that look at what’s rendered',
-    body: 'The agent opens what it built in a browser, as you, and reads what a viewer sees and what the page costs to load. Then it fixes what it finds: labels that collide, a heatmap scrambled by a partial day, heavy work that belongs in the database.',
+    title: 'Checked in a real browser',
+    body: 'The agent opens what it built, as you, and looks at what a viewer would see and how fast it loads. Then it fixes what it finds: labels that collide, a heatmap scrambled by a partial day, heavy work that belongs in the database.',
     status: ['available'],
     href: '/governance#quality',
-    link: 'Checks on what it builds',
+    link: 'How the agent checks its work',
   },
   {
     title: 'Every number traceable',
-    body: 'In a report kit page every number is a declared query you can hover to trace. In our lab, any number on any dashboard opens down to the cube aggregates it is made of.',
+    body: 'In a report filled from a ready-made page, hover any number to see where it comes from. In our lab, any number on any dashboard opens down to the figures it was built from.',
     status: ['available', 'lab'],
     href: '/values-graph',
     link: 'Every number explains itself',
   },
   {
     title: 'The agent acts as you',
-    body: 'It works in your signed-in session, with your permissions and no service account, so it sees and changes only what you may. Its code passes publish checks before it reaches a dashboard.',
+    body: 'It works in your signed-in session, with your permissions and no service account, so it sees and changes only what you may. Anything it writes for a page is checked before it goes live.',
     status: ['available'],
     href: '/governance#access',
-    link: 'Access control',
+    link: 'Permissions',
   },
 ]
 
 const lab = [
   {
     title: 'Every number explains itself',
-    body: 'Hover any number in edit mode, including on the pages above, and see the cube aggregates it is made of and what moved it between two periods.',
+    body: 'Hover any number while editing a dashboard, including on the pages above, to see what it was built from and what moved it between two periods.',
     href: '/values-graph',
   },
   {
-    title: 'Answers from the data',
-    body: 'Assistants read the same graph, so “why did the rate per night fall?” is answered from the split, not from a guess.',
+    title: 'Ask why a number moved',
+    body: 'The assistant reads the same trail, so “why did the rate per night fall?” is answered from your data, not from a guess.',
     href: '/values-graph#agents',
   },
   {
     title: 'Numbers that must add up',
-    body: 'The render check splits a chart’s numbers by a field and flags one whose parts don’t add up to its total.',
+    body: 'The agent checks that a chart’s parts add up to its total, and flags one that doesn’t.',
     href: '/governance#quality',
   },
 ]
-
-function Tags({ uses, className = '' }: { uses: Mechanism[]; className?: string }) {
-  return (
-    <ul className={`flex flex-wrap gap-1.5 ${className}`} aria-label="How it was built">
-      {uses.map((u) => (
-        <li key={u} className="rounded bg-tint px-2 py-0.5 text-xs text-brand">
-          {mechanisms[u].label}
-        </li>
-      ))}
-    </ul>
-  )
-}
 
 function StatusBadge({ s }: { s: Status }) {
   return s === 'lab' ? (
@@ -120,22 +108,30 @@ function HeroSection({ h, n, tone }: { h: Hero; n: number; tone: 'white' | 'pape
         </div>
       </div>
 
-      <Screenshot className="mt-10" src={h.shot.src} alt={h.shot.alt} width={h.shot.width} height={h.shot.height} priority={n === 1} unoptimized />
+      <Screenshot
+        className="mt-10"
+        src={h.shot.src}
+        alt={h.shot.alt}
+        width={h.shot.width}
+        height={h.shot.height}
+        caption={
+          <>
+            <span className="font-medium text-ink">What you see: </span>
+            {h.see}
+          </>
+        }
+        priority={n === 1}
+        unoptimized
+      />
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
         <div>
           <h3 className="text-sm font-medium text-slate">What the agent did</h3>
           <RuleList className="mt-3" items={h.did} />
         </div>
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-sm font-medium text-slate">The ask</h3>
-            <p className="mt-2 rounded-lg rounded-tl-sm bg-tint px-4 py-3 leading-relaxed text-ink">{h.asked}</p>
-          </div>
-          <div>
-            <h3 className="text-sm font-medium text-slate">Built with</h3>
-            <Tags className="mt-2" uses={h.uses} />
-          </div>
+        <div>
+          <h3 className="text-sm font-medium text-slate">What they asked for</h3>
+          <p className="mt-2 rounded-lg rounded-tl-sm bg-tint px-4 py-3 leading-relaxed text-ink">{h.asked}</p>
         </div>
       </div>
     </Section>
@@ -163,7 +159,6 @@ function CaseCard({ c }: { c: Case }) {
         </p>
         <h3 className="mt-2 text-lg font-semibold leading-snug">{c.question}</h3>
         <p className="mt-2 text-sm leading-relaxed">{c.how}</p>
-        <Tags className="mt-3" uses={c.uses} />
         {c.href && (
           <div className="mt-auto pt-4">
             <Link href={c.href.startsWith('#') ? `/showcase${c.href}` : c.href} className={buttonClass.link}>
@@ -184,7 +179,7 @@ export default function ShowcasePage() {
       <main>
         <PageHeader
           title="What the engine builds"
-          lede="AI agents built these inside an MPP BI installation with MPP BI’s own agent tools: they took on the data, modeled it, wrote the visuals and pages, then looked at the result and fixed what they found. A country in hexagons, a 3D globe, a market as a ring of treemaps, a racing oval that is a treemap and a live aurora page, all on one semantic model. The agent was Claude Opus, working through MPP BI’s MCP server, except where DeepSeek V4 Flash is named."
+          lede="Each of these started as a question handed to an AI agent in MPP BI. The agent took on the data, shaped it, drew charts and pages built for the question, then checked the result in a real browser and fixed what it found. A country in hexagons, a 3D globe, a market as a ring, a racing oval and a live aurora page, all from the same product. The agent was Claude Opus, except where the smaller DeepSeek V4 Flash is named."
         >
           <DemoButton label="Try it on your data" />
           <TextLink href="#cases">Find a case like yours</TextLink>
@@ -215,7 +210,7 @@ export default function ShowcasePage() {
             <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">Every case, and how it was solved</h2>
             <p className="mt-4 text-lg leading-relaxed">
               Every project the agents built, with our reference samples. Each card starts with the question it answers, so
-              you can find the one that looks like yours, then says how it was solved.
+              you can find the one that looks like yours, then says what the agent did.
             </p>
           </div>
           <ul className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -229,15 +224,15 @@ export default function ShowcasePage() {
           <div className="max-w-2xl">
             <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">Data of any complexity</h2>
             <p className="mt-4 text-lg leading-relaxed">
-              None of this data arrived clean. Here is what each dataset brought, the problem it posed, and how it ended up
-              living in the platform. Everything after the import was the agent’s work.
+              None of this data arrived clean. Here is what each dataset brought, the problem it posed, and how it was
+              handled. Everything after the data arrived was the agent’s work.
             </p>
           </div>
           <div className="mt-10 border-t border-line">
             <div className="hidden gap-8 border-b border-line py-3 text-sm font-medium text-slate lg:grid lg:grid-cols-[1fr_1fr_1.2fr]">
               <p>The data</p>
               <p>The problem it posed</p>
-              <p>How the platform handled it</p>
+              <p>How it was handled</p>
             </div>
             {dataCases.map((d) => (
               <div key={d.data} className="grid gap-3 border-b border-line py-5 lg:grid-cols-[1fr_1fr_1.2fr] lg:gap-8">
@@ -260,10 +255,10 @@ export default function ShowcasePage() {
 
         <Section id="grounded" tone={heroes.length % 2 ? 'paper' : 'white'}>
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">What keeps the agent’s work grounded</h2>
+            <h2 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">Why you can trust what it builds</h2>
             <p className="mt-4 text-lg leading-relaxed">
-              Freedom to build anything only helps if you can trust what was built. The same things hold under every project
-              on this page.
+              Freedom to build anything only helps if you can trust what was built. The same four things hold under every
+              project on this page.
             </p>
           </div>
           <ul className="mt-10 grid gap-5 md:grid-cols-2">
@@ -290,7 +285,8 @@ export default function ShowcasePage() {
               <Preview />
               <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight md:text-4xl">From the lab</h2>
               <p className="mt-4 text-lg leading-relaxed">
-                What we are building next on top of these pages. It runs on our lab installation, not in the released product.
+                What we are building next on top of these pages. It runs on our lab installation and is not in the released
+                product yet.
               </p>
             </div>
             <ul className="divide-y divide-line border-y border-line">
@@ -320,7 +316,7 @@ export default function ShowcasePage() {
             </ul>
             <p className="mt-4 max-w-3xl text-sm text-slate">
               USGS, Nasdaq, NASCAR and the World Bank are trademarks of their respective owners. These are independent demos
-              on public data and are not endorsed by them. The report kit and the samples use a sample hotel dataset.
+              on public data and are not endorsed by them. The report and the samples use a sample hotel dataset.
             </p>
           </Container>
         </section>

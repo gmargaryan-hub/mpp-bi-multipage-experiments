@@ -16,9 +16,9 @@ import { PageHeader, Screenshot, Section, TextLink } from '@/components/ui'
 // built.
 
 export const metadata: Metadata = {
-  title: 'Governance: model, trace, checks and permissions | MPP BI',
+  title: 'Governance: your data model, checks and permissions | MPP BI',
   description:
-    'How agent-built analytics in MPP BI stay governed: the semantic model agents work in, the trace behind each number, checks on what they build, how data stays current, and the permissions they run under. Each item marked available, in the lab or planned.',
+    'How agent-built analytics in MPP BI stay trustworthy: the data model agents work in, the trail behind each number, checks on what they build, how data stays current, and the permissions they work under. Each item marked available, in the lab or planned.',
 }
 
 type Status = 'available' | 'lab' | 'planned'
@@ -42,25 +42,25 @@ type Item = { status: Status; title: string; body: string }
 const areas: { id: string; kicker: string; title: string; intro: string; items: Item[] }[] = [
   {
     id: 'model',
-    kicker: '01 The data model',
-    title: 'Agents build on the semantic model',
+    kicker: '01 Your data model',
+    title: 'Agents build on your data model',
     intro:
-      'In MPP BI a chart doesn’t read a table. It asks a cube: a named view over your database with its dimensions and measures, queried in LPE, the calculation language that compiles to SQL. The agent works in the same model, with the same parts a person uses.',
+      'In MPP BI a chart doesn’t read raw tables. It reads a model of your data: named measures and the fields you slice them by, calculated in your own database. The agent works in the same model, with the same parts your team uses.',
     items: [
       {
         status: 'available',
-        title: 'Atlases, cubes, dimensions, measures',
-        body: 'The agent lists cubes, previews queries against them, and creates or edits cubes and their fields. Every chart it makes asks a cube, never a raw table.',
+        title: 'Measures and fields, not raw tables',
+        body: 'The agent explores the model, previews what a chart would show, and adds or changes measures and fields. Every chart it makes reads the model.',
       },
       {
         status: 'available',
-        title: 'Cube SQL does the heavy lifting',
-        body: 'Derived fields, window functions for ranks, shares and indexes, and small pre-aggregated cubes for heavy history live in the cube, so every chart on it gets them and the browser only draws.',
+        title: 'Heavy logic lives in the model',
+        body: 'Derived fields, ranks, shares, running totals and summaries of long histories are worked out once in the model, so every chart gets them and pages stay light.',
       },
       {
         status: 'available',
         title: 'Calculations run in your database',
-        body: 'Measures are LPE expressions over the cube. They compile to SQL and run where the data lives, under the same permissions as any other query.',
+        body: 'Measures are calculated where the data lives, under the same permissions as any other query.',
       },
     ],
   },
@@ -69,51 +69,51 @@ const areas: { id: string; kicker: string; title: string; intro: string; items: 
     kicker: '02 Traceability',
     title: 'Every number can say where it came from',
     intro:
-      'A number people can’t trace is a number they argue about. Two mechanisms make the trail visible: declared facts in reports, and a graph behind any number on a dashboard.',
+      'A number people can’t trace is a number they argue about. Two things make the trail visible: reports that show the source of every figure, and a trail behind any number on a dashboard.',
     items: [
       {
         status: 'available',
-        title: 'Report kit facts',
-        body: 'In a report filled from the kit, every number is a declared fact: a measure or a ratio with its filters and format. Hover it to see how it is made; a Sources panel lists every query, and a click on a number jumps to its card.',
+        title: 'Reports that show their sources',
+        body: 'In a report filled from a ready-made page, every number is declared with its filters and format. Hover it to see how it is made; a sources list shows the data behind every figure, and a click on a number jumps to it.',
       },
       {
         status: 'lab',
         title: 'Every number explains itself',
-        body: 'In edit mode, any number on a dashboard opens as a graph down to the cube aggregates it is made of, with what moved it between two periods. It works on agent-written components with no change to their code.',
+        body: 'While you edit a dashboard, any number on it opens down to the figures it was built from, with what moved it between two periods. It works on pages agents built, with no change to them.',
       },
       {
         status: 'lab',
-        title: 'explain_number for agents',
-        body: 'Assistants read the same graph, so “why did ADR fall?” is answered from the split, not from a guess.',
+        title: 'Ask the assistant why',
+        body: 'The assistant reads the same trail, so “why did the rate per night fall?” is answered from the split, not from a guess.',
       },
     ],
   },
   {
     id: 'quality',
     kicker: '03 Data quality',
-    title: 'Checks on what the agent imports and builds',
+    title: 'The agent checks its own work',
     intro:
-      'The agent doesn’t stop at “created”. It checks the data on the way in and the dashboard on the way out, and each finding names the fix.',
+      'The agent doesn’t stop at “done”. It checks the data on the way in and the dashboard on the way out, and fixes what it finds.',
     items: [
       {
         status: 'available',
-        title: 'Typed imports',
-        body: 'Codes with leading zeros, such as car “07”, stay text; integers past the 32-bit range are stored as 64-bit numbers; long files are sampled at the end too, so a late large value still sets the type.',
+        title: 'Data that keeps its meaning',
+        body: 'Codes with leading zeros, such as car “07”, stay exactly as written; very large numbers are stored in full; long files are checked at the end too, so a late large value still counts.',
       },
       {
         status: 'available',
-        title: 'The render check',
-        body: 'Opens what the agent built in a browser, as the user, and reports what a viewer would see: a blank dashboard, clipped or overlapping text, an empty chart, and the cost of the load: heavy data, too many requests, a blocked browser, canvas memory.',
+        title: 'A look in a real browser',
+        body: 'The agent opens what it built, as you, and sees what a viewer would: a blank page, cut-off or overlapping text, an empty chart, or a page that loads too much or too slowly.',
       },
       {
         status: 'available',
-        title: 'The dashboard audit',
-        body: 'Reviews the saved charts without reading data: a missing cube, a measure without an aggregate, percentages on the wrong scale, mixed scales and formats, overlapping cards, raw field names. It returns the fixes ready to apply.',
+        title: 'A review of every chart',
+        body: 'It reviews each chart’s settings without reading any data: a missing data source, figures listed row by row that should be totalled, percentages on the wrong scale, mixed formats, overlapping cards, raw field names. The fixes come ready to apply.',
       },
       {
         status: 'lab',
         title: 'Numbers that must add up',
-        body: 'The render check’s values mode splits each chart’s numbers by a field and flags one whose parts don’t add up to its total.',
+        body: 'The agent splits a chart’s numbers by a field and flags one whose parts don’t add up to its total.',
       },
     ],
   },
@@ -122,7 +122,7 @@ const areas: { id: string; kicker: string; title: string; intro: string; items: 
     kicker: '04 Data updates',
     title: 'Dashboards stay current without copies',
     intro:
-      'MPP BI keeps no extract of your data to refresh. What an agent builds asks the same cubes as everything else, so it shows new data as soon as the tables behind the cubes change.',
+      'MPP BI keeps no copy of your data to refresh. What an agent builds reads the same data model as everything else, so it shows new data as soon as the tables behind it change.',
     items: [
       {
         status: 'available',
@@ -131,24 +131,24 @@ const areas: { id: string; kicker: string; title: string; intro: string; items: 
       },
       {
         status: 'available',
-        title: 'Scheduled flows in MPP ETL',
-        body: 'MPP ETL, included in every license, runs flows at fixed times or when an event arrives, and refreshes the tables the cubes read. Excel files can also be uploaded on a schedule.',
+        title: 'Scheduled data flows',
+        body: 'MPP ETL, included in every license, runs data flows at fixed times or when an event arrives, and refreshes the tables your dashboards read. Excel files can also be uploaded on a schedule.',
       },
       {
         status: 'available',
         title: 'Agent-built dashboards follow the data',
-        body: 'They read cubes, not snapshots of them. A file the agent imports in the chat is the exception: it stays as it was imported until something refreshes it.',
+        body: 'They read your data model, not snapshots of it. A file the agent brings in through the chat is the exception: it stays as it was until something refreshes it.',
       },
       {
         status: 'planned',
-        title: 'From a one-off pipeline to a scheduled flow',
-        body: 'Turning a pipeline the agent ran once in the chat, such as download, clean and import, into a scheduled MPP ETL flow.',
+        title: 'From a one-off to a schedule',
+        body: 'Turning a pipeline the agent ran once in the chat, such as download, clean and load, into a data flow that runs on a schedule.',
       },
     ],
   },
   {
     id: 'access',
-    kicker: '05 Access control',
+    kicker: '05 Permissions',
     title: 'The agent works as you, and only as you',
     intro:
       'There is no service account behind the agent. It uses your signed-in session, so the permissions you already set decide what it can read and change.',
@@ -156,7 +156,7 @@ const areas: { id: string; kicker: string; title: string; intro: string; items: 
       {
         status: 'available',
         title: 'Your session, your permissions',
-        body: 'In the product’s chat and through MPP BI’s MCP server, every tool call carries the user’s own session. The product’s role-based permissions decide what it may read or change.',
+        body: 'In the product’s chat and in any AI assistant you connect to MPP BI, every action carries your own session. Your roles and permissions decide what it may read or change.',
       },
       {
         status: 'available',
@@ -165,23 +165,23 @@ const areas: { id: string; kicker: string; title: string; intro: string; items: 
       },
       {
         status: 'available',
-        title: 'Writes through the product',
-        body: 'The agent changes things through the product’s own APIs, the ones the interface uses, so the product logs them like any other action. Deleting needs a confirmed second call.',
+        title: 'Changes through the product',
+        body: 'The agent changes things the same way the product’s own screens do, so every change is logged like any other. Deleting needs a second, confirmed step.',
       },
       {
         status: 'available',
-        title: 'A write boundary when you want one',
-        body: 'An agent can be confined to named atlases and to the cubes it created; other writes and tools are refused.',
+        title: 'Limits when you want them',
+        body: 'You can confine an agent to chosen projects and to the data it created itself; anything else is refused.',
       },
       {
         status: 'available',
-        title: 'Publish checks on agent code',
-        body: 'A component the agent writes may import only the host’s modules, and is refused if it calls the network, eval, storage or cookies, other windows, raw HTML or the REST API directly. This is a review, not a sandbox: the component runs in the viewer’s page with the viewer’s session.',
+        title: 'Checks on what it writes',
+        body: 'Anything the agent writes for a page is checked before it goes live: no reaching out to the internet, no hidden storage, no running outside code. It is a check before publishing, not a wall: the page then runs in the viewer’s own session, like any dashboard.',
       },
       {
         status: 'available',
-        title: 'A check that only reads',
-        body: 'While the render check steps through a page, its browser may only read: any request other than a GET or a data query is refused and reported.',
+        title: 'Checks that change nothing',
+        body: 'When the agent tries a page out in its browser, that browser may only read; anything else is refused and reported.',
       },
     ],
   },
@@ -189,10 +189,10 @@ const areas: { id: string; kicker: string; title: string; intro: string; items: 
 
 const chain = [
   { title: 'You, signed in', body: 'through your directory or single sign-on' },
-  { title: 'The agent', body: 'in the chat or over MCP, with your session' },
-  { title: 'MPP BI server', body: 'checks permissions first' },
-  { title: 'Cubes', body: 'the semantic model' },
-  { title: 'Your database', body: 'runs the SQL' },
+  { title: 'The agent', body: 'in the chat or your own AI assistant, with your session' },
+  { title: 'MPP BI', body: 'checks your permissions first' },
+  { title: 'Your data model', body: 'measures and the fields you slice them by' },
+  { title: 'Your database', body: 'does the calculation' },
 ]
 
 export default function GovernancePage() {
@@ -210,10 +210,10 @@ export default function GovernancePage() {
             </div>
           }
           title="Built on your model, under your permissions"
-          lede="What keeps agent-built analytics trustworthy: the semantic model agents work in, the trace behind each number, the checks on what they build, how the data stays current, and the permissions they run under."
+          lede="What keeps agent-built analytics trustworthy: the data model agents work in, the trail behind each number, the checks on what they build, how the data stays current, and the permissions they work under."
         >
           <DemoButton label="Ask about governance" />
-          <TextLink href="#access">Access control</TextLink>
+          <TextLink href="#access">Permissions</TextLink>
         </PageHeader>
 
         <nav aria-label="On this page" className="border-b border-line bg-white py-5">
@@ -235,7 +235,7 @@ export default function GovernancePage() {
                 <p className="mt-4 text-lg leading-relaxed">{a.intro}</p>
                 {a.id === 'trace' && (
                   <div className="mt-6">
-                    <TextLink href="/values-graph">The values graph preview</TextLink>
+                    <TextLink href="/values-graph">Every number explains itself</TextLink>
                   </div>
                 )}
               </div>
@@ -256,10 +256,10 @@ export default function GovernancePage() {
               <Screenshot
                 className="mt-12"
                 src="/governance/report-hover.webp"
-                alt="Hovering $147 in a kit report shows how it is made: revenue 2025 divided by nights 2025, each with its measure and date filter"
+                alt="Hovering $147 in a report shows how it is made: 2025 revenue divided by 2025 nights, each with its date filter"
                 width={1200}
                 height={408}
-                caption="A report kit number, hovered: $147 is revenue for 2025 ÷ nights for 2025, each with its own query and filters."
+                caption="A report number, hovered: $147 is 2025 revenue divided by 2025 nights, each with its own filters."
                 unoptimized
               />
             )}

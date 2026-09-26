@@ -8,9 +8,9 @@ const POSITIVE = '#2f63a0'
 
 const leaves = [
   {
-    measure: 'sum(revenue)',
+    measure: 'Revenue',
     value: '32,846.5',
-    grad: '∂ 1/217 = 0.00461',
+    grad: '+$1,000 adds $4.61',
     parts: [
       ['Corporate', '4,259.44'],
       ['Direct', '8,871.90'],
@@ -18,9 +18,9 @@ const leaves = [
     ],
   },
   {
-    measure: 'sum(nights)',
+    measure: 'Nights',
     value: '217',
-    grad: '∂ −0.698',
+    grad: 'one more takes off $0.70',
     parts: [
       ['Corporate', '27'],
       ['Direct', '66'],
@@ -40,15 +40,15 @@ const signed = (v: number) => `${v < 0 ? '−' : '+'}$${Math.abs(v).toFixed(2)}`
 export default function ValuesGraphDiagram() {
   return (
     <figure className="rounded-lg border border-line bg-paper p-4 sm:p-6">
-      <figcaption className="font-mono text-xs leading-relaxed text-slate">
+      <figcaption className="text-xs leading-relaxed text-slate">
         One number, opened up: rate per night on the sample hotel data, July 2025
       </figcaption>
 
       <div className="mt-5">
         <div className="mx-auto w-fit rounded-md border-2 border-brand bg-white px-5 py-3 text-center">
-          <p className="font-mono text-xs text-slate">on screen</p>
+          <p className="text-xs text-slate">Rate per night, on screen</p>
           <p className="text-2xl font-semibold tabular-nums text-ink">$151.37</p>
-          <p className="font-mono text-xs text-slate">revenue ÷ nights · ∂ 1</p>
+          <p className="text-xs text-slate">revenue ÷ nights</p>
         </div>
 
         <svg viewBox="0 0 100 28" preserveAspectRatio="none" className="block h-7 w-full" aria-hidden>
@@ -64,9 +64,9 @@ export default function ValuesGraphDiagram() {
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {leaves.map((l) => (
             <div key={l.measure} className="rounded-md border border-line bg-white p-3 sm:p-4">
-              <p className="font-mono text-xs text-slate">Σ {l.measure}</p>
+              <p className="text-xs font-medium text-slate">{l.measure}</p>
               <p className="mt-0.5 text-lg font-semibold tabular-nums text-ink">{l.value}</p>
-              <p className="font-mono text-[11px] leading-snug text-slate sm:text-xs">{l.grad}</p>
+              <p className="text-[11px] leading-snug text-slate sm:text-xs">{l.grad}</p>
               <dl className="mt-3 space-y-1 border-t border-line pt-2 text-xs sm:text-sm">
                 {l.parts.map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-2">
@@ -75,7 +75,7 @@ export default function ValuesGraphDiagram() {
                   </div>
                 ))}
               </dl>
-              <p className="mt-2 text-[11px] leading-snug text-slate sm:text-xs">split by channel, adds back up</p>
+              <p className="mt-2 text-[11px] leading-snug text-slate sm:text-xs">by channel, adds back up</p>
             </div>
           ))}
         </div>
@@ -104,7 +104,7 @@ export default function ValuesGraphDiagram() {
           })}
         </ul>
         <p className="mt-4 text-xs leading-relaxed text-slate">
-          The parts add up to the change within 1.1 × 10⁻⁸ before rounding to cents. Numbers from our lab installation.
+          The parts add up to the change, before rounding to cents. Numbers from our lab installation.
         </p>
       </div>
     </figure>

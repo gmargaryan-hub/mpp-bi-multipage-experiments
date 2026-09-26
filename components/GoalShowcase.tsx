@@ -5,10 +5,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { asset } from '@/lib/basePath'
 import { buttonClass } from '@/components/ui'
-import type { Goal } from '@/lib/goals'
+import type { Hero } from '@/lib/showcase'
 
 /** Our top cases as goals: pick one and see what the agent did with it and what came out. */
-export default function GoalShowcase({ goals }: { goals: Goal[] }) {
+export default function GoalShowcase({ goals }: { goals: Hero[] }) {
   const [active, setActive] = useState(0)
   const g = goals[active]
   if (!g) return null
@@ -28,7 +28,7 @@ export default function GoalShowcase({ goals }: { goals: Goal[] }) {
               i === active ? 'border-brand bg-brand text-white' : 'border-line bg-white text-body hover:border-mist'
             }`}
           >
-            {x.tab}
+            {x.title}
           </button>
         ))}
       </div>
@@ -36,8 +36,8 @@ export default function GoalShowcase({ goals }: { goals: Goal[] }) {
       <div id="goal-panel" role="tabpanel" aria-labelledby={`goal-tab-${g.slug}`}>
         <div className="max-w-3xl">
           <p className="text-xs font-medium text-slate">The goal</p>
-          <p className="mt-1.5 rounded-lg rounded-tl-sm bg-tint px-4 py-3 text-lg leading-relaxed text-ink">{g.goal}</p>
-          <p className="mt-2 text-xs text-slate">Data: {g.data}</p>
+          <p className="mt-1.5 rounded-lg rounded-tl-sm bg-tint px-4 py-3 text-lg leading-relaxed text-ink">{g.asked}</p>
+          <p className="mt-2 text-xs text-slate">Data: {g.kicker}</p>
         </div>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)] lg:gap-10">
@@ -54,8 +54,9 @@ export default function GoalShowcase({ goals }: { goals: Goal[] }) {
                 unoptimized
               />
             </div>
-            <figcaption className="mt-3">
-              <Link href={`/showcase#${g.slug}`} className={buttonClass.link}>
+            <figcaption className="mt-3 text-sm leading-relaxed text-slate">
+              <p>{g.see}</p>
+              <Link href={`/showcase#${g.slug}`} className={`${buttonClass.link} mt-2 inline-block`}>
                 See it in the showcase
               </Link>
             </figcaption>
@@ -63,16 +64,13 @@ export default function GoalShowcase({ goals }: { goals: Goal[] }) {
 
           <div className="min-w-0">
             <p className="text-xs font-medium text-slate">What the agent did</p>
-            <ol className="mt-3 space-y-5">
-              {g.steps.map((s, i) => (
-                <li key={s.text} className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-3">
+            <ol className="mt-3 space-y-4">
+              {g.did.map((step, i) => (
+                <li key={step} className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-3">
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand font-mono text-xs text-white" aria-hidden>
                     {i + 1}
                   </span>
-                  <div>
-                    <p className="font-mono text-[11px] uppercase tracking-wide text-brand">{s.tag}</p>
-                    <p className="mt-0.5 text-sm leading-snug text-body">{s.text}</p>
-                  </div>
+                  <p className="pt-1 text-sm leading-snug text-body">{step}</p>
                 </li>
               ))}
             </ol>

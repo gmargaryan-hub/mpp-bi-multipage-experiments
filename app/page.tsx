@@ -6,8 +6,7 @@ import DemoButton from '@/components/DemoButton'
 import ArchitectureDiagram from '@/components/ArchitectureDiagram'
 import CaseStudy from '@/components/CaseStudy'
 import GoalShowcase from '@/components/GoalShowcase'
-import { goals } from '@/lib/goals'
-import { cases } from '@/lib/showcase'
+import { cases, heroes } from '@/lib/showcase'
 import { Container, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
 
@@ -28,8 +27,8 @@ const engine = [
 ]
 
 const safety = [
-  { art: '/brand/data-source.svg', title: 'The agent works as you', body: 'Its tools run in your own signed-in session. It sees only what you can see and changes only what it created or you gave it.' },
-  { art: '/brand/editor-button.svg', title: 'You approve what lands', body: 'Every step shows in the chat. Charts arrive as previews with a diff; you add them or reject them. Deleting needs a confirmed second call.' },
+  { art: '/brand/data-source.svg', title: 'The agent works as you', body: 'It works in your own signed-in session. It sees only what you can see and changes only what it created or you gave it.' },
+  { art: '/brand/editor-button.svg', title: 'You approve what lands', body: 'Every step shows in the chat. Charts arrive as previews of what will change; you add them or reject them. Deleting needs a second, confirmed step.' },
   { art: '/brand/atlas-thumbnail.svg', title: 'It stays on your servers', body: 'The agent, its sandbox and its memory run inside your installation, with the model you choose. It works air-gapped.' },
   { art: '/brand/data-koob.svg', title: 'Permissions before queries', body: 'Access rules down to rows and charts are applied before data is fetched, for people and for the agent alike. Every action is logged.' },
 ]
@@ -39,7 +38,7 @@ const features = [
   { title: '30+ chart types', body: 'KPIs, maps, floor plans, live schematics, drill-down, export to Excel, PDF and PowerPoint.', href: '/features#visualization' },
   { title: 'MPP ETL included', body: 'Visual pipelines for Kafka, SAP, ClickHouse, PostgreSQL and any JDBC source, in every license.', href: '/features#mpp-etl' },
   { title: 'Forecasts and models', body: 'Forecasts drawn next to actuals; models trained and served from the chat through MPP ETL.', href: '/features#ai-ml' },
-  { title: 'Your brand, your code', body: 'White label, custom views in React, source code with the right license.', href: '/features#customization' },
+  { title: 'Your brand, your code', body: 'White label, custom views your developers can build, source code with the right license.', href: '/features#customization' },
   { title: 'Runs anywhere', body: 'On-premises, AWS, Azure, Google Cloud, Docker or a VM image; one node or a cluster.', href: '/features#deployment-options' },
 ]
 
@@ -85,7 +84,7 @@ export default function HomePage() {
               <Image src={asset('/brand/mascot-laptop.svg')} alt="" width={200} height={200} className="hidden h-44 w-44 lg:block" priority unoptimized />
             </div>
             <div className="mt-12 md:mt-16">
-              <GoalShowcase goals={goals} />
+              <GoalShowcase goals={heroes} />
             </div>
           </Container>
         </section>
@@ -126,7 +125,7 @@ export default function HomePage() {
           <Chapter
             n="02 Analyze with ease"
             title="The engine that runs your analytics now builds them"
-            lede="Say what you want to see. The agent imports the data, models it, draws visuals no chart menu has, and moves the heavy math into the database so pages stay fast. Beyond the goals above, here is more of what it built in MPP BI: pages on public data, and a report kit whose every number is a declared query."
+            lede="Say what you want to see. The agent brings in the data, models it, draws charts no menu has, and keeps the heavy math in your database so pages stay fast. Beyond the goals above, here is more of what it built: pages on public data, and a report where every number shows where it comes from."
           />
           <ul className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 lg:grid-cols-3">
             {more.map((c) => (
@@ -153,7 +152,7 @@ export default function HomePage() {
                 <div className="flex aspect-[16/10] w-full flex-col justify-end rounded-lg border border-line bg-paper p-4 transition-colors group-hover:border-mist md:p-5">
                   <p className="font-mono text-xs text-brand">{cases.length} cases</p>
                   <p className="mt-1 text-xs leading-snug text-ink sm:text-sm md:text-base">
-                    Kits, spec charts, custom visuals and pages, window functions
+                    From ready-made reports to charts no menu has
                   </p>
                 </div>
                 <h3 className="mt-3 font-semibold group-hover:text-brand">Every case, and how it was solved</h3>
