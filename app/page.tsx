@@ -7,8 +7,8 @@ import ArchitectureDiagram from '@/components/ArchitectureDiagram'
 import CaseStudy from '@/components/CaseStudy'
 import IntentShowcase from '@/components/IntentShowcase'
 import { intents } from '@/lib/intents'
-import { gallery } from '@/lib/showcase'
-import { Container, Section, TextLink, buttonClass } from '@/components/ui'
+import { cases, gallery } from '@/lib/showcase'
+import { Container, Preview, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
 
 const clients = [
@@ -138,7 +138,7 @@ export default function HomePage() {
           <Chapter
             n="02 Analyze with ease"
             title="The engine that runs your analytics now builds them"
-            lede="Say what you want to see. The agent imports the data, models it, draws visuals no chart menu has, and moves the heavy math into the database so pages stay fast. An agent built each of these in MPP BI: five on public data, the report on a sample hotel dataset."
+            lede="Say what you want to see. The agent imports the data, models it, draws visuals no chart menu has, and moves the heavy math into the database so pages stay fast. An agent built each of these in MPP BI, on public data."
           />
           <ul className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 lg:grid-cols-3">
             {gallery.map((e) => (
@@ -146,20 +146,31 @@ export default function HomePage() {
                 <Link href={`/showcase#${e.slug}`} className="group block">
                   <div className="overflow-hidden rounded-lg border border-line bg-paper transition-colors group-hover:border-mist">
                     <Image
-                      src={asset(e.shot.src)}
+                      src={asset(e.thumb.src)}
                       alt=""
-                      width={e.shot.width}
-                      height={e.shot.height}
+                      width={e.thumb.width}
+                      height={e.thumb.height}
                       className="block aspect-[16/10] w-full object-cover object-left-top"
-                      style={e.focus ? { objectPosition: e.focus } : undefined}
                       unoptimized
                     />
                   </div>
                   <h3 className="mt-3 font-semibold group-hover:text-brand">{e.title}</h3>
-                  <p className="mt-1 text-sm leading-snug text-slate">{e.caption}</p>
+                  <p className="mt-1 text-sm leading-snug text-slate">{e.hook}</p>
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/showcase#cases" className="group flex h-full flex-col">
+                <div className="flex aspect-[16/10] w-full flex-col justify-end rounded-lg border border-line bg-paper p-4 transition-colors group-hover:border-mist md:p-5">
+                  <p className="font-mono text-xs text-brand">{cases.length} cases</p>
+                  <p className="mt-1 text-xs leading-snug text-ink sm:text-sm md:text-base">
+                    Kits, spec charts, custom visuals and pages, window functions
+                  </p>
+                </div>
+                <h3 className="mt-3 font-semibold group-hover:text-brand">Every case, and how it was solved</h3>
+                <p className="mt-1 text-sm leading-snug text-slate">Find the one that looks like your problem.</p>
+              </Link>
+            </li>
           </ul>
           <div className="mt-14 grid gap-8 md:grid-cols-3">
             {proof.map((p) => (
@@ -171,6 +182,21 @@ export default function HomePage() {
           </div>
           <div className="mt-8">
             <TextLink href="/showcase">See what it built</TextLink>
+          </div>
+          <div className="mt-12 flex flex-col gap-4 rounded-lg border border-line bg-paper p-6 md:flex-row md:items-center md:justify-between md:gap-8">
+            <div>
+              <Preview />
+              <p className="mt-3 text-ink">
+                <span className="font-medium">Every number explains itself.</span>{' '}
+                <span className="text-body">
+                  Hover a number on a dashboard the agent built to see the cube aggregates it is made of and what moved it,
+                  with no change to the agent’s code.
+                </span>
+              </p>
+            </div>
+            <div className="shrink-0">
+              <TextLink href="/values-graph">See the preview</TextLink>
+            </div>
           </div>
         </Section>
 
