@@ -279,7 +279,19 @@ export default function ValuesGraphPage() {
               ]}
             />
           </div>
-          <div className="mt-10">
+          <div className="mt-10 flex flex-col gap-4 rounded-lg border border-line bg-white p-6 md:flex-row md:items-center md:justify-between md:gap-8">
+            <p className="text-ink">
+              <span className="font-medium">The rest of the governance side.</span>{' '}
+              <span className="text-body">
+                The semantic model agents work in, checks on what they build, how data stays current and the permissions they
+                run under, each marked available, in the lab or planned.
+              </span>
+            </p>
+            <div className="shrink-0">
+              <TextLink href="/governance">Governance</TextLink>
+            </div>
+          </div>
+          <div className="mt-8">
             <TextLink href="/showcase">See what the agent built</TextLink>
           </div>
         </Section>
