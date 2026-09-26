@@ -51,16 +51,20 @@ export function SectionHeader({
 export function PageHeader({
   title,
   lede,
+  eyebrow,
   children,
 }: {
   title: React.ReactNode
   lede?: React.ReactNode
+  /** A line above the title, such as a Preview label. */
+  eyebrow?: React.ReactNode
   children?: React.ReactNode
 }) {
   return (
     <section className="bg-paper border-b border-line pt-32 pb-14 md:pt-40 md:pb-20">
       <Container>
         <div className="max-w-3xl">
+          {eyebrow && <div className="mb-5">{eyebrow}</div>}
           <h1 className="text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1]">{title}</h1>
           {lede && <p className="mt-5 text-lg md:text-xl leading-relaxed">{lede}</p>}
           {children && <div className="mt-8 flex flex-wrap items-center gap-4">{children}</div>}
@@ -138,5 +142,17 @@ export function RuleList({ items, className = '' }: { items: React.ReactNode[]; 
         </li>
       ))}
     </ul>
+  )
+}
+
+/** Marks work that runs in our lab and is not in the released product yet. */
+export function Preview({ className = '' }: { className?: string }) {
+  return (
+    <p
+      className={`inline-flex items-center gap-2 rounded-full border border-brand/30 bg-tint px-3 py-1 font-mono text-xs text-brand ${className}`}
+    >
+      <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden />
+      Preview · in the lab, not yet released
+    </p>
   )
 }
