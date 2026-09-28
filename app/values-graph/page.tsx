@@ -21,6 +21,7 @@ const knows = [
   { title: 'What moves it', body: 'How much the number changes when each part changes, so you know which lever matters.' },
   { title: 'What moved it', body: 'The change between two periods, split exactly across its parts.' },
   { title: 'Split by anything', body: 'Open any part by region, channel or any other field, and the pieces add back up to the whole.' },
+  { title: 'The query behind it', body: 'Click any part to see the exact SQL that fetched it from your data, ready to copy.' },
 ]
 
 const traced = [
@@ -61,7 +62,7 @@ export default function ValuesGraphPage() {
               </p>
               <p className="mt-4 leading-relaxed">
                 We borrowed the idea from micrograd, a tiny teaching tool in which every value remembers how it was computed.
-                Here every number on a dashboard carries the same memory, so it can tell you four things:
+                Here every number on a dashboard carries the same memory, so it can tell you five things:
               </p>
               <dl className="mt-6 divide-y divide-line border-y border-line">
                 {knows.map((k) => (
