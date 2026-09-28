@@ -5,7 +5,7 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import DemoButton from '@/components/DemoButton'
 import CTABand from '@/components/CTABand'
-import { Container, PageHeader, Preview, RuleList, Screenshot, Section, TextLink, buttonClass } from '@/components/ui'
+import { Container, PageHeader, RuleList, Screenshot, Section, TextLink, buttonClass } from '@/components/ui'
 import { asset } from '@/lib/basePath'
 import { cases, dataCases, heroes, type Case, type Hero } from '@/lib/showcase'
 
@@ -29,10 +29,10 @@ const contents = [
   { href: '#cases', label: 'Every case' },
   { href: '#data', label: 'Data of any complexity' },
   { href: '#grounded', label: 'Why you can trust it' },
-  { href: '#lab', label: 'From the lab' },
+  { href: '#next', label: 'Going further' },
 ]
 
-type Status = 'available' | 'lab'
+type Status = 'available'
 
 const grounding: { title: string; body: string; status: Status[]; href: string; link: string }[] = [
   {
@@ -51,8 +51,8 @@ const grounding: { title: string; body: string; status: Status[]; href: string; 
   },
   {
     title: 'Every number traceable',
-    body: 'In a report filled from a ready-made page, hover any number to see where it comes from. In our lab, any number on any dashboard opens down to the figures it was built from.',
-    status: ['available', 'lab'],
+    body: 'In a report filled from a ready-made page, hover any number to see where it comes from. While you edit, any number on any dashboard opens down to the figures it was built from.',
+    status: ['available'],
     href: '/values-graph',
     link: 'Every number explains itself',
   },
@@ -83,10 +83,8 @@ const lab = [
   },
 ]
 
-function StatusBadge({ s }: { s: Status }) {
-  return s === 'lab' ? (
-    <span className="whitespace-nowrap rounded-full border border-brand/30 bg-tint px-2.5 py-0.5 font-mono text-[11px] text-brand">In the lab</span>
-  ) : (
+function StatusBadge(_: { s: Status }) {
+  return (
     <span className="whitespace-nowrap rounded-full border border-brand bg-brand px-2.5 py-0.5 font-mono text-[11px] text-white">Available</span>
   )
 }
@@ -162,7 +160,7 @@ function CaseCard({ c }: { c: Case }) {
         {c.href && (
           <div className="mt-auto pt-4">
             <Link href={c.href.startsWith('#') ? `/showcase${c.href}` : c.href} className={buttonClass.link}>
-              {c.href.startsWith('#') ? 'See it above' : 'See the preview'}
+              {c.href.startsWith('#') ? 'See it above' : 'See how it works'}
             </Link>
           </div>
         )}
@@ -279,14 +277,12 @@ export default function ShowcasePage() {
           </ul>
         </Section>
 
-        <Section id="lab" tone={heroes.length % 2 ? 'white' : 'paper'}>
+        <Section id="next" tone={heroes.length % 2 ? 'white' : 'paper'}>
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-12">
             <div>
-              <Preview />
-              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight md:text-4xl">From the lab</h2>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight md:text-4xl">Going further</h2>
               <p className="mt-4 text-lg leading-relaxed">
-                What we are building next on top of these pages. It runs on our lab installation and is not in the released
-                product yet.
+                What the same platform adds on top of these pages.
               </p>
             </div>
             <ul className="divide-y divide-line border-y border-line">

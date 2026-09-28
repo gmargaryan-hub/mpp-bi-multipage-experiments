@@ -56,7 +56,7 @@ export function PageHeader({
 }: {
   title: React.ReactNode
   lede?: React.ReactNode
-  /** A line above the title, such as a Preview label. */
+  /** A line above the title, such as a short label. */
   eyebrow?: React.ReactNode
   children?: React.ReactNode
 }) {
@@ -145,14 +145,3 @@ export function RuleList({ items, className = '' }: { items: React.ReactNode[]; 
   )
 }
 
-/** Marks work that runs in our lab and is not in the released product yet. */
-export function Preview({ className = '' }: { className?: string }) {
-  return (
-    <p
-      className={`inline-flex items-center gap-2 rounded-full border border-brand/30 bg-tint px-3 py-1 font-mono text-xs text-brand ${className}`}
-    >
-      <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden />
-      Preview · in the lab, not yet released
-    </p>
-  )
-}

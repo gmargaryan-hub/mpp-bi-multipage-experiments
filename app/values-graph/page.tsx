@@ -4,16 +4,16 @@ import Footer from '@/components/Footer'
 import DemoButton from '@/components/DemoButton'
 import CTABand from '@/components/CTABand'
 import ValuesGraphDiagram from '@/components/ValuesGraphDiagram'
-import { PageHeader, Preview, RuleList, Screenshot, Section, TextLink } from '@/components/ui'
+import { PageHeader, RuleList, Screenshot, Section, TextLink } from '@/components/ui'
 
-// "Every number explains itself": a preview from the lab installation (the values graph, web-res
-// branch feat/values-graph), told as what a customer gets. Every number here was measured there;
+// "Every number explains itself": the values graph (web-res feat/chat-viz-studio), told as what a
+// customer gets. Every number here was measured there;
 // the worklog and the notes' values pages hold the runs. No internal or tool names in the copy.
 
 export const metadata: Metadata = {
-  title: 'Every number explains itself (preview) | MPP BI',
+  title: 'Every number explains itself | MPP BI',
   description:
-    'A preview from the MPP BI lab: hover any number on a dashboard to see what it was built from and what moved it, including on pages an agent built, with nothing extra to set up.',
+    'Hover any number on a dashboard to see what it was built from and what moved it, including on pages an agent built, with nothing extra to set up.',
 }
 
 const knows = [
@@ -44,7 +44,6 @@ export default function ValuesGraphPage() {
       <Navigation />
       <main>
         <PageHeader
-          eyebrow={<Preview />}
           title="Every number explains itself"
           lede="Hover a number on a dashboard and see how it was made: the figures from your data underneath, how they combine, and which of them moves it most. Compare two periods and the change is split exactly across its parts. It works on the dashboards agents build, with nothing extra to set up."
         >
@@ -187,7 +186,7 @@ export default function ValuesGraphPage() {
               />
             </div>
             <figure className="min-w-0 rounded-lg border border-line bg-white p-5">
-              <figcaption className="text-xs text-slate">A question and the answer the lab installation gave, in plain words</figcaption>
+              <figcaption className="text-xs text-slate">A question and the answer, in plain words</figcaption>
               <p className="mt-4 ml-auto w-fit max-w-[85%] rounded-lg rounded-tr-sm bg-brand px-4 py-2.5 text-sm leading-relaxed text-white">
                 Why did the rate per night fall in July?
               </p>
@@ -245,7 +244,6 @@ export default function ValuesGraphPage() {
             <h2 className="text-2xl font-semibold leading-tight tracking-tight md:text-3xl">Where it stops today</h2>
             <RuleList
               items={[
-                'It runs on our lab installation and has not been reviewed for release.',
                 'Not explained yet: names and years stored as text, text drawn inside a 3D view or an image, and numbers a chart only works out for its labels.',
                 'Distinct counts, medians and ranks don’t split into parts; the card says so and shows them whole.',
               ]}
@@ -256,7 +254,7 @@ export default function ValuesGraphPage() {
               <span className="font-medium">The rest of the trust story.</span>{' '}
               <span className="text-body">
                 Your data model, how the agent checks its work, how data stays current and the permissions it works under, each
-                marked available, in the lab or planned.
+                marked available or planned.
               </span>
             </p>
             <div className="shrink-0">

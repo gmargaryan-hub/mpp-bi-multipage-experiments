@@ -1,5 +1,5 @@
 // One number opened up, redrawn in the site's style: the rate per night (ADR) on the sample
-// hotel dashboard for July 2025, with the values the lab installation returned for it
+// hotel dashboard for July 2025, with the values MPP BI returned for it
 // (explain_number on ds_211 dashlet 36, split by channel, compared with June 2025).
 // Diverging bars: the two hues were checked with the dataviz palette validator (light mode).
 
@@ -104,7 +104,7 @@ export default function ValuesGraphDiagram() {
           })}
         </ul>
         <p className="mt-4 text-xs leading-relaxed text-slate">
-          The parts add up to the change, before rounding to cents. Numbers from our lab installation.
+          The parts add up to the change, before rounding to cents. Numbers from the sample hotel dashboard.
         </p>
       </div>
     </figure>

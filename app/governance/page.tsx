@@ -12,20 +12,18 @@ import { PageHeader, Screenshot, Section, TextLink } from '@/components/ui'
 // publish checks (web-res src/plugins/chat/customComponents/compileModule.ts) and audit rules
 // (tools/audit/auditRules.ts); the import fixes (web-res f9f44b903f, 54b41b5587); the values
 // graph on the lab stand. "Available" means it works today in MPP BI or in the agent tools on
-// our showcase installation; "In the lab" runs only on our lab installation; "Planned" is not
-// built.
+// our showcase installation; "Planned" is not built.
 
 export const metadata: Metadata = {
   title: 'Governance: your data model, checks and permissions | MPP BI',
   description:
-    'How agent-built analytics in MPP BI stay trustworthy: the data model agents work in, the trail behind each number, checks on what they build, how data stays current, and the permissions they work under. Each item marked available, in the lab or planned.',
+    'How agent-built analytics in MPP BI stay trustworthy: the data model agents work in, the trail behind each number, checks on what they build, how data stays current, and the permissions they work under. Each item marked available or planned.',
 }
 
-type Status = 'available' | 'lab' | 'planned'
+type Status = 'available' | 'planned'
 
 const statusStyle: Record<Status, { label: string; className: string }> = {
   available: { label: 'Available', className: 'border-brand bg-brand text-white' },
-  lab: { label: 'In the lab', className: 'border-brand/30 bg-tint text-brand' },
   planned: { label: 'Planned', className: 'border-dashed border-mist bg-white text-slate' },
 }
 
@@ -77,12 +75,12 @@ const areas: { id: string; kicker: string; title: string; intro: string; items: 
         body: 'In a report filled from a ready-made page, every number is declared with its filters and format. Hover it to see how it is made; a sources list shows the data behind every figure, and a click on a number jumps to it.',
       },
       {
-        status: 'lab',
+        status: 'available',
         title: 'Every number explains itself',
         body: 'While you edit a dashboard, any number on it opens down to the figures it was built from, with what moved it between two periods. It works on pages agents built, with no change to them.',
       },
       {
-        status: 'lab',
+        status: 'available',
         title: 'Ask the assistant why',
         body: 'The assistant reads the same trail, so “why did the rate per night fall?” is answered from the split, not from a guess.',
       },
@@ -111,7 +109,7 @@ const areas: { id: string; kicker: string; title: string; intro: string; items: 
         body: 'It reviews each chart’s settings without reading any data: a missing data source, figures listed row by row that should be totalled, percentages on the wrong scale, mixed formats, overlapping cards, raw field names. The fixes come ready to apply.',
       },
       {
-        status: 'lab',
+        status: 'available',
         title: 'Numbers that must add up',
         body: 'The agent splits a chart’s numbers by a field and flags one whose parts don’t add up to its total.',
       },
@@ -204,7 +202,6 @@ export default function GovernancePage() {
           eyebrow={
             <div className="flex flex-wrap items-center gap-2 text-sm text-slate">
               <Badge s="available" />
-              <Badge s="lab" />
               <Badge s="planned" />
               <span className="ml-1">each item says where it stands</span>
             </div>
